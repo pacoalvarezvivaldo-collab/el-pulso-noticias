@@ -1,0 +1,88 @@
+{
+  "generado": "2026-09-16T10:00:00-06:00",
+  "notas": [
+    {
+      "id": "n1",
+      "categoria": "nacional",
+      "titulo": "[Ejemplo] Gobierno federal anuncia plan de infraestructura carretera",
+      "resumen": "Placeholder de resumen reescrito por IA — aquí iría el resumen real generado a partir del RSS del medio original.",
+      "cuerpo": "Placeholder de cuerpo completo de la nota, tal como lo entregaría el Agente Editor (IA) en tono de presentador profesional. Este texto es solo de relleno para probar el diseño.",
+      "fuente": "El Universal",
+      "link": "#",
+      "fecha": "2026-09-16T09:40:00-06:00",
+      "destacada": true
+    },
+    {
+      "id": "n2",
+      "categoria": "nacional",
+      "titulo": "[Ejemplo] Congreso discute reforma en materia de seguridad pública",
+      "resumen": "Placeholder de resumen — nota nacional de ejemplo número 2.",
+      "cuerpo": "Cuerpo de ejemplo para la nota nacional 2, usado únicamente para validar el diseño de tarjetas y modal.",
+      "fuente": "Reforma",
+      "link": "#",
+      "fecha": "2026-09-16T08:15:00-06:00"
+    },
+    {
+      "id": "n3",
+      "categoria": "nacional",
+      "titulo": "[Ejemplo] Autoridades reportan avance en programa de vacunación",
+      "resumen": "Placeholder de resumen — nota nacional de ejemplo número 3.",
+      "cuerpo": "Cuerpo de ejemplo para la nota nacional 3.",
+      "fuente": "El Heraldo",
+      "link": "#",
+      "fecha": "2026-09-16T07:50:00-06:00"
+    },
+    {
+      "id": "i1",
+      "categoria": "internacional",
+      "titulo": "[Ejemplo] Cumbre internacional aborda acuerdos comerciales",
+      "resumen": "Placeholder de resumen reescrito por IA — nota internacional de ejemplo.",
+      "cuerpo": "Cuerpo de ejemplo para la nota internacional 1, con el mismo tono serio de presentador profesional.",
+      "fuente": "CNN en Español",
+      "link": "#",
+      "fecha": "2026-09-16T09:10:00-06:00",
+      "destacada": true
+    },
+    {
+      "id": "i2",
+      "categoria": "internacional",
+      "titulo": "[Ejemplo] Mercados globales reaccionan a decisión de tasas de interés",
+      "resumen": "Placeholder de resumen — nota internacional de ejemplo número 2.",
+      "cuerpo": "Cuerpo de ejemplo para la nota internacional 2.",
+      "fuente": "El País",
+      "link": "#",
+      "fecha": "2026-09-16T06:30:00-06:00"
+    },
+    {
+      "id": "i3",
+      "categoria": "internacional",
+      "titulo": "[Ejemplo] Organismo internacional emite reporte sobre cambio climático",
+      "resumen": "Placeholder de resumen — nota internacional de ejemplo número 3.",
+      "cuerpo": "Cuerpo de ejemplo para la nota internacional 3.",
+      "fuente": "Associated Press",
+      "link": "#",
+      "fecha": "2026-09-16T05:55:00-06:00"
+    },
+    {
+      "id": "t1",
+      "categoria": "trending",
+      "titulo": "[Ejemplo] Tema X se vuelve tendencia nacional en redes sociales",
+      "resumen": "Placeholder de resumen — lo más buscado del momento según Google Trends.",
+      "cuerpo": "Cuerpo de ejemplo para la nota trending 1.",
+      "fuente": "Google Trends",
+      "link": "#",
+      "fecha": "2026-09-16T10:05:00-06:00",
+      "destacada": true
+    },
+    {
+      "id": "t2",
+      "categoria": "trending",
+      "titulo": "[Ejemplo] Video viral genera reacciones en todo el país",
+      "resumen": "Placeholder de resumen — nota trending de ejemplo número 2.",
+      "cuerpo": "Cuerpo de ejemplo para la nota trending 2.",
+      "fuente": "Google Trends",
+      "link": "#",
+      "fecha": "2026-09-16T09:20:00-06:00"
+    }
+  ]
+}

@@ -68,6 +68,10 @@ index.html / style.css / app.js   → sitio estático, lee news.json
 
 GitHub Pages, mismo repositorio del pipeline — un solo lugar, un solo push activa todo.
 
+## Seguridad
+
+- El contenido de las notas viene de RSS externo + reescritura por IA — no es confiable. El frontend debe **escapar** título/resumen/cuerpo/fuente antes de insertarlos en el DOM (nunca `innerHTML` directo con texto de la nota) para evitar XSS si algún feed o la salida del modelo trae HTML/JS embebido.
+
 ## Manejo de errores
 
 - Feed individual caído/timeout → se salta esa fuente, el run continúa con las demás; se deja log visible en la salida del Action.

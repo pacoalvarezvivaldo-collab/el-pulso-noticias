@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>El Pulso Noticias — Prototipo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <div class="topbar">
+    <span class="topbar-date" id="topbarDate"></span>
+    <span class="topbar-social" title="Pendiente: el cliente aún no envía las páginas oficiales de redes">
+      <a href="#" class="social-pending">Facebook</a>
+      <a href="#" class="social-pending">X</a>
+      <a href="#" class="social-pending">TikTok</a>
+      <a href="#" class="social-pending">WhatsApp</a>
+    </span>
+  </div>
+
+  <div class="brand-row">
+    <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú">☰</button>
+    <a href="#" class="logo-link" id="logoLink">
+      <img src="LOGO.PNG" alt="El Pulso Noticias" class="logo-img">
+    </a>
+    <div class="search-box">
+      <input type="text" placeholder="Buscar noticias, temas…" id="searchInput">
+      <button id="searchBtn">Buscar</button>
+    </div>
+    <button class="search-icon-btn" id="searchIconBtn" aria-label="Buscar">⌕</button>
+    <div class="live-clock">
+      <span class="live-label">EN VIVO · ACTUALIZADO</span>
+      <span class="live-time" id="liveClock">--:--</span>
+    </div>
+  </div>
+
+  <nav class="main-nav" id="mainNav">
+    <button class="nav-pill active" data-cat="todas">Inicio</button>
+    <button class="nav-pill" data-cat="nacional">Nacional</button>
+    <button class="nav-pill" data-cat="internacional">Internacional</button>
+    <button class="nav-pill" data-cat="trending">Trending</button>
+  </nav>
+
+  <div class="ticker">
+    <div class="ticker-label"><span class="pulse-dot"></span>AL MOMENTO</div>
+    <div class="ticker-track">
+      <div class="ticker-inner" id="tickerInner"></div>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu" hidden>
+  <div class="mobile-menu-head">
+    <img src="LOGO.PNG" alt="El Pulso Noticias" class="mobile-menu-logo">
+    <button id="closeMenuBtn" aria-label="Cerrar menú">✕</button>
+  </div>
+  <a href="#" class="mobile-menu-item" data-cat="todas">Inicio</a>
+  <a href="#" class="mobile-menu-item" data-cat="nacional">Nacional</a>
+  <a href="#" class="mobile-menu-item" data-cat="internacional">Internacional</a>
+  <a href="#" class="mobile-menu-item" data-cat="trending">Trending</a>
+  <div class="mobile-menu-social">
+    <span class="mobile-menu-social-label">Síguenos</span>
+    <div class="mobile-menu-social-links">
+      <a href="#" class="social-pending">Facebook</a>
+      <a href="#" class="social-pending">X</a>
+      <a href="#" class="social-pending">TikTok</a>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+  <section class="hero" id="hero"></section>
+  <section class="feed">
+    <div class="feed-head">
+      <span class="feed-title" id="feedTitle">Últimas noticias</span>
+      <span class="feed-rule"></span>
+      <span class="feed-updated" id="feedUpdated"></span>
+    </div>
+    <div class="card-grid" id="cardGrid"></div>
+  </section>
+</main>
+
+<nav class="bottom-nav" id="bottomNav">
+  <button class="bottom-item active" data-cat="todas"><span class="bn-icon">⌂</span><span>Inicio</span></button>
+  <button class="bottom-item" data-cat="nacional"><span class="bn-icon">🏛</span><span>Nacional</span></button>
+  <button class="bottom-item" data-cat="internacional"><span class="bn-icon">🌐</span><span>Mundo</span></button>
+  <button class="bottom-item" data-cat="trending"><span class="bn-icon">⚡</span><span>Trending</span></button>
+  <button class="bottom-item" id="bottomSearchBtn"><span class="bn-icon">⌕</span><span>Buscar</span></button>
+</nav>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="LOGO.PNG" alt="El Pulso Noticias" class="footer-logo">
+      <p>Noticias nacionales, internacionales y lo más trending del momento, actualizado automáticamente.</p>
+      <div class="footer-social" title="Pendiente: el cliente aún no envía las páginas oficiales de redes">
+        <a href="#" class="social-pending">Facebook</a>
+        <a href="#" class="social-pending">X</a>
+        <a href="#" class="social-pending">TikTok</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Secciones</div>
+      <a href="#" data-cat="nacional">Nacional</a>
+      <a href="#" data-cat="internacional">Internacional</a>
+      <a href="#" data-cat="trending">Trending</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">El medio</div>
+      <a href="#">Quiénes somos</a>
+      <a href="#">Contacto</a>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 El Pulso Noticias. Prototipo de diseño — no es el sitio final.</div>
+</footer>
+
+<div class="modal-overlay" id="modalOverlay" hidden>
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Cerrar">✕</button>
+    <div class="modal-cat" id="modalCat"></div>
+    <h1 class="modal-title" id="modalTitle"></h1>
+    <div class="modal-meta" id="modalMeta"></div>
+    <p class="modal-body" id="modalBody"></p>
+    <a href="#" class="modal-source" id="modalSource" target="_blank" rel="noopener"></a>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
