@@ -19,11 +19,25 @@ Fuera de alcance — fases posteriores, specs aparte:
 
 ## Fuentes de datos (todas gratis, sin API key, sin límite de requests)
 
-| Categoría | Fuente | Método |
+Verificadas por HTTP real (16-sep-2026) contra la lista original que dio el usuario. 5 de las 9 fuentes pedidas no exponen RSS público utilizable:
+- **CNN en Español**: sin RSS público (todas las rutas probadas dan 404).
+- **Telemundo**: la URL de RSS redirige a la página HTML normal, no hay feed real.
+- **Associated Press**: bloquea con 403, no ofrece RSS público gratuito (el wire es solo para clientes de pago).
+- **Agencia France-Presse**: sí responde un feed, pero es el blog corporativo de AFP (noticias sobre AFP, en francés), no su cobertura de noticias en español — no sirve.
+
+Se reemplazan por BBC Mundo y DW Español, ambos con RSS público confirmado y cobertura internacional en español de calidad equivalente.
+
+| Categoría | Fuente | URL del feed |
 | --- | --- | --- |
-| Nacional | El Universal, Reforma, El Heraldo, Latinus | RSS propio de cada medio (Latinus vía RSS del canal de YouTube si no publica feed de texto) |
-| Internacional | CNN en español, El País, Telemundo, Associated Press, Agencia France-Presse, Google News (sección internacional/español) | RSS propio de cada medio + RSS de búsqueda de Google News |
-| Trending | Google Trends | RSS diario de tendencias, `geo=MX` |
+| Nacional | El Universal | `https://www.eluniversal.com.mx/arc/outboundfeeds/rss/` |
+| Nacional | Reforma | `https://www.reforma.com/rss/portada.xml` |
+| Nacional | El Heraldo | `https://heraldodemexico.com.mx/rss` |
+| Nacional | Latinus (canal de YouTube, sin feed de texto propio) | `https://www.youtube.com/feeds/videos.xml?channel_id=UCjmSHs_B8h2E2wLiCKu7oWQ` |
+| Internacional | El País | `https://elpais.com/rss/elpais/portada.xml` |
+| Internacional | BBC Mundo | `https://feeds.bbci.co.uk/mundo/rss.xml` |
+| Internacional | DW Español | `https://rss.dw.com/xml/rss-es-all` |
+| Internacional | Google News (sección internacional, español México) | `https://news.google.com/rss?hl=es-419&gl=MX&ceid=MX:es-419` |
+| Trending | Google Trends (diario, México) | `https://trends.google.com/trending/rss?geo=MX` |
 
 Justificación: NewsAPI.org en tier gratis prohíbe uso en producción/comercial y retrasa artículos 24h; Currents API gratis limita a 600 requests/mes. RSS directo no tiene esas restricciones y da control exacto sobre qué medios se incluyen.
 
