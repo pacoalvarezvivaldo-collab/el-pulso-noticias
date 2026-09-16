@@ -9,6 +9,7 @@ Fase 1 (este spec): pipeline de contenido que jala noticias, las reescribe con I
 Fuera de alcance — fases posteriores, specs aparte:
 - **Fase 2**: autoposteo a Facebook/Instagram/TikTok/X (cada API pide su propio proceso de aprobación/app review) y cualquier API de noticias de paga (NewsAPI/Currents).
 - **Fase 3**: PWA (el mismo sitio, instalable en el celular con ícono y pantalla completa vía `manifest.json` + service worker) — decidido en vez de app nativa por costo/esfuerzo (sin cuentas de desarrollador de pago, mismo código que el sitio).
+- **Fase 4**: narración en video/reels con voz IA (ElevenLabs — voces "Abel" hombre y "Angelica" mujer ya elegidas por el usuario, archivos de muestra en el proyecto) para dar las noticias en formato corto para redes. Depende del pipeline de esta fase 1 como fuente del texto ya reescrito.
 
 ## Cobertura editorial
 

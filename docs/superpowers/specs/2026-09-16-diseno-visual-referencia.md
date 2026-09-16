@@ -27,7 +27,7 @@ Elementos de marca a llevar al sitio:
 - Fondo oscuro con textura sutil de circuito digital en header/footer (baja opacidad, no debe competir con el texto).
 - Los tres colores de marca (violeta/naranja/azul) se pueden usar para diferenciar las 3 categorías: p.ej. **Nacional = azul**, **Internacional = violeta**, **Trending = naranja/ámbar** (coherente con que "Trending" es lo más "caliente"/pulso del momento).
 
-Pendiente: el usuario debe colocar el archivo del logo dentro del proyecto (ej. `assets/logo.png`) para usarlo en el sitio — la imagen se compartió en el chat pero no está guardada aún como archivo del proyecto.
+Logo guardado en el proyecto: `LOGO.PNG` (raíz de la carpeta). Se usa este archivo directo para el sitio (header/footer/favicon), no hace falta recrearlo.
 
 ## Paleta de color
 
