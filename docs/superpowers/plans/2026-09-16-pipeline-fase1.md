@@ -388,7 +388,7 @@ def build_nota(entrada: dict, reescrita: dict) -> dict:
 - [ ] **Step 4: Correr los tests y verificar que pasan**
 
 Run: `pytest pipeline/tests/test_noticias.py -v`
-Expected: 14 tests, todos `PASS`.
+Expected: 12 tests, todos `PASS`.
 
 - [ ] **Step 5: Commit**
 
