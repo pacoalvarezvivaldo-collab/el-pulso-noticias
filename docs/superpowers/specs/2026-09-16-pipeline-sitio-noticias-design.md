@@ -1,12 +1,14 @@
-# Diseño — Evaristo Minuto a Minuto: pipeline de noticias + sitio (Fase 1)
+# Diseño — El Pulso Noticias: pipeline de noticias + sitio (Fase 1)
 
-Diseño visual de referencia (paleta, tipografía, componentes): ver [`2026-09-16-diseno-visual-referencia.md`](2026-09-16-diseno-visual-referencia.md).
+Diseño visual de referencia (paleta, tipografía, componentes): ver `2026-09-16-diseno-visual-referencia.md`.
 
 ## Alcance
 
 Fase 1 (este spec): pipeline de contenido que jala noticias, las reescribe con IA y las publica en un sitio web estático que se actualiza solo.
 
-Fuera de alcance — fase 2, spec aparte: autoposteo a Facebook/Instagram/TikTok/X (cada API pide su propio proceso de aprobación/app review) y cualquier API de noticias de paga (NewsAPI/Currents).
+Fuera de alcance — fases posteriores, specs aparte:
+- **Fase 2**: autoposteo a Facebook/Instagram/TikTok/X (cada API pide su propio proceso de aprobación/app review) y cualquier API de noticias de paga (NewsAPI/Currents).
+- **Fase 3**: PWA (el mismo sitio, instalable en el celular con ícono y pantalla completa vía `manifest.json` + service worker) — decidido en vez de app nativa por costo/esfuerzo (sin cuentas de desarrollador de pago, mismo código que el sitio).
 
 ## Cobertura editorial
 
@@ -17,7 +19,7 @@ Fuera de alcance — fase 2, spec aparte: autoposteo a Facebook/Instagram/TikTok
 ## Fuentes de datos (todas gratis, sin API key, sin límite de requests)
 
 | Categoría | Fuente | Método |
-|---|---|---|
+| --- | --- | --- |
 | Nacional | El Universal, Reforma, El Heraldo, Latinus | RSS propio de cada medio (Latinus vía RSS del canal de YouTube si no publica feed de texto) |
 | Internacional | CNN en español, El País, Telemundo, Associated Press, Agencia France-Presse, Google News (sección internacional/español) | RSS propio de cada medio + RSS de búsqueda de Google News |
 | Trending | Google Trends | RSS diario de tendencias, `geo=MX` |
@@ -39,16 +41,16 @@ index.html / style.css / app.js   → sitio estático, lee news.json
 1. Recorre la lista de feeds RSS (nacional + internacional + Google News + Google Trends) con `feedparser`.
 2. Filtra contra `historial.json` (dedup por URL/link) — solo procesa notas nuevas.
 3. Por cada nota nueva, llama a la API de OpenAI (`gpt-4o-mini`) con el rol de "Agente Editor":
-   - **Prompt de sistema**: *"Actúa como un presentador y redactor profesional de un noticiero tradicional y serio. Reescribe el título y el cuerpo de la nota con un tono informativo, objetivo, claro y profesional. Devuelve el resultado estrictamente en un formato JSON estructurado sin texto adicional."*
-   - Entrada: título + resumen/extracto original del RSS.
-   - Salida esperada (JSON): `{ "titulo": "...", "resumen": "...", "cuerpo": "..." }`
+  - **Prompt de sistema**: *"Actúa como un presentador y redactor profesional de un noticiero tradicional y serio. Reescribe el título y el cuerpo de la nota con un tono informativo, objetivo, claro y profesional. Devuelve el resultado estrictamente en un formato JSON estructurado sin texto adicional."*
+  - Entrada: título + resumen/extracto original del RSS.
+  - Salida esperada (JSON): `{ "titulo": "...", "resumen": "...", "cuerpo": "..." }`
 4. Arma el objeto final de la nota: categoría (`nacional`/`internacional`/`trending`), título y cuerpo reescritos, fuente original (nombre del medio), link original, fecha de publicación, fecha de procesamiento.
 5. Guarda todas las notas (nuevas + las que ya estaban vigentes) en `news.json`.
 6. Agrega las URLs nuevas a `historial.json` y recorta entradas viejas (más de N días) para que no crezca sin límite.
 
 ### 2. Automatización (`.github/workflows/update_news.yml`)
 
-- Cron cada 3 horas.
+- Cron cada 6 horas.
 - Pasos: checkout → instalar dependencias (`feedparser`, `openai`) → correr `fetch_news.py` (con `OPENAI_API_KEY` como GitHub Secret) → commit de `news.json` + `historial.json` si hubo cambios → push.
 - El push a la rama activa el rebuild/publish de GitHub Pages.
 
@@ -82,5 +84,5 @@ GitHub Pages, mismo repositorio del pipeline — un solo lugar, un solo push act
 
 ## Pendiente para el usuario (fuera del código)
 
-- Comprar dominio propio (hosting es gratis vía GitHub Pages, pero el dominio no).
+- **Dominio: sin decidir todavía.** `elpulsonoticias.com` y `.com.mx`, `elpulsodigital.mx`, `pulsonoticias.mx` salen ocupados en verificación WHOIS (posible squatting sobre variantes obvias del nombre). `elpulsonews.com` confirmado disponible como opción de respaldo. No bloquea el desarrollo — GitHub Pages da una URL gratis (`usuario.github.io/repo`) mientras se decide, y el dominio propio se apunta después.
 - Crear la cuenta/API key de OpenAI y cargarla como secret del repo.

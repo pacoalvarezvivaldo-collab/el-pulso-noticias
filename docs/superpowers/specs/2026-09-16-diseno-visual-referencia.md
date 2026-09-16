@@ -1,6 +1,33 @@
-# Análisis de diseño visual de referencia — "Minuto a Minuto Noticias" (Vallarta)
+# Análisis de diseño visual — El Pulso Noticias
 
-Fuente: canvas de Claude Design compartido por el usuario (`Rediseño sitio noticias Vallarta.zip`, archivo `Minuto a Minuto Sitio.dc.html`). Es un rediseño del sitio real `minutoaminutonoticiasvallartabahia.com`, hecho con datos de ejemplo (placeholders `{{ }}`). Sirve como referencia visual/estructural para el sitio de Evaristo, no se usa tal cual.
+Este proyecto se llamaba antes "Evaristo Minuto a Minuto"; el nombre oficial final es **El Pulso Noticias** (logo de marca: "El Pulso Digital Noticias / Digital News" — el wordmark completo queda en el logo, el nombre corto de uso general es "El Pulso Noticias"). La carpeta de trabajo sigue siendo `EVARISTO MINUTO A MINUTO` (ruta interna, no se ve en el sitio).
+
+Fuente estructural: canvas de Claude Design compartido por el usuario (`Rediseño sitio noticias Vallarta.zip`, archivo `Minuto a Minuto Sitio.dc.html`), rediseño del sitio real `minutoaminutonoticiasvallartabahia.com`. Sirve como referencia de **maquetación/estructura** (layout, componentes), no de paleta — la paleta de color oficial ahora viene del logo de El Pulso Noticias (ver sección "Marca" abajo).
+
+## Marca: El Pulso Noticias
+
+Logo compartido por el usuario: wordmark 3D sobre fondo oscuro degradado morado→azul marino, con textura de líneas de circuito digital y una **onda de pulso/sonido** (línea amarillo-naranja tipo ecualizador/latido) atravesando el nombre — refuerza el concepto "pulso" de forma literal.
+
+Paleta oficial (aproximada del logo, afinar con cuentagotas sobre el archivo real en implementación):
+
+| Uso | Color aprox. |
+|---|---|
+| "El" (violeta) | `#6a3fa0` |
+| "Pulso" (naranja/ámbar, degradado a rojo) | `#f7941d` → `#e8531f` |
+| "Noticias" (azul) | `#3b6fe0` |
+| Punto/acento rojo | `#e23b3b` |
+| Onda de pulso (línea) | `#ffb020` → `#ff7a1a` |
+| Fondo oscuro (header/footer/hero) | degradado `#241b3f` → `#141225` |
+| Líneas de circuito (decorativas, bajo opacidad) | violeta/azul claro sobre el fondo oscuro |
+
+Dirección visual acordada: **moderno/tech con acento "pulso"**, no el clásico navy+rojo del sitio de Vallarta. Se conserva la *estructura* de layout del canvas de Vallarta (secciones descritas abajo) pero la piel de color cambia a esta paleta.
+
+Elementos de marca a llevar al sitio:
+- Onda de pulso animada (tipo ecualizador, tramos de línea con `stroke-dasharray`/`stroke-dashoffset` animado) como separador visual bajo el header o dentro del ticker de últimas noticias — reemplaza el punto rojo pulsante simple del prototipo Vallarta por algo más acorde a la marca.
+- Fondo oscuro con textura sutil de circuito digital en header/footer (baja opacidad, no debe competir con el texto).
+- Los tres colores de marca (violeta/naranja/azul) se pueden usar para diferenciar las 3 categorías: p.ej. **Nacional = azul**, **Internacional = violeta**, **Trending = naranja/ámbar** (coherente con que "Trending" es lo más "caliente"/pulso del momento).
+
+Pendiente: el usuario debe colocar el archivo del logo dentro del proyecto (ej. `assets/logo.png`) para usarlo en el sitio — la imagen se compartió en el chat pero no está guardada aún como archivo del proyecto.
 
 ## Paleta de color
 
