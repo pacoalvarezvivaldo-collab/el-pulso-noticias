@@ -2,11 +2,27 @@ const CAT_LABEL = { nacional: 'Nacional', internacional: 'Internacional', trendi
 const CAT_COLOR = { nacional: 'var(--cat-nacional)', internacional: 'var(--cat-internacional)', trending: 'var(--cat-trending)' };
 
 // Las notas vienen de RSS externo + reescritura por IA (fuente no confiable) —
-// escapar siempre antes de insertar en innerHTML para evitar XSS.
+// escapar siempre antes de insertar en innerHTML para evitar XSS. div.innerHTML
+// no escapa comillas, y estos valores también se usan dentro de atributos
+// (data-id="..."), así que hace falta un escaper completo, no solo de texto.
 function esc(str) {
-  const div = document.createElement('div');
-  div.textContent = str ?? '';
-  return div.innerHTML;
+  return String(str ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// Solo permite abrir enlaces http(s) — bloquea esquemas como javascript:
+// que podrían venir de un link malicioso en el RSS o en la salida de la IA.
+function safeUrl(link) {
+  try {
+    const u = new URL(link, location.href);
+    return (u.protocol === 'http:' || u.protocol === 'https:') ? u.href : null;
+  } catch {
+    return null;
+  }
 }
 
 let NOTAS = [];
@@ -108,8 +124,15 @@ function openModal(id) {
   document.getElementById('modalMeta').textContent = `${fmtHora(n.fecha)} · Fuente: ${n.fuente}`;
   document.getElementById('modalBody').textContent = n.cuerpo;
   const src = document.getElementById('modalSource');
-  src.href = n.link;
-  src.textContent = `Ver nota original en ${n.fuente} →`;
+  const url = safeUrl(n.link);
+  if (url) {
+    src.href = url;
+    src.textContent = `Ver nota original en ${n.fuente} →`;
+    src.hidden = false;
+  } else {
+    src.removeAttribute('href');
+    src.hidden = true;
+  }
   document.getElementById('modalOverlay').hidden = false;
 }
 

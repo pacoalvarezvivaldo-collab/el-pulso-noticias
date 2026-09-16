@@ -70,7 +70,8 @@ GitHub Pages, mismo repositorio del pipeline — un solo lugar, un solo push act
 
 ## Seguridad
 
-- El contenido de las notas viene de RSS externo + reescritura por IA — no es confiable. El frontend debe **escapar** título/resumen/cuerpo/fuente antes de insertarlos en el DOM (nunca `innerHTML` directo con texto de la nota) para evitar XSS si algún feed o la salida del modelo trae HTML/JS embebido.
+- El contenido de las notas viene de RSS externo + reescritura por IA — no es confiable. El frontend debe **escapar** título/resumen/cuerpo/fuente (incluyendo comillas, no solo `<`/`>`) antes de insertarlos en el DOM, tanto en texto como dentro de atributos HTML, para evitar XSS si algún feed o la salida del modelo trae HTML/JS embebido.
+- El `link` de cada nota también debe validarse antes de usarlo como `href` — solo permitir `http:`/`https:`, nunca asignar el valor crudo (podría venir un esquema `javascript:` malicioso desde el feed).
 
 ## Manejo de errores
 
