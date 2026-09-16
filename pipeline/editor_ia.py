@@ -21,22 +21,26 @@ CallOpenAI = Callable[[str, str], str]
 
 def rewrite_entry_with_ai(entrada: dict, call_openai: CallOpenAI) -> dict | None:
     """Devuelve {"titulo", "resumen", "cuerpo"} o None si falla esta nota puntual."""
-    entrada_usuario = (
-        f"Título original: {entrada['titulo']}\n"
-        f"Resumen original: {entrada['resumen']}"
-    )
     try:
+        entrada_usuario = (
+            f"Título original: {entrada['titulo']}\n"
+            f"Resumen original: {entrada['resumen']}"
+        )
         respuesta = call_openai(PROMPT_SISTEMA, entrada_usuario)
         data = json.loads(respuesta)
+
+        # Validar que data es un dict con las claves esperadas
+        if not isinstance(data, dict):
+            return None
+
+        claves = ("titulo", "resumen", "cuerpo")
+        if not all(k in data for k in claves):
+            return None
+        if not all(isinstance(data[k], str) and data[k].strip() for k in claves):
+            return None
+        return {k: data[k] for k in claves}
     except Exception:
         return None
-
-    claves = ("titulo", "resumen", "cuerpo")
-    if not all(k in data for k in claves):
-        return None
-    if not all(isinstance(data[k], str) and data[k].strip() for k in claves):
-        return None
-    return {k: data[k] for k in claves}
 
 
 def make_openai_caller(client, modelo: str = "gpt-4o-mini") -> CallOpenAI:

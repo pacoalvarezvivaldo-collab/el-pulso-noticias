@@ -53,3 +53,34 @@ def test_rewrite_entry_with_ai_devuelve_none_si_una_clave_esta_vacia():
         return json.dumps({"titulo": "T", "resumen": "", "cuerpo": "C"})
 
     assert rewrite_entry_with_ai(ENTRADA, call_openai_vacio) is None
+
+
+def test_rewrite_entry_with_ai_devuelve_none_si_json_valido_no_es_dict():
+    """Finding 1: json.loads de "42" o "null" es válido JSON pero no dict."""
+    def call_openai_numero(prompt_sistema, entrada_usuario):
+        return json.dumps(42)  # JSON válido pero no dict
+
+    assert rewrite_entry_with_ai(ENTRADA, call_openai_numero) is None
+
+    def call_openai_null(prompt_sistema, entrada_usuario):
+        return json.dumps(None)  # JSON válido pero no dict
+
+    assert rewrite_entry_with_ai(ENTRADA, call_openai_null) is None
+
+
+def test_rewrite_entry_with_ai_devuelve_none_si_entrada_le_falta_clave():
+    """Finding 2: entrada sin 'titulo' o 'resumen' debe devolver None, no levantar."""
+    def call_openai_falso(prompt_sistema, entrada_usuario):
+        return json.dumps({
+            "titulo": "Título reescrito",
+            "resumen": "Resumen reescrito",
+            "cuerpo": "Cuerpo reescrito",
+        })
+
+    # entrada sin 'titulo'
+    entrada_sin_titulo = {"resumen": "Resumen original", "link": "https://x.com/1"}
+    assert rewrite_entry_with_ai(entrada_sin_titulo, call_openai_falso) is None
+
+    # entrada sin 'resumen'
+    entrada_sin_resumen = {"titulo": "Título original", "link": "https://x.com/1"}
+    assert rewrite_entry_with_ai(entrada_sin_resumen, call_openai_falso) is None
