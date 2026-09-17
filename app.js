@@ -101,7 +101,7 @@ function renderGrid(notas) {
 }
 
 function renderTicker() {
-  const ordenadas = [...NOTAS].sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+  const ordenadas = [...NOTAS].sort((a, b) => new Date(b.fecha) - new Date(a.fecha)).slice(0, 15);
   const items = ordenadas.map(n => `
     <a href="#" class="ticker-item" data-id="${esc(n.id)}">
       <span class="t-time">${fmtHora(n.fecha)}</span>${esc(n.titulo)}<span style="opacity:.5">/</span>
@@ -148,38 +148,48 @@ async function init() {
   updateClock();
   setInterval(updateClock, 30000);
 
-  const res = await fetch('news.json');
-  const data = await res.json();
-  NOTAS = data.notas;
-  document.getElementById('feedUpdated').textContent = 'ACTUALIZADO ' + fmtHora(data.generado);
+  try {
+    const res = await fetch('news.json');
+    const data = await res.json();
+    NOTAS = data.notas ?? [];
+    document.getElementById('feedUpdated').textContent = data.generado
+      ? 'ACTUALIZADO ' + fmtHora(data.generado)
+      : 'Sin actualizar aún';
 
-  renderTicker();
-  render();
+    renderTicker();
+    render();
+  } catch (err) {
+    console.error('No se pudieron cargar las noticias:', err);
+    document.getElementById('feedTitle').textContent = 'No se pudieron cargar las noticias';
+  } finally {
+    // Los listeners se enlazan pase lo que pase con el fetch: si news.json
+    // falla o llega mal formado, la página no debe quedar muerta (menú,
+    // búsqueda, modal, etc. tienen que seguir funcionando).
+    document.querySelectorAll('[data-cat]').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        setActiveCat(el.dataset.cat);
+        document.getElementById('mobileMenu').hidden = true;
+      });
+    });
 
-  document.querySelectorAll('[data-cat]').forEach(el => {
-    el.addEventListener('click', (e) => {
-      e.preventDefault();
-      setActiveCat(el.dataset.cat);
+    document.getElementById('hamburgerBtn').addEventListener('click', () => {
+      document.getElementById('mobileMenu').hidden = false;
+    });
+    document.getElementById('closeMenuBtn').addEventListener('click', () => {
       document.getElementById('mobileMenu').hidden = true;
     });
-  });
-
-  document.getElementById('hamburgerBtn').addEventListener('click', () => {
-    document.getElementById('mobileMenu').hidden = false;
-  });
-  document.getElementById('closeMenuBtn').addEventListener('click', () => {
-    document.getElementById('mobileMenu').hidden = true;
-  });
-  document.getElementById('searchIconBtn').addEventListener('click', () => {
-    document.getElementById('searchInput')?.focus();
-  });
-  document.getElementById('bottomSearchBtn').addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-  document.getElementById('modalClose').addEventListener('click', closeModal);
-  document.getElementById('modalOverlay').addEventListener('click', (e) => {
-    if (e.target.id === 'modalOverlay') closeModal();
-  });
+    document.getElementById('searchIconBtn').addEventListener('click', () => {
+      document.getElementById('searchInput')?.focus();
+    });
+    document.getElementById('bottomSearchBtn').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    document.getElementById('modalOverlay').addEventListener('click', (e) => {
+      if (e.target.id === 'modalOverlay') closeModal();
+    });
+  }
 }
 
 init();
