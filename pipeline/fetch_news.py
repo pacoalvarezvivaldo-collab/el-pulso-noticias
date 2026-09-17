@@ -68,11 +68,11 @@ def obtener_entradas_nuevas(historial: dict) -> list[dict]:
             if getattr(parsed, "bozo", False) and not parsed.entries:
                 print(f"[aviso] feed sin entradas o con error: {feed['fuente']} ({feed['url']})")
                 continue
+            entradas = parse_entries_from_parsed(parsed, feed["fuente"], feed["categoria"])
+            nuevas.extend(filter_new_entries(entradas, historial))
         except Exception as exc:
             print(f"[aviso] no se pudo leer feed {feed['fuente']}: {exc}")
             continue
-        entradas = parse_entries_from_parsed(parsed, feed["fuente"], feed["categoria"])
-        nuevas.extend(filter_new_entries(entradas, historial))
     return nuevas
 
 
