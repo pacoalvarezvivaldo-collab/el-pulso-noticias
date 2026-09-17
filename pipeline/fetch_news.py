@@ -18,6 +18,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import feedparser
+import requests
 from dotenv import load_dotenv
 from openai import OpenAI
 
@@ -35,14 +36,17 @@ RAIZ = Path(__file__).parent.parent
 HISTORIAL_PATH = RAIZ / "historial.json"
 NEWS_PATH = RAIZ / "news.json"
 
+# Varios sitios (sobre todo YouTube) bloquean o responden distinto a clientes
+# sin User-Agent de navegador — feedparser por sí solo no manda uno útil.
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) ElPulsoNoticiasBot/1.0"
+
 FEEDS = [
     {"url": "https://www.eluniversal.com.mx/arc/outboundfeeds/rss/", "fuente": "El Universal", "categoria": "nacional"},
     {"url": "https://www.reforma.com/rss/portada.xml", "fuente": "Reforma", "categoria": "nacional"},
-    {"url": "https://heraldodemexico.com.mx/rss", "fuente": "El Heraldo", "categoria": "nacional"},
     {"url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCjmSHs_B8h2E2wLiCKu7oWQ", "fuente": "Latinus", "categoria": "nacional"},
     {"url": "https://elpais.com/rss/elpais/portada.xml", "fuente": "El País", "categoria": "internacional"},
     {"url": "https://feeds.bbci.co.uk/mundo/rss.xml", "fuente": "BBC Mundo", "categoria": "internacional"},
-    {"url": "https://rss.dw.com/xml/rss-es-all", "fuente": "DW Español", "categoria": "internacional"},
+    {"url": "https://es.euronews.com/rss?level=theme&name=news", "fuente": "Euronews", "categoria": "internacional"},
     {"url": "https://news.google.com/rss?hl=es-419&gl=MX&ceid=MX:es-419", "fuente": "Google News", "categoria": "internacional"},
     {"url": "https://trends.google.com/trending/rss?geo=MX", "fuente": "Google Trends", "categoria": "trending"},
 ]
@@ -64,7 +68,9 @@ def obtener_entradas_nuevas(historial: dict) -> list[dict]:
     nuevas = []
     for feed in FEEDS:
         try:
-            parsed = feedparser.parse(feed["url"])
+            resp = requests.get(feed["url"], headers={"User-Agent": USER_AGENT}, timeout=15)
+            resp.raise_for_status()
+            parsed = feedparser.parse(resp.content)
             if getattr(parsed, "bozo", False) and not parsed.entries:
                 print(f"[aviso] feed sin entradas o con error: {feed['fuente']} ({feed['url']})")
                 continue

@@ -27,15 +27,19 @@ Verificadas por HTTP real (16-sep-2026) contra la lista original que dio el usua
 
 Se reemplazan por BBC Mundo y DW Español, ambos con RSS público confirmado y cobertura internacional en español de calidad equivalente.
 
+**Actualización (17-sep-2026, tras la corrida real del pipeline):** al ejecutar el pipeline de verdad (no solo `curl`), aparecieron 2 problemas más:
+- **El Heraldo** (pedido por el usuario): su URL de RSS dejó de servir XML — ahora regresa la página HTML normal sin importar el User-Agent. Se probaron 6 variantes de URL, ninguna funciona. **Se quitó de la lista** (nacional queda con El Universal, Reforma y Latinus). Pendiente: si el usuario encuentra la URL correcta del RSS actual de El Heraldo, se vuelve a agregar.
+- **DW Español**: el servicio `rss.dw.com` ya no reconoce ningún feed ("Error: no feed by that name" en cualquier ruta probada) — parece un servicio de RSS discontinuado por DW. **Se reemplazó por Euronews en español**, mismo perfil editorial (noticias internacionales serias), RSS confirmado funcionando.
+- **Latinus** (YouTube): `feedparser` por sí solo recibía 404 de YouTube sin un User-Agent de navegador (aunque `curl` con `-A "Mozilla/5.0"` sí funcionaba) — el pipeline ahora jala cada feed con `requests` mandando un User-Agent explícito y le pasa los bytes ya descargados a `feedparser`, en vez de dejar que `feedparser` haga la petición HTTP él mismo.
+
 | Categoría | Fuente | URL del feed |
 | --- | --- | --- |
 | Nacional | El Universal | `https://www.eluniversal.com.mx/arc/outboundfeeds/rss/` |
 | Nacional | Reforma | `https://www.reforma.com/rss/portada.xml` |
-| Nacional | El Heraldo | `https://heraldodemexico.com.mx/rss` |
 | Nacional | Latinus (canal de YouTube, sin feed de texto propio) | `https://www.youtube.com/feeds/videos.xml?channel_id=UCjmSHs_B8h2E2wLiCKu7oWQ` |
 | Internacional | El País | `https://elpais.com/rss/elpais/portada.xml` |
 | Internacional | BBC Mundo | `https://feeds.bbci.co.uk/mundo/rss.xml` |
-| Internacional | DW Español | `https://rss.dw.com/xml/rss-es-all` |
+| Internacional | Euronews (español) | `https://es.euronews.com/rss?level=theme&name=news` |
 | Internacional | Google News (sección internacional, español México) | `https://news.google.com/rss?hl=es-419&gl=MX&ceid=MX:es-419` |
 | Trending | Google Trends (diario, México) | `https://trends.google.com/trending/rss?geo=MX` |
 

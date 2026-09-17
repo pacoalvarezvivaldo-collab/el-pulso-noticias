@@ -1,4 +1,8 @@
 feedparser==6.0.11
 openai==1.54.4
+# httpx>=0.28 quitó el parámetro "proxies" que openai==1.54.4 todavía usa internamente
+# (TypeError: Client.__init__() got an unexpected keyword argument 'proxies') — fijar <0.28.
+httpx==0.27.2
+requests==2.34.2
 python-dotenv==1.0.1
 pytest==8.3.3
