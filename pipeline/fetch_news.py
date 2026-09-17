@@ -43,7 +43,7 @@ USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) ElPulsoNoticiasBot/1.0"
 FEEDS = [
     {"url": "https://www.eluniversal.com.mx/arc/outboundfeeds/rss/", "fuente": "El Universal", "categoria": "nacional"},
     {"url": "https://www.reforma.com/rss/portada.xml", "fuente": "Reforma", "categoria": "nacional"},
-    {"url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCjmSHs_B8h2E2wLiCKu7oWQ", "fuente": "Latinus", "categoria": "nacional"},
+    {"url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC-FVhfqCwhzpJ4DTJOMMofA", "fuente": "Latinus", "categoria": "nacional"},
     {"url": "https://elpais.com/rss/elpais/portada.xml", "fuente": "El País", "categoria": "internacional"},
     {"url": "https://feeds.bbci.co.uk/mundo/rss.xml", "fuente": "BBC Mundo", "categoria": "internacional"},
     {"url": "https://es.euronews.com/rss?level=theme&name=news", "fuente": "Euronews", "categoria": "internacional"},
@@ -74,12 +74,25 @@ def obtener_entradas_nuevas(historial: dict) -> list[dict]:
             if getattr(parsed, "bozo", False) and not parsed.entries:
                 print(f"[aviso] feed sin entradas o con error: {feed['fuente']} ({feed['url']})")
                 continue
-            entradas = parse_entries_from_parsed(parsed, feed["fuente"], feed["categoria"])
+            entradas = parse_entries_from_parsed(
+                parsed, feed["fuente"], feed["categoria"], feed_url=feed["url"]
+            )
             nuevas.extend(filter_new_entries(entradas, historial))
         except Exception as exc:
             print(f"[aviso] no se pudo leer feed {feed['fuente']}: {exc}")
             continue
-    return nuevas
+
+    # Dedup dentro de la misma corrida: distintos feeds (o, tras el fix del
+    # link sintético de Trends, en teoría el mismo feed) pueden traer la
+    # misma nota. Sin esto se reescribe con IA y se renderiza dos veces.
+    vistos: set[str] = set()
+    deduplicadas = []
+    for entrada in nuevas:
+        if entrada["link"] in vistos:
+            continue
+        vistos.add(entrada["link"])
+        deduplicadas.append(entrada)
+    return deduplicadas
 
 
 def main() -> None:
@@ -106,7 +119,12 @@ def main() -> None:
             print(f"[aviso] se descarta nota (falló reescritura IA): {entrada['titulo']}")
             continue
         notas_nuevas.append(build_nota(entrada, reescrita))
-        historial[entrada["link"]] = entrada["fecha"]
+        # Se guarda cuándo el PIPELINE vio este link (no la fecha de
+        # publicación del feed): trim_historial mide antigüedad desde este
+        # valor, y si aquí quedara la fecha de publicación, una nota ya
+        # vieja al llegar se purgaría del historial en la misma corrida y
+        # volvería a parecer "nueva" (y a re-pagarse a la IA) para siempre.
+        historial[entrada["link"]] = datetime.now(timezone.utc).isoformat()
 
     todas = trim_news(notas_vigentes + notas_nuevas)
     historial = trim_historial(historial)

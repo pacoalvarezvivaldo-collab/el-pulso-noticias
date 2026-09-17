@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import calendar
 from datetime import datetime, timedelta, timezone
+from urllib.parse import quote
 
 CAMPOS_NOTA = {"id", "categoria", "titulo", "resumen", "cuerpo", "fuente", "link", "fecha"}
 CATEGORIAS_VALIDAS = {"nacional", "internacional", "trending"}
@@ -14,15 +15,26 @@ def id_de_link(link: str) -> str:
     return hashlib.sha1(link.encode("utf-8")).hexdigest()[:12]
 
 
-def parse_entries_from_parsed(parsed, fuente: str, categoria: str) -> list[dict]:
+def parse_entries_from_parsed(
+    parsed, fuente: str, categoria: str, feed_url: str | None = None
+) -> list[dict]:
     """parsed: resultado de feedparser.parse(url), o un objeto equivalente
-    (en tests, un SimpleNamespace con .entries)."""
+    (en tests, un SimpleNamespace con .entries).
+
+    Algunos feeds (p.ej. Google Trends RSS) no traen un <link> propio por
+    entrada: feedparser rellena entry.link con el link del feed completo, así
+    que todas las entradas terminan con el mismo link (y por tanto el mismo
+    id). Si eso pasa —o si el link simplemente falta— se genera un link
+    sintético de búsqueda a partir del título, que sí es distinto por nota.
+    """
     entradas = []
     for item in parsed.entries:
-        link = getattr(item, "link", None)
         titulo = getattr(item, "title", None)
-        if not link or not titulo:
+        if not titulo:
             continue
+        link = getattr(item, "link", None)
+        if not link or (feed_url is not None and link == feed_url):
+            link = f"https://www.google.com/search?q={quote(titulo)}"
         resumen = getattr(item, "summary", "") or ""
         published_parsed = getattr(item, "published_parsed", None)
         if published_parsed:
@@ -63,7 +75,10 @@ def trim_historial(
 
 
 def trim_news(
-    notas: list[dict], dias: int = 4, ahora: datetime | None = None
+    notas: list[dict],
+    dias: int = 4,
+    ahora: datetime | None = None,
+    max_por_categoria: int = 20,
 ) -> list[dict]:
     ahora = ahora or datetime.now(timezone.utc)
     limite = ahora - timedelta(days=dias)
@@ -75,7 +90,20 @@ def trim_news(
             continue
         if fecha >= limite:
             resultado.append(nota)
-    return resultado
+
+    # Tope por categoría: news.json no debe crecer sin límite — el frontend
+    # solo muestra ~10 notas por vista, así que conservar cientos es puro
+    # peso muerto (tamaño del archivo y del repo). Se queda con las N más
+    # recientes de CADA categoría, no un tope global.
+    por_categoria: dict[str, list[dict]] = {}
+    for nota in resultado:
+        por_categoria.setdefault(nota.get("categoria"), []).append(nota)
+
+    limitado = []
+    for notas_categoria in por_categoria.values():
+        notas_categoria.sort(key=lambda n: n["fecha"], reverse=True)
+        limitado.extend(notas_categoria[:max_por_categoria])
+    return limitado
 
 
 def validate_nota(nota: dict) -> None:

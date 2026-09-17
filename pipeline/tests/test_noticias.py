@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from types import SimpleNamespace
 
 import pytest
@@ -46,15 +46,49 @@ def test_parse_entries_from_parsed_extrae_campos():
     assert e["fecha"] == "2026-09-16T15:00:00+00:00"
 
 
-def test_parse_entries_from_parsed_ignora_entradas_sin_link_o_titulo():
+def test_parse_entries_from_parsed_ignora_entradas_sin_titulo():
     parsed = SimpleNamespace(entries=[
-        SimpleNamespace(link=None, title="Sin link", summary=""),
         SimpleNamespace(link="https://x.com/n2", title=None, summary=""),
     ])
 
     entradas = parse_entries_from_parsed(parsed, fuente="X", categoria="nacional")
 
     assert entradas == []
+
+
+def test_parse_entries_from_parsed_genera_link_sintetico_si_falta_link():
+    parsed = SimpleNamespace(entries=[
+        SimpleNamespace(link=None, title="Sin link", summary=""),
+    ])
+
+    entradas = parse_entries_from_parsed(parsed, fuente="X", categoria="nacional")
+
+    assert len(entradas) == 1
+    assert entradas[0]["link"] == "https://www.google.com/search?q=Sin%20link"
+
+
+def test_parse_entries_from_parsed_da_links_distintos_si_colisionan_con_el_feed():
+    # Caso real: Google Trends RSS no trae <link> por entrada, así que
+    # feedparser rellena entry.link con el link del FEED completo para
+    # cada entrada — sin el fix, las 3 quedarían con el mismo link/id.
+    feed_url = "https://trends.google.com/trending/rss?geo=MX"
+    parsed = SimpleNamespace(entries=[
+        SimpleNamespace(link=feed_url, title="Tema A", summary=""),
+        SimpleNamespace(link=feed_url, title="Tema B", summary=""),
+        SimpleNamespace(link=feed_url, title="Tema C", summary=""),
+    ])
+
+    entradas = parse_entries_from_parsed(
+        parsed, fuente="Google Trends", categoria="trending", feed_url=feed_url
+    )
+
+    links = [e["link"] for e in entradas]
+    assert len(links) == 3
+    assert len(set(links)) == 3  # distintos entre sí
+    assert all(link != feed_url for link in links)  # ninguno es el link del feed
+
+    ids = [id_de_link(link) for link in links]
+    assert len(set(ids)) == 3  # y por tanto ids distintos
 
 
 def test_parse_entries_from_parsed_usa_fecha_actual_si_falta_published_parsed():
@@ -99,6 +133,51 @@ def test_trim_news_descarta_notas_viejas():
     resultado = trim_news(notas, dias=4, ahora=ahora)
 
     assert resultado == [{"fecha": "2026-09-15T12:00:00+00:00", "titulo": "reciente"}]
+
+
+def test_trim_news_limita_a_20_mas_recientes_por_categoria():
+    ahora = datetime(2026, 9, 16, tzinfo=timezone.utc)
+    notas = [
+        {
+            "categoria": "nacional",
+            "fecha": (ahora - timedelta(hours=i)).isoformat(),
+            "titulo": f"nota {i}",
+        }
+        for i in range(25)
+    ]
+
+    resultado = trim_news(notas, dias=4, ahora=ahora)
+
+    assert len(resultado) == 20
+    titulos = {n["titulo"] for n in resultado}
+    # Las 20 más recientes son las de i=0..19 (menor i = más reciente)
+    assert titulos == {f"nota {i}" for i in range(20)}
+
+
+def test_trim_news_limita_categorias_de_forma_independiente():
+    ahora = datetime(2026, 9, 16, tzinfo=timezone.utc)
+    notas = [
+        {
+            "categoria": "nacional",
+            "fecha": (ahora - timedelta(hours=i)).isoformat(),
+            "titulo": f"nac {i}",
+        }
+        for i in range(25)
+    ] + [
+        {
+            "categoria": "internacional",
+            "fecha": (ahora - timedelta(hours=i)).isoformat(),
+            "titulo": f"intl {i}",
+        }
+        for i in range(5)
+    ]
+
+    resultado = trim_news(notas, dias=4, ahora=ahora)
+
+    nacionales = [n for n in resultado if n["categoria"] == "nacional"]
+    internacionales = [n for n in resultado if n["categoria"] == "internacional"]
+    assert len(nacionales) == 20  # tope alcanzado y aplicado
+    assert len(internacionales) == 5  # por debajo del tope, no se recorta
 
 
 def _nota_valida():
