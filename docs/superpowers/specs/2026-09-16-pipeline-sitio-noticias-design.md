@@ -19,7 +19,7 @@ Fuera de alcance — fases posteriores, specs aparte:
 
 ## Fuentes de datos (todas gratis, sin API key, sin límite de requests)
 
-Verificadas por HTTP real (16-sep-2026) contra la lista original que dio el usuario. 5 de las 9 fuentes pedidas no exponen RSS público utilizable:
+Verificadas por HTTP real (16-sep-2026) contra la lista original que dio el usuario. 4 de las 9 fuentes pedidas no exponen RSS público utilizable:
 - **CNN en Español**: sin RSS público (todas las rutas probadas dan 404).
 - **Telemundo**: la URL de RSS redirige a la página HTML normal, no hay feed real.
 - **Associated Press**: bloquea con 403, no ofrece RSS público gratuito (el wire es solo para clientes de pago).
@@ -32,11 +32,13 @@ Se reemplazan por BBC Mundo y DW Español, ambos con RSS público confirmado y c
 - **DW Español**: el servicio `rss.dw.com` ya no reconoce ningún feed ("Error: no feed by that name" en cualquier ruta probada) — parece un servicio de RSS discontinuado por DW. **Se reemplazó por Euronews en español**, mismo perfil editorial (noticias internacionales serias), RSS confirmado funcionando.
 - **Latinus** (YouTube): `feedparser` por sí solo recibía 404 de YouTube sin un User-Agent de navegador (aunque `curl` con `-A "Mozilla/5.0"` sí funcionaba) — el pipeline ahora jala cada feed con `requests` mandando un User-Agent explícito y le pasa los bytes ya descargados a `feedparser`, en vez de dejar que `feedparser` haga la petición HTTP él mismo.
 
+**Actualización (17-sep-2026, revisión final de rama):** el `channel_id` de Latinus usado hasta este punto (`UCjmSHs_B8h2E2wLiCKu7oWQ`) resultó estar mal identificado — traía videos random (gaming, comida) sin relación con el medio, aunque el feed reportaba `title: "latinus"`. El usuario confirmó el canal real vía `https://latinus.us/` → link a `youtube.com/channel/UC-FVhfqCwhzpJ4DTJOMMofA` ("Latinus_us", contenido real verificado: "Loret en Latinus", segmentos #ObjetivoCiudadano). **Corregido a `UC-FVhfqCwhzpJ4DTJOMMofA`.**
+
 | Categoría | Fuente | URL del feed |
 | --- | --- | --- |
 | Nacional | El Universal | `https://www.eluniversal.com.mx/arc/outboundfeeds/rss/` |
 | Nacional | Reforma | `https://www.reforma.com/rss/portada.xml` |
-| Nacional | Latinus (canal de YouTube, sin feed de texto propio) | `https://www.youtube.com/feeds/videos.xml?channel_id=UCjmSHs_B8h2E2wLiCKu7oWQ` |
+| Nacional | Latinus (canal de YouTube, sin feed de texto propio) | `https://www.youtube.com/feeds/videos.xml?channel_id=UC-FVhfqCwhzpJ4DTJOMMofA` |
 | Internacional | El País | `https://elpais.com/rss/elpais/portada.xml` |
 | Internacional | BBC Mundo | `https://feeds.bbci.co.uk/mundo/rss.xml` |
 | Internacional | Euronews (español) | `https://es.euronews.com/rss?level=theme&name=news` |
@@ -51,7 +53,7 @@ Justificación: NewsAPI.org en tier gratis prohíbe uso en producción/comercial
 pipeline/fetch_news.py   → jala RSS, dedup, llama a OpenAI, escribe news.json
 historial.json           → URLs ya procesadas (evita repetir notas)
 news.json                → salida: notas listas para el frontend
-.github/workflows/update_news.yml → cron cada 3h: corre el script, commitea y pushea
+.github/workflows/update_news.yml → cron cada 6h: corre el script, commitea y pushea
 index.html / style.css / app.js   → sitio estático, lee news.json
 ```
 
