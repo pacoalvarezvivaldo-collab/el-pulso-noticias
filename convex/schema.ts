@@ -17,4 +17,9 @@ export default defineSchema({
   })
     .index("by_categoria", ["categoria"])
     .index("by_fecha", ["fecha"]),
+
+  banners: defineTable({
+    imagenStorageId: v.id("_storage"),
+    linkUrl: v.optional(v.string()),
+  }),
 });

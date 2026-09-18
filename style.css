@@ -277,6 +277,29 @@ h1, h2, h3 { font-family: 'Archivo', sans-serif; margin: 0; }
 
 main { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
 
+.page-layout { display: grid; grid-template-columns: 1fr 300px; gap: 32px; align-items: start; }
+.feed-col { min-width: 0; }
+
+.sidebar { display: flex; flex-direction: column; gap: 18px; padding-top: 28px; }
+.sidebar[hidden] { display: none; }
+.sidebar-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-meta);
+}
+.banner-link { display: block; }
+.banner-img {
+  width: 100%;
+  border-radius: 6px;
+  display: block;
+  border: 1px solid var(--border);
+}
+
+.mobile-banner { display: none; }
+.mobile-banner .banner-img { border-radius: 0; }
+
 .hero {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
@@ -510,6 +533,10 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
   main { padding: 0; }
   .feed-head { padding: 0 16px; }
   .card-grid { grid-template-columns: 1fr; padding: 0 16px 90px; gap: 20px; }
+
+  .page-layout { grid-template-columns: 1fr; gap: 0; }
+  .sidebar { display: none; }
+  .mobile-banner { display: block; margin: 18px 16px 0; }
 
   .bottom-nav { display: flex; }
   body { padding-bottom: 56px; }

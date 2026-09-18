@@ -1,5 +1,18 @@
+function esc(str) {
+  return String(str ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 const loginScreen = document.getElementById('loginScreen');
+const panelTabs = document.getElementById('panelTabs');
+const tabNotaBtn = document.getElementById('tabNotaBtn');
+const tabBannerBtn = document.getElementById('tabBannerBtn');
 const formScreen = document.getElementById('formScreen');
+const bannerScreen = document.getElementById('bannerScreen');
 const passwordInput = document.getElementById('passwordInput');
 const loginBtn = document.getElementById('loginBtn');
 const loginError = document.getElementById('loginError');
@@ -15,24 +28,44 @@ const imagenPreview = document.getElementById('imagenPreview');
 const publicarBtn = document.getElementById('publicarBtn');
 const formStatus = document.getElementById('formStatus');
 
+const bannerList = document.getElementById('bannerList');
+const bannerImagenInput = document.getElementById('bannerImagenInput');
+const bannerImagenPreview = document.getElementById('bannerImagenPreview');
+const bannerLinkInput = document.getElementById('bannerLinkInput');
+const agregarBannerBtn = document.getElementById('agregarBannerBtn');
+const bannerStatus = document.getElementById('bannerStatus');
+
 function getPassword() {
   return sessionStorage.getItem('panelPassword') || '';
 }
 
 function showForm() {
   loginScreen.hidden = true;
+  panelTabs.hidden = false;
   formScreen.hidden = false;
+  cargarBanners();
 }
 
 function showLogin(mensajeError) {
   sessionStorage.removeItem('panelPassword');
+  panelTabs.hidden = true;
   formScreen.hidden = true;
+  bannerScreen.hidden = true;
   loginScreen.hidden = false;
   if (mensajeError) {
     loginError.textContent = mensajeError;
     loginError.hidden = false;
   }
 }
+
+function cambiarTab(tab) {
+  tabNotaBtn.classList.toggle('active', tab === 'nota');
+  tabBannerBtn.classList.toggle('active', tab === 'banner');
+  formScreen.hidden = tab !== 'nota';
+  bannerScreen.hidden = tab !== 'banner';
+}
+tabNotaBtn.addEventListener('click', () => cambiarTab('nota'));
+tabBannerBtn.addEventListener('click', () => cambiarTab('banner'));
 
 if (getPassword()) showForm();
 
@@ -64,10 +97,7 @@ function setStatus(msg, tipo) {
   formStatus.hidden = false;
 }
 
-async function subirImagenSiHay() {
-  const file = imagenInput.files[0];
-  if (!file) return null;
-
+async function subirImagen(file) {
   const res = await fetch(CONVEX_HTTP_URL + '/api/subir-imagen-url', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -85,6 +115,11 @@ async function subirImagenSiHay() {
   if (!subida.ok) throw new Error('Falló la subida de la imagen.');
   const { storageId } = await subida.json();
   return storageId;
+}
+
+async function subirImagenSiHay() {
+  const file = imagenInput.files[0];
+  return file ? subirImagen(file) : null;
 }
 
 publicarBtn.addEventListener('click', async () => {
@@ -137,5 +172,96 @@ publicarBtn.addEventListener('click', async () => {
     setStatus(err.message || 'Error al publicar.', 'err');
   } finally {
     publicarBtn.disabled = false;
+  }
+});
+
+bannerImagenInput.addEventListener('change', () => {
+  const file = bannerImagenInput.files[0];
+  if (!file) { bannerImagenPreview.hidden = true; return; }
+  bannerImagenPreview.src = URL.createObjectURL(file);
+  bannerImagenPreview.hidden = false;
+});
+
+function setBannerStatus(msg, tipo) {
+  bannerStatus.textContent = msg;
+  bannerStatus.className = 'panel-status ' + tipo;
+  bannerStatus.hidden = false;
+}
+
+async function cargarBanners() {
+  try {
+    const res = await fetch(CONVEX_HTTP_URL + '/api/banners');
+    if (!res.ok) return;
+    const banners = await res.json();
+    bannerList.innerHTML = banners.map(b => `
+      <div class="banner-list-item" data-id="${esc(b.id)}">
+        <img src="${esc(b.imagenUrl)}" alt="">
+        <span class="banner-list-link">${b.linkUrl ? esc(b.linkUrl) : 'Sin link'}</span>
+        <button class="banner-delete-btn" data-id="${esc(b.id)}">Eliminar</button>
+      </div>
+    `).join('');
+    bannerList.querySelectorAll('.banner-delete-btn').forEach(btn => {
+      btn.addEventListener('click', () => eliminarBanner(btn.dataset.id));
+    });
+  } catch {
+    // Sin conexión con Convex — se deja la lista como estaba, no es fatal.
+  }
+}
+
+async function eliminarBanner(id) {
+  try {
+    const res = await fetch(CONVEX_HTTP_URL + '/api/banners/eliminar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: getPassword(), id }),
+    });
+    if (res.status === 401) throw { sesionInvalida: true };
+    if (!res.ok) throw new Error('No se pudo eliminar el banner.');
+    cargarBanners();
+  } catch (err) {
+    if (err && err.sesionInvalida) { showLogin('Contraseña incorrecta o vencida — entra de nuevo.'); return; }
+    setBannerStatus(err.message || 'Error al eliminar.', 'err');
+  }
+}
+
+agregarBannerBtn.addEventListener('click', async () => {
+  const file = bannerImagenInput.files[0];
+  if (!file) {
+    setBannerStatus('Falta la imagen del banner.', 'err');
+    return;
+  }
+
+  agregarBannerBtn.disabled = true;
+  setBannerStatus('Subiendo…', 'ok');
+
+  try {
+    const imagenStorageId = await subirImagen(file);
+
+    const res = await fetch(CONVEX_HTTP_URL + '/api/banners', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        password: getPassword(),
+        imagenStorageId,
+        linkUrl: bannerLinkInput.value.trim(),
+      }),
+    });
+
+    if (res.status === 401) throw { sesionInvalida: true };
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      throw new Error(data.error || 'No se pudo agregar el banner.');
+    }
+
+    bannerImagenInput.value = '';
+    bannerImagenPreview.hidden = true;
+    bannerLinkInput.value = '';
+    setBannerStatus('Banner agregado.', 'ok');
+    cargarBanners();
+  } catch (err) {
+    if (err && err.sesionInvalida) { showLogin('Contraseña incorrecta o vencida — entra de nuevo.'); return; }
+    setBannerStatus(err.message || 'Error al agregar.', 'err');
+  } finally {
+    agregarBannerBtn.disabled = false;
   }
 });

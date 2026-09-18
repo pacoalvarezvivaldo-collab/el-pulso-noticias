@@ -28,11 +28,14 @@
     <p class="panel-error" id="loginError" hidden></p>
   </section>
 
+  <nav class="panel-tabs" id="panelTabs" hidden>
+    <button class="panel-tab active" id="tabNotaBtn" data-tab="nota">Nota</button>
+    <button class="panel-tab" id="tabBannerBtn" data-tab="banner">Banner</button>
+    <button id="logoutBtn" class="panel-link-btn panel-tabs-logout">Salir</button>
+  </nav>
+
   <section id="formScreen" class="panel-card" hidden>
-    <div class="panel-form-head">
-      <h1 class="panel-h1">Nueva nota</h1>
-      <button id="logoutBtn" class="panel-link-btn">Salir</button>
-    </div>
+    <h1 class="panel-h1">Nueva nota</h1>
 
     <label class="panel-label">Categoría</label>
     <select id="categoriaInput" class="panel-input">
@@ -59,6 +62,23 @@
 
     <button id="publicarBtn" class="panel-btn">Publicar nota</button>
     <p class="panel-status" id="formStatus" hidden></p>
+  </section>
+
+  <section id="bannerScreen" class="panel-card" hidden>
+    <h1 class="panel-h1">Banners publicitarios</h1>
+    <p class="panel-hint">Se muestran al costado del sitio (y arriba de las notas en celular).</p>
+
+    <div class="banner-list" id="bannerList"></div>
+
+    <label class="panel-label">Imagen del banner</label>
+    <input type="file" id="bannerImagenInput" class="panel-input" accept="image/*">
+    <img id="bannerImagenPreview" class="panel-preview" hidden>
+
+    <label class="panel-label">Link al hacer click (opcional)</label>
+    <input type="text" id="bannerLinkInput" class="panel-input" placeholder="https://...">
+
+    <button id="agregarBannerBtn" class="panel-btn">Agregar banner</button>
+    <p class="panel-status" id="bannerStatus" hidden></p>
   </section>
 
 </main>

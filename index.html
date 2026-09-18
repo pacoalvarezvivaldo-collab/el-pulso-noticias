@@ -73,15 +73,24 @@
 </div>
 
 <main id="main">
-  <section class="hero" id="hero"></section>
-  <section class="feed">
-    <div class="feed-head">
-      <span class="feed-title" id="feedTitle">Últimas noticias</span>
-      <span class="feed-rule"></span>
-      <span class="feed-updated" id="feedUpdated"></span>
+  <div class="page-layout">
+    <div class="feed-col">
+      <section class="hero" id="hero"></section>
+      <div class="mobile-banner" id="mobileBanner"></div>
+      <section class="feed">
+        <div class="feed-head">
+          <span class="feed-title" id="feedTitle">Últimas noticias</span>
+          <span class="feed-rule"></span>
+          <span class="feed-updated" id="feedUpdated"></span>
+        </div>
+        <div class="card-grid" id="cardGrid"></div>
+      </section>
     </div>
-    <div class="card-grid" id="cardGrid"></div>
-  </section>
+    <aside class="sidebar" id="sidebar" hidden>
+      <span class="sidebar-label">Publicidad</span>
+      <div class="sidebar-banners" id="sidebarBanners"></div>
+    </aside>
+  </div>
 </main>
 
 <nav class="bottom-nav" id="bottomNav">

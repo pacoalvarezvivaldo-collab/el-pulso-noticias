@@ -43,6 +43,39 @@ async function cargarNotasManual() {
   }
 }
 
+async function cargarBanners() {
+  if (typeof CONVEX_HTTP_URL === 'undefined' || CONVEX_HTTP_URL.includes('REEMPLAZAR')) return [];
+  try {
+    const res = await fetch(CONVEX_HTTP_URL + '/api/banners');
+    if (!res.ok) return [];
+    return await res.json();
+  } catch {
+    return [];
+  }
+}
+
+function bannerHtml(b) {
+  const img = `<img class="banner-img" src="${esc(safeUrl(b.imagenUrl) ?? '')}" alt="Publicidad" loading="lazy">`;
+  const url = b.linkUrl ? safeUrl(b.linkUrl) : null;
+  return url
+    ? `<a class="banner-link" href="${esc(url)}" target="_blank" rel="noopener sponsored">${img}</a>`
+    : img;
+}
+
+function renderBanners(banners) {
+  const sidebar = document.getElementById('sidebar');
+  const sidebarBox = document.getElementById('sidebarBanners');
+  const mobileBox = document.getElementById('mobileBanner');
+  if (!banners.length) {
+    sidebar.hidden = true;
+    mobileBox.innerHTML = '';
+    return;
+  }
+  sidebar.hidden = false;
+  sidebarBox.innerHTML = banners.map(bannerHtml).join('');
+  mobileBox.innerHTML = bannerHtml(banners[0]);
+}
+
 // Zona horaria fija de Puerto Vallarta, sin importar dónde esté el visitante
 // (así todos ven la misma hora, la del medio, no la de su dispositivo).
 const TZ_VALLARTA = 'America/Mexico_City';
@@ -65,9 +98,30 @@ function setActiveCat(cat) {
   render();
 }
 
+// En Inicio ninguna categoría debe monopolizar la portada (p. ej. si
+// Nacional publica mucho más seguido que Trending) — se intercala 1 de
+// cada categoría, más reciente primero dentro de cada una.
+function mezclarPorCategoria(notas) {
+  const grupos = new Map();
+  for (const n of [...notas].sort((a, b) => new Date(b.fecha) - new Date(a.fecha))) {
+    if (!grupos.has(n.categoria)) grupos.set(n.categoria, []);
+    grupos.get(n.categoria).push(n);
+  }
+  const listas = [...grupos.values()];
+  const mezcla = [];
+  for (let i = 0; listas.some(l => i < l.length); i++) {
+    for (const lista of listas) {
+      if (i < lista.length) mezcla.push(lista[i]);
+    }
+  }
+  return mezcla;
+}
+
 function render() {
   const filtradas = activeCat === 'todas' ? NOTAS : NOTAS.filter(n => n.categoria === activeCat);
-  const ordenadas = [...filtradas].sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+  const ordenadas = activeCat === 'todas'
+    ? mezclarPorCategoria(filtradas)
+    : [...filtradas].sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
 
   const destacada = ordenadas.find(n => n.destacada) || ordenadas[0];
   const resto = ordenadas.filter(n => n !== destacada);
@@ -76,7 +130,8 @@ function render() {
     activeCat === 'todas' ? 'Últimas noticias' : CAT_LABEL[activeCat];
 
   renderHero(destacada, resto.slice(0, 3));
-  renderGrid(resto.slice(3, 9).length ? resto.slice(3, 9) : resto.slice(0, 6));
+  const gridItems = resto.slice(3, 15); // hero(1) + laterales(3) + grid(12) = 16 notas visibles
+  renderGrid(gridItems.length ? gridItems : resto.slice(0, 6));
 }
 
 function renderHero(destacada, laterales) {
@@ -201,8 +256,9 @@ async function init() {
     const res = await fetch('news.json');
     const data = await res.json();
     const notasPipeline = data.notas ?? [];
-    const notasManual = await cargarNotasManual();
+    const [notasManual, banners] = await Promise.all([cargarNotasManual(), cargarBanners()]);
     NOTAS = [...notasPipeline, ...notasManual];
+    renderBanners(banners);
     document.getElementById('feedUpdated').textContent = data.generado
       ? 'ACTUALIZADO ' + fmtHora(data.generado)
       : 'Sin actualizar aún';

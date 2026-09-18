@@ -160,4 +160,95 @@ http.route({
   }),
 });
 
+http.route({
+  path: "/api/banners",
+  method: "GET",
+  handler: httpAction(async (ctx) => {
+    const banners = await ctx.runQuery(api.banners.listarBanners, {});
+    return jsonResponse(banners, 200);
+  }),
+});
+
+http.route({
+  path: "/api/banners",
+  method: "OPTIONS",
+  handler: httpAction(async () => preflightResponse()),
+});
+
+http.route({
+  path: "/api/banners",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    let body: Record<string, unknown>;
+    try {
+      body = await request.json();
+    } catch {
+      return jsonResponse({ error: "Body inválido: se esperaba JSON" }, 400);
+    }
+
+    if (typeof body.password !== "string") {
+      return jsonResponse({ error: "Falta el campo password" }, 400);
+    }
+    if (typeof body.imagenStorageId !== "string") {
+      return jsonResponse(
+        { error: "Falta el campo obligatorio o no es texto: imagenStorageId" },
+        400,
+      );
+    }
+    if (body.linkUrl !== undefined && typeof body.linkUrl !== "string") {
+      return jsonResponse({ error: "linkUrl debe ser texto" }, 400);
+    }
+
+    try {
+      const banner = await ctx.runMutation(api.banners.crearBanner, {
+        password: body.password,
+        imagenStorageId: body.imagenStorageId as Id<"_storage">,
+        linkUrl: body.linkUrl as string | undefined,
+      });
+      return jsonResponse(banner, 201);
+    } catch (err) {
+      return errorResponse(err);
+    }
+  }),
+});
+
+http.route({
+  path: "/api/banners/eliminar",
+  method: "OPTIONS",
+  handler: httpAction(async () => preflightResponse()),
+});
+
+http.route({
+  path: "/api/banners/eliminar",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    let body: Record<string, unknown>;
+    try {
+      body = await request.json();
+    } catch {
+      return jsonResponse({ error: "Body inválido: se esperaba JSON" }, 400);
+    }
+
+    if (typeof body.password !== "string") {
+      return jsonResponse({ error: "Falta el campo password" }, 400);
+    }
+    if (typeof body.id !== "string") {
+      return jsonResponse(
+        { error: "Falta el campo obligatorio o no es texto: id" },
+        400,
+      );
+    }
+
+    try {
+      await ctx.runMutation(api.banners.eliminarBanner, {
+        password: body.password,
+        id: body.id as Id<"banners">,
+      });
+      return jsonResponse({ ok: true }, 200);
+    } catch (err) {
+      return errorResponse(err);
+    }
+  }),
+});
+
 export default http;
