@@ -62,18 +62,33 @@ function bannerHtml(b) {
     : img;
 }
 
+let bannerRotTimer = null;
+
+// Con varios banners activos se muestra uno a la vez (rotando), no todos
+// apilados uno tras otro — cada anunciante se ve igual de seguido.
 function renderBanners(banners) {
   const sidebar = document.getElementById('sidebar');
-  const sidebarBox = document.getElementById('sidebarBanners');
-  const mobileBox = document.getElementById('mobileBanner');
+  if (bannerRotTimer) { clearInterval(bannerRotTimer); bannerRotTimer = null; }
   if (!banners.length) {
     sidebar.hidden = true;
-    mobileBox.innerHTML = '';
+    document.getElementById('mobileBanner').innerHTML = '';
     return;
   }
   sidebar.hidden = false;
-  sidebarBox.innerHTML = banners.map(bannerHtml).join('');
-  mobileBox.innerHTML = bannerHtml(banners[0]);
+
+  let i = 0;
+  const mostrar = () => {
+    const html = bannerHtml(banners[i]);
+    document.getElementById('sidebarBanners').innerHTML = html;
+    document.getElementById('mobileBanner').innerHTML = html;
+  };
+  mostrar();
+  if (banners.length > 1) {
+    bannerRotTimer = setInterval(() => {
+      i = (i + 1) % banners.length;
+      mostrar();
+    }, 8000);
+  }
 }
 
 // Zona horaria fija de Puerto Vallarta, sin importar dónde esté el visitante
@@ -117,13 +132,20 @@ function mezclarPorCategoria(notas) {
   return mezcla;
 }
 
+// Lo que Evaristo sube desde el panel tiene prioridad SOLO 24h desde que
+// la publica — pasado ese tiempo pasa a segundo plano y compite en orden
+// normal con las notas automáticas del pipeline (sigue existiendo, solo
+// deja de estar fijada arriba).
+const VENTANA_PRIORIDAD_MS = 24 * 60 * 60 * 1000;
+function esPrioritaria(n) {
+  return n.esManual && (Date.now() - new Date(n.fecha).getTime()) < VENTANA_PRIORIDAD_MS;
+}
+
 function render() {
   const filtradas = activeCat === 'todas' ? NOTAS : NOTAS.filter(n => n.categoria === activeCat);
 
-  // Lo que Evaristo sube desde el panel va siempre primero, sin importar
-  // la fecha — el resto (pipeline RSS+IA) se ordena/mezcla como antes.
-  const manuales = filtradas.filter(n => n.esManual).sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
-  const automaticas = filtradas.filter(n => !n.esManual);
+  const manuales = filtradas.filter(esPrioritaria).sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+  const automaticas = filtradas.filter(n => !esPrioritaria(n));
   const restoOrdenado = activeCat === 'todas'
     ? mezclarPorCategoria(automaticas)
     : [...automaticas].sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
@@ -136,7 +158,7 @@ function render() {
     activeCat === 'todas' ? 'Últimas noticias' : CAT_LABEL[activeCat];
 
   renderHero(destacada, resto.slice(0, 3));
-  const gridItems = resto.slice(3, 15); // hero(1) + laterales(3) + grid(12) = 16 notas visibles
+  const gridItems = resto.slice(3, 19); // hero(1) + laterales(3) + grid(16) = 20 notas visibles
   renderGrid(gridItems.length ? gridItems : resto.slice(0, 6));
 }
 
@@ -181,8 +203,8 @@ function renderGrid(notas) {
 }
 
 function renderTicker() {
-  const manuales = NOTAS.filter(n => n.esManual).sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
-  const automaticas = NOTAS.filter(n => !n.esManual).sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+  const manuales = NOTAS.filter(esPrioritaria).sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+  const automaticas = NOTAS.filter(n => !esPrioritaria(n)).sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
   const ordenadas = [...manuales, ...automaticas].slice(0, 15);
   const items = ordenadas.map(n => `
     <a href="#" class="ticker-item" data-id="${esc(n.id)}">

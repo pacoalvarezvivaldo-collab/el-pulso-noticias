@@ -32,6 +32,7 @@ const bannerList = document.getElementById('bannerList');
 const bannerImagenInput = document.getElementById('bannerImagenInput');
 const bannerImagenPreview = document.getElementById('bannerImagenPreview');
 const bannerLinkInput = document.getElementById('bannerLinkInput');
+const bannerDiasInput = document.getElementById('bannerDiasInput');
 const agregarBannerBtn = document.getElementById('agregarBannerBtn');
 const bannerStatus = document.getElementById('bannerStatus');
 
@@ -193,13 +194,18 @@ async function cargarBanners() {
     const res = await fetch(CONVEX_HTTP_URL + '/api/banners');
     if (!res.ok) return;
     const banners = await res.json();
-    bannerList.innerHTML = banners.map(b => `
-      <div class="banner-list-item" data-id="${esc(b.id)}">
-        <img src="${esc(b.imagenUrl)}" alt="">
-        <span class="banner-list-link">${b.linkUrl ? esc(b.linkUrl) : 'Sin link'}</span>
-        <button class="banner-delete-btn" data-id="${esc(b.id)}">Eliminar</button>
-      </div>
-    `).join('');
+    bannerList.innerHTML = banners.map(b => {
+      const vigencia = b.expiraEn
+        ? `Expira ${new Date(b.expiraEn).toLocaleDateString('es-MX')}`
+        : 'No expira';
+      return `
+        <div class="banner-list-item" data-id="${esc(b.id)}">
+          <img src="${esc(b.imagenUrl)}" alt="">
+          <span class="banner-list-link">${b.linkUrl ? esc(b.linkUrl) : 'Sin link'} · ${esc(vigencia)}</span>
+          <button class="banner-delete-btn" data-id="${esc(b.id)}">Eliminar</button>
+        </div>
+      `;
+    }).join('');
     bannerList.querySelectorAll('.banner-delete-btn').forEach(btn => {
       btn.addEventListener('click', () => eliminarBanner(btn.dataset.id));
     });
@@ -244,6 +250,7 @@ agregarBannerBtn.addEventListener('click', async () => {
         password: getPassword(),
         imagenStorageId,
         linkUrl: bannerLinkInput.value.trim(),
+        diasVigencia: bannerDiasInput.value ? Number(bannerDiasInput.value) : undefined,
       }),
     });
 
@@ -256,6 +263,7 @@ agregarBannerBtn.addEventListener('click', async () => {
     bannerImagenInput.value = '';
     bannerImagenPreview.hidden = true;
     bannerLinkInput.value = '';
+    bannerDiasInput.value = '';
     setBannerStatus('Banner agregado.', 'ok');
     cargarBanners();
   } catch (err) {
