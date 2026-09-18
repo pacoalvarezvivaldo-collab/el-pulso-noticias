@@ -128,12 +128,18 @@ retroactivamente, solo las que se procesan de aquí en adelante.
   puesto al subirlo (opcional) — si no le puso link, no es clickeable.
 - **Búsqueda (18-sep-2026)**: la caja de búsqueda era decorativa (sin
   listener real). Ahora es un botón chico (lupa) que abre un popover
-  colgado del header (sticky, siempre visible, no hace falta forzar
-  scroll al abrir) → filtra `NOTAS` por título/resumen normalizado (sin
-  acentos/mayúsculas) → resultados reemplazan hero+grid. Si borran el
-  texto sin dar Enter, regresa sola al feed normal (antes se quedaba
-  trabada). En `app.js`: `buscar()`, `normalizar()`, rama `searchQuery` de
-  `render()`.
+  colgado del header (sticky, siempre visible) → filtra `NOTAS` por
+  título/resumen normalizado (sin acentos/mayúsculas) → resultados
+  reemplazan hero+grid. Si borran el texto sin dar Enter, regresa sola al
+  feed normal. En `app.js`: `buscar()`, `normalizar()`, rama `searchQuery`
+  de `render()`. **En móvil** el popover-colgado-del-header hacía que el
+  navegador scrolleara la página al enfocar el input (para "mantenerlo
+  visible", típico de teclado virtual) — se cambió a modal fijo centrado
+  (`#searchBackdrop` + `.search-box.open` con `position:fixed` dentro del
+  media query de 760px), independiente del scroll. No se pudo confirmar en
+  celular real (la herramienta de automatización no logra emular un
+  viewport angosto — confirmado, ver nota de visualViewport abajo), solo
+  verificado que los valores CSS calculan bien.
 - **Logo del header con "zoom" (18-sep-2026)**: `LOGO.PNG` trae mucho
   fondo/circuitos alrededor del texto — se ve chico si se muestra completo.
   `.logo-link.brand-center` es una caja fija (68px alto desktop / 48px
@@ -150,6 +156,14 @@ retroactivamente, solo las que se procesan de aquí en adelante.
   sidebar ya no se muestra en móvil). El sidebar completo se oculta solo
   si NO hay banner Y NO hay "más noticias" (antes solo dependía del
   banner) — ver `actualizarSidebarVisible()`.
+  **Bug real encontrado el mismo día**: `pipeline/noticias.py::trim_news`
+  recortaba a 20 notas por categoría — exactamente las que ya se muestran
+  en hero+grid, así que a Nacional/Internacional/Trending nunca les
+  sobraba nada para esta lista (solo a Inicio, que mezcla las 3
+  categorías). Tope subido a 28. El efecto no es inmediato: solo se llena
+  con las próximas corridas del cron (cada 6h) conforme se acumulan notas
+  por encima de 20 en cada categoría — puede tardar hasta un día o dos en
+  verse lleno en Nacional/Internacional/Trending.
 - **Banner ancla en móvil (18-sep-2026)**: antes vivía inline en el feed
   con su alto natural (se veía "a lo largo", se iba con el scroll). Ahora
   es franja fija de 64px pegada arriba del nav inferior, recortada con
