@@ -129,6 +129,29 @@ retroactivamente, solo las que se procesan de aquí en adelante.
 
 ## Pendiente / decisiones abiertas con el cliente
 
+- **ARREGLAR EN LA SIGUIENTE SESIÓN: fotos de Trending casi no se ven en
+  el sitio** (18-sep-2026, reportado por el cliente después del fix de
+  `ht:picture`). Diagnóstico ya hecho — no es que estén rotas: verificado
+  con `curl` que la URL de imagen sí carga bien (200, JPEG real, CORS
+  abierto, dominio `encrypted-tbnN.gstatic.com`). El problema real es de
+  cobertura, no de renderizado: en el `news.json` actual solo **1 de 20**
+  notas de Trending tiene `imagenUrl` — las otras 19 son de ANTES del fix
+  y no se reprocesan solas. Causa: las notas de Trending no tienen link
+  propio (Google Trends no trae `<link>` por entrada), así que
+  `parse_entries_from_parsed` genera un link sintético a partir del
+  **título** (`google.com/search?q=<título>`); si el mismo tema de
+  tendencia reaparece en una corrida futura con el mismo título exacto,
+  `filter_new_entries` lo ve como "ya visto" en `historial.json` y
+  **nunca se vuelve a procesar** — se queda sin imagen para siempre salvo
+  que el título cambie o la nota se recorte a los 4 días y el tema
+  reaparezca como "nuevo". Son las notas viejas rezagadas, no un bug del
+  fix en sí (los tests ya cubren `ht_picture` y pasan). Opciones a
+  evaluar la próxima sesión: (a) dejar que se resuelva solo en ~4 días
+  conforme rota el contenido, (b) correr un backfill puntual una sola vez
+  (limpiar del `historial.json` las entradas de Trending para forzar su
+  reproceso), o (c) cambiar el criterio de dedup de Trending para que no
+  dependa del título. Explicarle esto al cliente si pregunta de nuevo
+  antes de la siguiente sesión.
 - **Redes sociales reales de Evaristo** — hoy la barra superior/footer
   tienen los íconos como placeholder ("Pendiente"). En cuanto el cliente
   las pase, conectarlas en `index.html` (topbar-social, mobile-menu-social,
