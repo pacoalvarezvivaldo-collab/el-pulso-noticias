@@ -173,8 +173,19 @@ def obtener_entradas_vallarta(historial: dict) -> list[dict]:
     propio de Evaristo, se usa tal cual (sin pasar por rewrite_entry_with_ai
     como el resto de FEEDS) — build_nota() recibe la misma entrada dos
     veces (como 'entrada' y como 'reescrita') porque para cuando llega ahí
-    ya trae titulo/resumen/cuerpo puestos aquí mismo."""
-    nuevas = []
+    ya trae titulo/resumen/cuerpo puestos aquí mismo.
+
+    Su sitio etiqueta el mismo artículo en más de una región a la vez (ej.
+    una nota de Puerto Vallarta también en Jalisco, porque Puerto Vallarta
+    es municipio de Jalisco). Por decisión explícita del cliente, esa nota
+    debe verse en las dos pestañas (no se descarta como duplicado) — por
+    eso primero se agrupan las categorías por link (una sola pasada a las
+    4 feeds) y luego se genera una copia por categoría, cada una con
+    'categoriasTodas' con la lista completa para que el frontend muestre
+    el badge junto (p.ej. "Puerto Vallarta · Jalisco"). El cuerpo/imagen
+    solo se descargan una vez por artículo, no una vez por categoría."""
+    categorias_por_link: dict[str, list[str]] = {}
+    base_por_link: dict[str, dict] = {}
     for feed in FEEDS_VALLARTA:
         try:
             resp = requests.get(feed["url"], headers={"User-Agent": USER_AGENT}, timeout=15)
@@ -186,27 +197,34 @@ def obtener_entradas_vallarta(historial: dict) -> list[dict]:
             entradas = parse_entries_from_parsed(
                 parsed, FUENTE_VALLARTA, feed["categoria"], feed_url=feed["url"]
             )
-            nuevas.extend(filter_new_entries(entradas, historial))
+            nuevas = filter_new_entries(entradas, historial)
         except Exception as exc:
             print(f"[aviso] no se pudo leer feed {FUENTE_VALLARTA} ({feed['categoria']}): {exc}")
             continue
 
-    vistos: set[str] = set()
+        for entrada in nuevas:
+            link = entrada["link"]
+            base_por_link.setdefault(link, entrada)
+            categorias = categorias_por_link.setdefault(link, [])
+            if feed["categoria"] not in categorias:
+                categorias.append(feed["categoria"])
+
     completas = []
-    for entrada in nuevas:
-        if entrada["link"] in vistos:
-            continue
-        vistos.add(entrada["link"])
-
-        cuerpo, imagen = obtener_cuerpo_y_og_image(entrada["link"])
+    for link, categorias in categorias_por_link.items():
+        base = base_por_link[link]
+        cuerpo, imagen = obtener_cuerpo_y_og_image(link)
         if not cuerpo:
-            print(f"[aviso] se descarta nota de Vallarta (sin cuerpo): {entrada['titulo']}")
+            print(f"[aviso] se descarta nota de Vallarta (sin cuerpo): {base['titulo']}")
             continue
 
-        entrada["cuerpo"] = cuerpo
-        entrada["resumen"] = resumen_de_cuerpo(cuerpo)
-        entrada["imagen"] = imagen
-        completas.append(entrada)
+        for categoria in categorias:
+            entrada = dict(base)
+            entrada["categoria"] = categoria
+            entrada["categoriasTodas"] = categorias
+            entrada["cuerpo"] = cuerpo
+            entrada["resumen"] = resumen_de_cuerpo(cuerpo)
+            entrada["imagen"] = imagen
+            completas.append(entrada)
 
     return completas
 
@@ -250,7 +268,9 @@ def main() -> None:
             # Sin reescritura IA: la propia entrada (ya trae
             # titulo/resumen/cuerpo puestos en obtener_entradas_vallarta)
             # hace las veces de "reescrita".
-            notas_nuevas.append(build_nota(entrada, entrada))
+            nota = build_nota(entrada, entrada)
+            nota["categoriasTodas"] = entrada.get("categoriasTodas", [entrada["categoria"]])
+            notas_nuevas.append(nota)
         except ValueError as exc:
             print(f"[aviso] se descarta nota de Vallarta (inválida): {entrada['titulo']} — {exc}")
             continue

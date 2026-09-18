@@ -8,14 +8,13 @@ from datetime import datetime, timedelta, timezone
 from urllib.parse import quote
 
 CAMPOS_NOTA = {"id", "categoria", "titulo", "resumen", "cuerpo", "fuente", "link", "fecha"}
-CATEGORIAS_VALIDAS = {
-    "nacional", "internacional", "trending",
-    # Regionales: contenido propio de Evaristo Tenorio (Minuto a Minuto
-    # Noticias Vallarta Bahía) — autorización expresa del dueño para usar
-    # texto e imágenes tal cual, sin reescritura IA. Ver
-    # fetch_news.py::obtener_entradas_vallarta.
-    "puerto-vallarta", "bahia-banderas", "jalisco", "nayarit",
-}
+# Regionales: contenido propio de Evaristo Tenorio (Minuto a Minuto
+# Noticias Vallarta Bahía) — autorización expresa del dueño para usar
+# texto e imágenes tal cual, sin reescritura IA. Ver
+# fetch_news.py::obtener_entradas_vallarta. Se conservan más tiempo (ver
+# trim_news) que el resto del sitio, con su propio tope por categoría.
+CATEGORIAS_REGIONALES = {"puerto-vallarta", "bahia-banderas", "jalisco", "nayarit"}
+CATEGORIAS_VALIDAS = {"nacional", "internacional", "trending"} | CATEGORIAS_REGIONALES
 
 
 def id_de_link(link: str) -> str:
@@ -127,18 +126,26 @@ def trim_historial(
 def trim_news(
     notas: list[dict],
     dias: int = 4,
+    dias_regional: int = 60,
     ahora: datetime | None = None,
     max_por_categoria: int = 28,
+    max_por_categoria_regional: int = 25,
 ) -> list[dict]:
     ahora = ahora or datetime.now(timezone.utc)
     limite = ahora - timedelta(days=dias)
+    # Puerto Vallarta/Bahía de Banderas/Jalisco/Nayarit son contenido
+    # propio de Evaristo (no de terceros reescrito por IA) — el cliente
+    # pidió que se conserven más tiempo (2 meses) que el resto del sitio
+    # (4 días), con su propio tope por categoría (25, no 28).
+    limite_regional = ahora - timedelta(days=dias_regional)
     resultado = []
     for nota in notas:
         try:
             fecha = datetime.fromisoformat(nota["fecha"])
         except (KeyError, ValueError):
             continue
-        if fecha >= limite:
+        es_regional = nota.get("categoria") in CATEGORIAS_REGIONALES
+        if fecha >= (limite_regional if es_regional else limite):
             resultado.append(nota)
 
     # Tope por categoría: news.json no debe crecer sin límite — el frontend
@@ -154,9 +161,10 @@ def trim_news(
         por_categoria.setdefault(nota.get("categoria"), []).append(nota)
 
     limitado = []
-    for notas_categoria in por_categoria.values():
+    for categoria, notas_categoria in por_categoria.items():
         notas_categoria.sort(key=lambda n: n["fecha"], reverse=True)
-        limitado.extend(notas_categoria[:max_por_categoria])
+        tope = max_por_categoria_regional if categoria in CATEGORIAS_REGIONALES else max_por_categoria
+        limitado.extend(notas_categoria[:tope])
     return limitado
 
 

@@ -359,3 +359,34 @@ def test_resumen_de_cuerpo_corta_en_espacio_y_agrega_puntos_suspensivos():
 
 def test_resumen_de_cuerpo_no_toca_textos_cortos():
     assert resumen_de_cuerpo("Texto corto.", max_len=180) == "Texto corto."
+
+
+def test_trim_news_conserva_regionales_mas_tiempo_que_el_resto():
+    ahora = datetime(2026, 9, 18, tzinfo=timezone.utc)
+    notas = [
+        # 10 días de antigüedad: ya fuera de la ventana normal de 4 días,
+        # pero muy dentro de los 60 días de las regionales.
+        {"categoria": "puerto-vallarta", "fecha": (ahora - timedelta(days=10)).isoformat(), "titulo": "pv vieja"},
+        {"categoria": "nacional", "fecha": (ahora - timedelta(days=10)).isoformat(), "titulo": "nac vieja"},
+    ]
+
+    resultado = trim_news(notas, dias=4, dias_regional=60, ahora=ahora)
+
+    titulos = {n["titulo"] for n in resultado}
+    assert titulos == {"pv vieja"}
+
+
+def test_trim_news_limita_regionales_a_25_no_28():
+    ahora = datetime(2026, 9, 18, tzinfo=timezone.utc)
+    notas = [
+        {
+            "categoria": "puerto-vallarta",
+            "fecha": (ahora - timedelta(hours=i)).isoformat(),
+            "titulo": f"pv {i}",
+        }
+        for i in range(30)
+    ]
+
+    resultado = trim_news(notas, dias=4, dias_regional=60, ahora=ahora)
+
+    assert len(resultado) == 25

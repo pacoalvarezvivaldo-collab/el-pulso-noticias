@@ -9,6 +9,17 @@ const CAT_COLOR = {
   jalisco: 'var(--cat-regional)', nayarit: 'var(--cat-regional)',
 };
 
+// Su sitio (Minuto a Minuto) etiqueta el mismo artículo en más de una
+// región (ej. Puerto Vallarta también Jalisco) — categoriasTodas trae la
+// lista completa para juntarlas en el badge, en vez de mostrar solo la
+// primera y esconder que también aplica a la otra.
+function catLabel(n) {
+  if (n.categoriasTodas && n.categoriasTodas.length > 1) {
+    return n.categoriasTodas.map(c => CAT_LABEL[c]).join(' · ');
+  }
+  return CAT_LABEL[n.categoria];
+}
+
 // Las notas vienen de RSS externo + reescritura por IA (fuente no confiable) —
 // escapar siempre antes de insertar en innerHTML para evitar XSS. div.innerHTML
 // no escapa comillas, y estos valores también se usan dentro de atributos
@@ -255,7 +266,7 @@ function renderMasNoticias(items) {
   if (!items.length) { list.innerHTML = ''; return; }
   list.innerHTML = items.map(n => `
     <div class="sidebar-more-item" data-id="${esc(n.id)}">
-      <span class="sidebar-more-cat" style="color:${CAT_COLOR[n.categoria]}">${CAT_LABEL[n.categoria]}</span>
+      <span class="sidebar-more-cat" style="color:${CAT_COLOR[n.categoria]}">${catLabel(n)}</span>
       <div class="sidebar-more-title">${esc(n.titulo)}</div>
       <div class="sidebar-more-meta">${fmtHora(n.fecha)}</div>
     </div>
@@ -269,7 +280,7 @@ function renderHero(destacada, laterales) {
   hero.innerHTML = `
     <div class="hero-main" data-id="${esc(destacada.id)}">
       <div class="hero-photo"${destacada.imagenUrl ? ` style="background-image:url('${esc(safeUrl(destacada.imagenUrl) ?? '')}');background-size:cover;background-position:center"` : ''}>
-        <span class="hero-badge" style="background:${CAT_COLOR[destacada.categoria]}">${CAT_LABEL[destacada.categoria]}</span>
+        <span class="hero-badge" style="background:${CAT_COLOR[destacada.categoria]}">${catLabel(destacada)}</span>
       </div>
       <h1 class="hero-title">${esc(destacada.titulo)}</h1>
       <p class="hero-deck">${esc(destacada.resumen)}</p>
@@ -278,7 +289,7 @@ function renderHero(destacada, laterales) {
     <div class="hero-side">
       ${laterales.map(n => `
         <div class="hero-side-item" data-id="${esc(n.id)}">
-          <span class="card-badge-inline" style="color:${CAT_COLOR[n.categoria]}; font-family:'Archivo',sans-serif; font-weight:800; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase;">${CAT_LABEL[n.categoria]}</span>
+          <span class="card-badge-inline" style="color:${CAT_COLOR[n.categoria]}; font-family:'Archivo',sans-serif; font-weight:800; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase;">${catLabel(n)}</span>
           <div class="hero-side-title">${esc(n.titulo)}</div>
           <div class="card-meta">${fmtHora(n.fecha)}</div>
         </div>
@@ -293,7 +304,7 @@ function renderGrid(notas) {
   grid.innerHTML = notas.map(n => `
     <div class="card" data-id="${esc(n.id)}">
       <div class="card-photo"${n.imagenUrl ? ` style="background-image:url('${esc(safeUrl(n.imagenUrl) ?? '')}');background-size:cover;background-position:center"` : ''}>
-        <span class="card-badge" style="background:${CAT_COLOR[n.categoria]}">${CAT_LABEL[n.categoria]}</span>
+        <span class="card-badge" style="background:${CAT_COLOR[n.categoria]}">${catLabel(n)}</span>
       </div>
       <div class="card-title">${esc(n.titulo)}</div>
       <div class="card-deck">${esc(n.resumen)}</div>
@@ -323,7 +334,7 @@ function renderTicker() {
 function openModal(id, actualizarUrl = true) {
   const n = NOTAS.find(x => x.id === id);
   if (!n) return;
-  document.getElementById('modalCat').textContent = CAT_LABEL[n.categoria];
+  document.getElementById('modalCat').textContent = catLabel(n);
   document.getElementById('modalCat').style.background = CAT_COLOR[n.categoria];
   document.getElementById('modalTitle').textContent = n.titulo;
   document.getElementById('modalMeta').textContent = `${fmtHora(n.fecha)} · El Pulso Noticias`;
