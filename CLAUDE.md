@@ -147,12 +147,40 @@ retroactivamente, solo las que se procesan de aquí en adelante.
   por el cliente que son sus links reales, no error). No dio link de X ni
   de WhatsApp: el espacio de X se reusó para Threads, WhatsApp (solo existía
   en topbar) queda "Pendiente" hasta que lo pase.
-- **Dominio propio** — sin decidir. Cliente preguntó (18-sep-2026),
-  sugerido `elpulsonoticias.com` (barato, universal) sobre `.mx`/`.news`
-  (más caros, menos comunes para su público). Sin comprar aún — falta que
-  el cliente confirme el nombre exacto antes de proceder (es gasto real).
-  Cuando se decida, agregarlo desde el dashboard de Vercel (Settings →
-  Domains) del proyecto, no hay que tocar el repo.
+- **Dominio propio — comprado, falta conectar (18-sep-2026).** Cuenta
+  Cloudflare del cliente (`pacoalvarezvivaldo@gmail.com`, account_id
+  `9bd9cf14ccad164bd0ebe5a11fff8412`) tiene acceso vía MCP `mcp__cloudflare__*`
+  (docs/execute/search) — sirve para DNS y registrar sin pedirle nada al
+  cliente. Dos dominios registrados ahí:
+  - `elpulsonoticicas.com` (zone `2420ef47e129966a0735708bf3ae998c`) — **typo
+    real** del cliente (sobra una "c": notici**c**as), coincide con el
+    nombre del archivo suelto `EL pulso noticicas.zip` en la raíz del repo.
+    Confirmado con la API del registrar: `is_refundable: false` — los ~$12
+    no se recuperan, se borre o no. Plan acordado: NO tirarlo — usarlo como
+    redirect gratis (Cloudflare Redirect Rules) hacia el dominio bueno una
+    vez conectado, atrapa gente que teclee el mismo typo. Pendiente de
+    configurar ese redirect.
+  - `elpulsonoticias.com.mx` (zone `560f9f454aa59d98892fea0eaa805eb7`) — el
+    real, sin typo, registrado 18-sep-2026, expira 18-sep-2027, ya con
+    nameservers de Cloudflare (`buck`/`coraline.ns.cloudflare.com`). `.com`
+    no estaba disponible, de ahí el `.com.mx`.
+  - **WHOIS sin privacidad en `.com.mx`**: confirmado con
+    `registrar/extensions/com.mx` → `privacy_mode` solo acepta `"off"` en
+    el schema — es regla de NIC México, no de Cloudflare, no hay forma de
+    activarla para ningún `.com.mx`. El nombre/domicilio/teléfono del
+    registrante (hoy: Francisco Álvarez, datos de Paco) quedan públicos.
+  - **Pendiente que el cliente pidió aplazar**: cambiar el contacto WHOIS
+    (al menos el teléfono, posiblemente también nombre/email) para que
+    quede el de Evaristo en vez del de Paco. Falta el teléfono de Evaristo
+    y confirmar alcance (¿solo teléfono, o todo el contacto?) antes de
+    tocarlo vía `PUT /accounts/{account_id}/registrar/domains/{domain}`.
+  - **Pendiente conectar a Vercel**: no hay tool MCP de Vercel para
+    adjuntar un dominio a un proyecto (solo `buy_domain`/compra propia), y
+    el CLI de Vercel está instalado local pero sin sesión (`vercel whoami`
+    → token inválido). Hay que hacerlo a mano: dashboard de Vercel →
+    proyecto `el-pulso-noticias` → Settings → Domains → agregar
+    `elpulsonoticias.com.mx` → el cliente pasa el registro DNS que muestre
+    Vercel → se agrega por API de Cloudflare (rápido, sin error de dedo).
 - **Google News sin imagen** — ver sección "Imágenes de las notas del
   pipeline" arriba; decidir si se deja así, se quita como fuente, o se
   justifica meter un navegador headless.
