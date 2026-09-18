@@ -59,8 +59,12 @@ para confirmar que GitHub realmente lo tiene registrado.
 ## Panel del cliente (Evaristo)
 
 Login de contraseña única compartida (`PANEL_PASSWORD`, env var en Convex
-prod — ya la cambió el cliente, no queda en texto plano en el repo). Dos
-pestañas:
+prod — nunca en texto plano en el repo, es público). Reseteada el
+18-sep-2026 para dársela a Evaristo directamente (antes la tenía Paco).
+`npx convex env set PANEL_PASSWORD '...' --prod` desde este directorio —
+**ojo**: sin `--prod` apunta al deployment local de dev, no al sitio real
+(pasó una vez, se corrigió al toque). Login verificado en el sitio real
+tras el cambio. Dos pestañas:
 - **Nota**: categoría + título + resumen + cuerpo + imagen opcional → se
   mezcla con las notas del pipeline en la misma categoría. Tiene
   **prioridad solo 24h** desde que se publica (queda fija arriba de
@@ -174,6 +178,16 @@ retroactivamente, solo las que se procesan de aquí en adelante.
   muestra su propia barra de botones (algunos la ponen abajo y tapaba lo
   nuestro) — no se pudo probar en dispositivo real, solo verificado que no
   rompe nada y que la variable se calcula bien.
+- **Modal de nota (18-sep-2026)**: `.modal-overlay` tenía
+  `align-items:flex-start` — la nota siempre abría pegada arriba del todo.
+  Cambiado a `center` (escritorio: más abajo y centrada). En móvil usaba
+  los mismos tamaños de escritorio (imagen 340px, título 28px) — se sentía
+  "de golpe muy grande" en pantalla de teléfono; reducidos a 200px/21px
+  dentro del media query de 760px.
+- **"Quiénes somos" (18-sep-2026)**: era `<a href="#">` sin contenido.
+  Ahora abre un modal (mismas clases CSS del modal de noticias, reutilizadas
+  con otro id) con sede en Puerto Vallarta + Evaristo Tenorio + equipo.
+  "Contacto" (el link de al lado) sigue muerto, no se tocó — no se pidió.
 
 ## Pendiente / decisiones abiertas con el cliente
 
