@@ -24,7 +24,7 @@ cliente: la reescritura con IA existe justo para que sea "fuente propia").
 
 ```
 pipeline/fetch_news.py         RSS → reescritura OpenAI (gpt-4o-mini) → news.json
-historial.json / news.json     estado del pipeline (recorte 4 días)
+historial.json / news.json     estado del pipeline (recorte 4 días, máx 20/categoría)
 .github/workflows/update_news.yml   cron cada 6h (0 */6 * * *, UTC), commitea y pushea
 index.html / style.css / app.js     sitio estático (GitHub Pages), lee news.json + Convex
 convex/                        backend del panel (notas manuales + banners)
@@ -41,20 +41,65 @@ en local. Convex ya tiene `npx convex login` hecho en esta máquina — para
 desplegar cambios de `convex/` basta `npx convex deploy -y` desde este
 directorio, no hace falta dejar ninguna terminal abierta después.
 
+**Gotcha ya resuelto pero a tener en cuenta:** el workflow de Actions
+(`update_news.yml`) quedó huérfano y NUNCA se registró en GitHub desde el
+primer push del repo (efecto colateral del primer intento de push que
+falló por falta del scope `workflow` en el token de `gh`) — corrió cero
+veces en automático hasta que lo noté (18-sep-2026) y forcé un commit
+trivial al archivo para que GitHub lo reindexara. Si algún workflow nuevo
+parece "no correr nunca", revisar primero `gh api repos/.../actions/workflows`
+para confirmar que GitHub realmente lo tiene registrado.
+
 ## Panel del cliente (Evaristo)
 
 Login de contraseña única compartida (`PANEL_PASSWORD`, env var en Convex
 prod — ya la cambió el cliente, no queda en texto plano en el repo). Dos
 pestañas:
 - **Nota**: categoría + título + resumen + cuerpo + imagen opcional → se
-  mezcla con las notas del pipeline en la misma categoría.
-- **Banner**: imagen + link opcional → aparece en la barra lateral del
-  sitio (desktop) y como banner inline arriba del feed (móvil).
+  mezcla con las notas del pipeline en la misma categoría. Tiene
+  **prioridad solo 24h** desde que se publica (queda fija arriba de
+  hero/grid/ticker); pasadas las 24h compite en orden normal, sigue
+  existiendo hasta que Convex la recorte a los 4 días (igual que las del
+  pipeline).
+- **Banner**: imagen + link opcional + **vigencia en días opcional** →
+  aparece en la barra lateral del sitio (desktop) y como banner inline
+  arriba del feed (móvil). Con varios banners activos **rotan uno a la
+  vez cada 8s**, no se apilan. Sin vigencia especificada, el banner es
+  permanente hasta que Evaristo lo borre a mano.
 
 Backend: tablas Convex `notasManual` y `banners`, HTTP actions en
 `convex/http.ts` (`/api/notas`, `/api/subir-imagen-url`, `/api/banners`,
 `/api/banners/eliminar`) con CORS abierto porque panel/sitio son HTML/JS
-plano sin SDK de Convex, en otro dominio (GitHub Pages).
+plano sin SDK de Convex, en otro dominio (GitHub Pages). `convex/crons.ts`
+tiene 2 cron diarios: borra notas manuales vencidas (+4 días) y banners
+vencidos (si tienen `expiraEn`), liberando también su imagen de storage
+en ambos casos — antes de esto las imágenes huérfanas se quedaban para
+siempre (fuga de storage ya corregida).
+
+**Bug real ya corregido (18-sep-2026):** `GET /api/notas` de Convex
+devuelve el array directo, pero `app.js` esperaba `{notas: [...]}` —
+`data.notas` daba `undefined` y las notas del panel **nunca se mostraban**
+en el sitio, desde que se armó el panel, sin ningún error visible. No era
+caché del navegador. Ya arreglado (`Array.isArray(data) ? data : []`).
+
+## Imágenes de las notas del pipeline
+
+`pipeline/noticias.py::_imagen_de_entry` lee `media:thumbnail` /
+`media:content` / `enclosure` ya embebidos en el RSS de cada entrada (sin
+red extra), y para Google Trends lee `ht:picture` (namespace propio de ese
+feed, feedparser lo expone como `entry.ht_picture`). Si el feed no trae
+nada, `fetch_news.py::obtener_imagen_og` intenta sacar el `og:image` de la
+página del artículo original como último recurso (regex simple, sin
+dependencia de parser HTML, timeout 8s, nunca bloquea el pipeline).
+
+Cobertura real verificada (18-sep-2026): El Universal/Reforma/BBC
+Mundo/Euronews ~100%, Google Trends 100% vía `ht:picture` una vez que cada
+nota se reprocesa. **Google News se queda en 0%** — sus links son
+redirects que necesitan JavaScript para resolver al artículo real, no se
+puede sacar `og:image` con una petición HTTP simple; solución real
+requeriría un navegador headless (no implementado, fuera de alcance por
+ahora). Notas viejas (de antes de estos fixes) no ganan imagen
+retroactivamente, solo las que se procesan de aquí en adelante.
 
 ## Decisiones de diseño ya tomadas
 
@@ -68,14 +113,25 @@ plano sin SDK de Convex, en otro dominio (GitHub Pages).
   no la del dispositivo del visitante.
 - **Inicio (pestaña "Todas")** mezcla 1 de cada categoría (round-robin) para
   que ninguna domine la portada — las pestañas de categoría sí van en
-  orden de más reciente a menos reciente. 16 notas visibles (hero + 3
-  laterales + 12 en grid).
+  orden de más reciente a menos reciente. **20 notas visibles** (hero + 3
+  laterales + 16 en grid).
 - Cada nota tiene link propio (`?nota=<id>`) con botones de compartir
   reales (X, Facebook, WhatsApp) + Instagram (copia texto+link, esa red no
   tiene intent de compartir web).
+- **Banners publicitarios**: al hacer click van al link que Evaristo haya
+  puesto al subirlo (opcional) — si no le puso link, no es clickeable.
 
-## Pendiente
+## Pendiente / decisiones abiertas con el cliente
 
+- **Hosting del sitio** (18-sep-2026): GitHub Pages cachea los archivos
+  estáticos **10 min fijos, sin forma de configurarlo** — el cliente lo
+  notó como "se tarda en actualizar". Se le explicaron 3 opciones: (1)
+  mover el sitio a Vercel (gratis, sin servidor, deploy casi instantáneo,
+  recomendado), (2) correr el pipeline más seguido sin cambiar hosting
+  (no arregla el límite de caché), (3) comprar un VPS nuevo y barato en
+  Hetzner solo para esto (viable, servir estático es ligero, actualizar
+  seguido NO sube el costo — el costo real sería el trabajo de armar
+  nginx/SSL/deploy, no dinero). Cliente evaluando, **sin decidir aún**.
 - **Redes sociales reales de Evaristo** — hoy la barra superior/footer
   tienen los íconos como placeholder ("Pendiente"). En cuanto el cliente
   las pase, conectarlas en `index.html` (topbar-social, mobile-menu-social,
@@ -83,3 +139,5 @@ plano sin SDK de Convex, en otro dominio (GitHub Pages).
   panel superior.
 - **Dominio propio** — sin decidir (ver spec de diseño), por ahora corre en
   la URL gratis de GitHub Pages.
+- **Google News sin imagen** — ver sección de arriba; decidir si se deja
+  así, se quita como fuente, o se justifica meter un navegador headless.
