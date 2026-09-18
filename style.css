@@ -509,7 +509,7 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
 .modal-overlay {
   position: fixed; inset: 0; z-index: 80;
   background: rgba(20,18,37,.6);
-  display: flex; align-items: flex-start; justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   padding: 40px 16px;
   overflow-y: auto;
 }
@@ -623,6 +623,16 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
   .hero-deck { padding: 0 16px; }
   .hero-meta { padding: 0 16px 16px; }
   .hero-side { padding: 0 16px; }
+
+  /* La nota se ve chica en las tarjetas pero al abrirla (modal) usaba los
+     mismos tamaños de escritorio — imagen y texto se sentían "de golpe
+     muy grandes" en pantalla de celular. Se achican y se acota el padding
+     para que se vea proporcionado al ancho real del teléfono. */
+  .modal-overlay { padding: 16px 12px; }
+  .modal { padding: 20px; }
+  .modal-title { font-size: 21px; }
+  .modal-image { max-height: 200px; }
+  .modal-body { font-size: 15px; line-height: 1.6; }
 
   main { padding: 0; }
   .feed-head { padding: 0 16px; }
