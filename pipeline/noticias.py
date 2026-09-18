@@ -15,6 +15,39 @@ def id_de_link(link: str) -> str:
     return hashlib.sha1(link.encode("utf-8")).hexdigest()[:12]
 
 
+def _imagen_de_entry(item) -> str | None:
+    """Busca una imagen ya embebida en la entrada RSS (media:thumbnail,
+    media:content o un enclosure de imagen) — sin red, solo lee lo que
+    feedparser ya trajo consigo. Si ningún feed trae nada aquí,
+    fetch_news.py intenta sacar el og:image de la página original como
+    último recurso (eso sí necesita red, por eso vive fuera de este módulo
+    "puro")."""
+    media_thumbnail = getattr(item, "media_thumbnail", None)
+    if media_thumbnail:
+        url = media_thumbnail[0].get("url")
+        if url:
+            return url
+
+    media_content = getattr(item, "media_content", None)
+    if media_content:
+        for m in media_content:
+            tipo = m.get("type") or m.get("medium") or ""
+            if not tipo or "image" in tipo:
+                url = m.get("url")
+                if url:
+                    return url
+
+    enclosures = getattr(item, "enclosures", None)
+    if enclosures:
+        for enc in enclosures:
+            tipo = enc.get("type", "")
+            url = enc.get("href") or enc.get("url")
+            if url and (not tipo or tipo.startswith("image/")):
+                return url
+
+    return None
+
+
 def parse_entries_from_parsed(
     parsed, fuente: str, categoria: str, feed_url: str | None = None
 ) -> list[dict]:
@@ -50,6 +83,7 @@ def parse_entries_from_parsed(
             "fuente": fuente,
             "categoria": categoria,
             "fecha": fecha,
+            "imagen": _imagen_de_entry(item),
         })
     return entradas
 
@@ -128,6 +162,7 @@ def build_nota(entrada: dict, reescrita: dict) -> dict:
         "fuente": entrada["fuente"],
         "link": entrada["link"],
         "fecha": entrada["fecha"],
+        "imagenUrl": entrada.get("imagen"),
     }
     validate_nota(nota)
     return nota

@@ -99,6 +99,54 @@ def test_parse_entries_from_parsed_usa_fecha_actual_si_falta_published_parsed():
     assert entradas[0]["fecha"]  # no vacío, no valida el valor exacto
 
 
+def test_parse_entries_from_parsed_sin_imagen_si_el_feed_no_trae_nada():
+    parsed = SimpleNamespace(entries=[_entry()])
+
+    entradas = parse_entries_from_parsed(parsed, fuente="X", categoria="nacional")
+
+    assert entradas[0]["imagen"] is None
+
+
+def test_parse_entries_from_parsed_toma_imagen_de_media_thumbnail():
+    entry = _entry()
+    entry.media_thumbnail = [{"url": "https://x.com/foto.jpg"}]
+    parsed = SimpleNamespace(entries=[entry])
+
+    entradas = parse_entries_from_parsed(parsed, fuente="X", categoria="nacional")
+
+    assert entradas[0]["imagen"] == "https://x.com/foto.jpg"
+
+
+def test_parse_entries_from_parsed_toma_imagen_de_media_content():
+    entry = _entry()
+    entry.media_content = [{"url": "https://x.com/foto.jpg", "medium": "image"}]
+    parsed = SimpleNamespace(entries=[entry])
+
+    entradas = parse_entries_from_parsed(parsed, fuente="X", categoria="nacional")
+
+    assert entradas[0]["imagen"] == "https://x.com/foto.jpg"
+
+
+def test_parse_entries_from_parsed_ignora_media_content_que_no_es_imagen():
+    entry = _entry()
+    entry.media_content = [{"url": "https://x.com/video.mp4", "medium": "video"}]
+    parsed = SimpleNamespace(entries=[entry])
+
+    entradas = parse_entries_from_parsed(parsed, fuente="X", categoria="nacional")
+
+    assert entradas[0]["imagen"] is None
+
+
+def test_parse_entries_from_parsed_toma_imagen_de_enclosure():
+    entry = _entry()
+    entry.enclosures = [{"href": "https://x.com/foto.jpg", "type": "image/jpeg"}]
+    parsed = SimpleNamespace(entries=[entry])
+
+    entradas = parse_entries_from_parsed(parsed, fuente="X", categoria="nacional")
+
+    assert entradas[0]["imagen"] == "https://x.com/foto.jpg"
+
+
 def test_filter_new_entries_excluye_las_que_ya_estan_en_historial():
     entradas = [
         {"link": "https://x.com/1", "titulo": "A"},
@@ -239,3 +287,21 @@ def test_build_nota_combina_entrada_y_reescrita():
     assert nota["categoria"] == "nacional"
     assert nota["link"] == "https://x.com/n1"
     assert nota["fecha"] == "2026-09-16T15:00:00+00:00"
+    assert nota["imagenUrl"] is None
+
+
+def test_build_nota_carga_imagenUrl_desde_la_entrada():
+    entrada = {
+        "link": "https://x.com/n1",
+        "titulo": "Original",
+        "resumen": "Original resumen",
+        "fuente": "El Universal",
+        "categoria": "nacional",
+        "fecha": "2026-09-16T15:00:00+00:00",
+        "imagen": "https://x.com/foto.jpg",
+    }
+    reescrita = {"titulo": "Reescrito", "resumen": "Resumen IA", "cuerpo": "Cuerpo IA"}
+
+    nota = build_nota(entrada, reescrita)
+
+    assert nota["imagenUrl"] == "https://x.com/foto.jpg"

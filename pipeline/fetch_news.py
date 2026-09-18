@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -50,6 +51,33 @@ FEEDS = [
     {"url": "https://news.google.com/rss?hl=es-419&gl=MX&ceid=MX:es-419", "fuente": "Google News", "categoria": "internacional"},
     {"url": "https://trends.google.com/trending/rss?geo=MX", "fuente": "Google Trends", "categoria": "trending"},
 ]
+
+
+# Búsqueda de og:image por regex en vez de un parser HTML completo: es una
+# sola etiqueta bien conocida, no vale la pena una dependencia (bs4/lxml)
+# para esto — ponytail: regex, upgrade a un parser real si algún día el
+# formato de las páginas fuente lo exige.
+OG_IMAGE_RE = re.compile(
+    r'<meta[^>]+property=["\']og:image["\'][^>]+content=["\']([^"\']+)["\']', re.IGNORECASE
+)
+OG_IMAGE_RE_ALT = re.compile(
+    r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+property=["\']og:image["\']', re.IGNORECASE
+)
+
+
+def obtener_imagen_og(url: str) -> str | None:
+    """Último recurso cuando el RSS no trae imagen propia: lee el <head> de
+    la página original y saca su og:image. Nunca debe tronar el pipeline —
+    cualquier falla (timeout, 403, HTML raro) simplemente deja la nota sin
+    imagen."""
+    try:
+        resp = requests.get(url, headers={"User-Agent": USER_AGENT}, timeout=8)
+        resp.raise_for_status()
+        html = resp.text[:200_000]  # no hace falta la página completa
+        match = OG_IMAGE_RE.search(html) or OG_IMAGE_RE_ALT.search(html)
+        return match.group(1) if match else None
+    except Exception:
+        return None
 
 
 def cargar_json(path: Path, default):
@@ -92,6 +120,12 @@ def obtener_entradas_nuevas(historial: dict) -> list[dict]:
             continue
         vistos.add(entrada["link"])
         deduplicadas.append(entrada)
+
+    for entrada in deduplicadas:
+        if entrada.get("imagen") or entrada["link"].startswith("https://www.google.com/search?q="):
+            continue
+        entrada["imagen"] = obtener_imagen_og(entrada["link"])
+
     return deduplicadas
 
 
