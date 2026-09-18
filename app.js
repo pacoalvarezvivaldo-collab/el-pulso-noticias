@@ -85,7 +85,7 @@ function renderHero(destacada, laterales) {
       </div>
       <h1 class="hero-title">${esc(destacada.titulo)}</h1>
       <p class="hero-deck">${esc(destacada.resumen)}</p>
-      <div class="hero-meta">${fmtHora(destacada.fecha)} · ${esc(destacada.fuente)}</div>
+      <div class="hero-meta">${fmtHora(destacada.fecha)} · El Pulso Noticias</div>
     </div>
     <div class="hero-side">
       ${laterales.map(n => `
@@ -109,7 +109,7 @@ function renderGrid(notas) {
       </div>
       <div class="card-title">${esc(n.titulo)}</div>
       <div class="card-deck">${esc(n.resumen)}</div>
-      <div class="card-meta">${fmtHora(n.fecha)} · ${esc(n.fuente)}</div>
+      <div class="card-meta">${fmtHora(n.fecha)} · El Pulso Noticias</div>
     </div>
   `).join('');
   grid.querySelectorAll('[data-id]').forEach(el => el.addEventListener('click', () => openModal(el.dataset.id)));
@@ -136,21 +136,11 @@ function openModal(id) {
   document.getElementById('modalCat').textContent = CAT_LABEL[n.categoria];
   document.getElementById('modalCat').style.background = CAT_COLOR[n.categoria];
   document.getElementById('modalTitle').textContent = n.titulo;
-  document.getElementById('modalMeta').textContent = `${fmtHora(n.fecha)} · Fuente: ${n.fuente}`;
+  document.getElementById('modalMeta').textContent = `${fmtHora(n.fecha)} · El Pulso Noticias`;
   const img = document.getElementById('modalImage');
   const imgUrl = n.imagenUrl ? safeUrl(n.imagenUrl) : null;
   if (imgUrl) { img.src = imgUrl; img.hidden = false; } else { img.hidden = true; img.removeAttribute('src'); }
   document.getElementById('modalBody').textContent = n.cuerpo;
-  const src = document.getElementById('modalSource');
-  const url = safeUrl(n.link);
-  if (url) {
-    src.href = url;
-    src.textContent = `Ver nota original en ${n.fuente} →`;
-    src.hidden = false;
-  } else {
-    src.removeAttribute('href');
-    src.hidden = true;
-  }
   document.getElementById('modalOverlay').hidden = false;
 }
 
