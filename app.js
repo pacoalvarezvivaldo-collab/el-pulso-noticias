@@ -365,6 +365,12 @@ async function init() {
     searchInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') buscar(searchInput.value);
     });
+    // Si borran el texto (con backspace o la X del input) sin dar Enter,
+    // regresa sola al feed normal en vez de quedarse trabada mostrando
+    // "sin resultados" de la última búsqueda.
+    searchInput.addEventListener('input', () => {
+      if (!searchInput.value.trim() && searchQuery) buscar('');
+    });
     document.addEventListener('click', (e) => {
       if (!searchBox.classList.contains('open')) return;
       if (searchBox.contains(e.target) || e.target.id === 'searchIconBtn' || e.target.id === 'bottomSearchBtn') return;
