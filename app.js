@@ -476,6 +476,16 @@ async function init() {
     document.getElementById('modalOverlay').addEventListener('click', (e) => {
       if (e.target.id === 'modalOverlay') closeModal();
     });
+
+    const infoModal = document.getElementById('infoModalOverlay');
+    document.getElementById('quienesSomosLink').addEventListener('click', (e) => {
+      e.preventDefault();
+      infoModal.hidden = false;
+    });
+    document.getElementById('infoModalClose').addEventListener('click', () => { infoModal.hidden = true; });
+    infoModal.addEventListener('click', (e) => {
+      if (e.target === infoModal) infoModal.hidden = true;
+    });
   }
 }
 
