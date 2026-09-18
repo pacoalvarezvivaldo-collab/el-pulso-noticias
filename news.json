@@ -1,6 +1,83 @@
 {
-  "generado": "2026-09-18T21:56:17.184078+00:00",
+  "generado": "2026-09-18T22:15:31.391507+00:00",
   "notas": [
+    {
+      "id": "8da36fbde333",
+      "categoria": "nacional",
+      "titulo": "Consejos para el manejo de frentes fríos en México y su impacto en la salud pública",
+      "resumen": "El fenómeno de los frentes fríos se caracteriza por la llegada de masas de aire frío que pueden ocasionar lluvias y descensos en la temperatura, lo que incrementa el riesgo de enfermedades respiratorias entre la población.",
+      "cuerpo": "La temporada de frentes fríos en México está marcada por la ocurrencia de ondas gélidas que, además de provocar disminuciones significativas en las temperaturas, pueden estar acompañadas de lluvias. Este fenómeno climático presenta un riesgo incrementado de contagio de enfermedades respiratorias, especialmente en poblaciones vulnerables. Las autoridades de salud recomiendan adoptar medidas preventivas para contrarrestar los efectos de estas condiciones climáticas. Es aconsejable vestir adecuadamente, evitar la exposición prolongada a bajas temperaturas y mantener una adecuada higiene para prevenir contagios. Asimismo, se sugiere la vacunación contra la influenza y otros virus estacionales como parte de las estrategias de prevención durante esta temporada.",
+      "fuente": "El Universal",
+      "link": "https://www.eluniversal.com.mx/tendencias/temporada-de-frentes-frios-en-mexico-recomendaciones-para-protegerte-de-bajas-temperaturas-y-enfermedades/",
+      "fecha": "2026-09-18T22:07:22+00:00",
+      "imagenUrl": "https://www.eluniversal.com.mx/resizer/v2/GZ76F54ODBHFNC5NSXLWYTVEQA.jpg?auth=e4f2733af10cd80025d38cbf20c644e1a402acf5999b04b52ec80e4060586b48&smart=true&width=500"
+    },
+    {
+      "id": "dbe1cf7fc75d",
+      "categoria": "nacional",
+      "titulo": "Trump responde a críticas del congresista sobre políticas migratorias",
+      "resumen": "En medio de un intercambio verbal entre ambos funcionarios, se señala que los republicanos podrían arriesgar su mayoría en el Congreso tras las próximas elecciones, según indican encuestas recientes.",
+      "cuerpo": "El expresidente de los Estados Unidos, Donald Trump, ha respondido a las críticas del congresista Salazar, quien cuestionó las políticas migratorias implementadas durante su administración. Trump afirmó que el éxito electoral de Salazar se debe en gran parte a su apoyo, sugiriendo que sin su influencia, el congresista no habría obtenido su cargo. Este enfrentamiento se produce en un contexto donde las encuestas indican que los republicanos podrían perder su mayoría en el Congreso en las elecciones venideras, lo que añade un nivel de tensión entre los líderes del partido.",
+      "fuente": "El Universal",
+      "link": "https://www.eluniversal.com.mx/mundo/salazar-gano-solo-gracias-a-mi-trump-responde-a-congresista-tras-criticas-a-politicas-migratorias/",
+      "fecha": "2026-09-18T22:05:34+00:00",
+      "imagenUrl": "https://www.eluniversal.com.mx/resizer/v2/FOPCMDLZVJF6LOBBCJ4QG4JTQQ.jpg?auth=15519f12aa0c98237bd4a99c7b010a004e06fd80e92a4c289a077390a20f172f&smart=true&width=500"
+    },
+    {
+      "id": "960fa7f50a1a",
+      "categoria": "nacional",
+      "titulo": "Volkswagen presenta el ID.3 GTI: la llegada del rendimiento eléctrico",
+      "resumen": "Volkswagen incorpora la versión GTI a su modelo eléctrico ID.3, marcando un hito en la movilidad deportiva y sostenible.",
+      "cuerpo": "Volkswagen ha lanzado oficialmente el ID.3 GTI, una variante deportiva de su popular modelo eléctrico ID.3. Este nuevo vehículo combina la tradición de rendimiento asociado a la insignia GTI con la tecnología de propulsión eléctrica, reflejando el compromiso de la marca con la sostenibilidad y la innovación. El ID.3 GTI promete ofrecer una experiencia de conducción dinámica y emocionante, sin comprometer su eficiencia energética. Con características que destacan su diseño deportivo y su rendimiento mejorado, este modelo representa un paso significativo en la evolución de los automóviles eléctricos en el segmento de alto rendimiento.",
+      "fuente": "El Universal",
+      "link": "https://www.eluniversal.com.mx/autopistas/volkswagen-id3-gti-el-apellido-deportivo-se-vuelve-electrico/",
+      "fecha": "2026-09-18T22:00:00+00:00",
+      "imagenUrl": "https://www.eluniversal.com.mx/resizer/v2/HNPBTUQWJNEG7F6Z6UEVKKOMUQ.jpg?auth=19539105ff9ac6fa49e4036442fc367ca38a19ca2436c20c240fb4b4189b3e17&smart=true&width=500"
+    },
+    {
+      "id": "a4d0a771d401",
+      "categoria": "nacional",
+      "titulo": "Carlos Torres Piña renuncia a la Fiscalía de Michoacán y asume nuevo cargo en Morena",
+      "resumen": "Su gestión al frente de la Fiscalía evidenció una tasa de impunidad penal del 67.68%, en comparación con la media nacional del 89.42%.",
+      "cuerpo": "Carlos Torres Piña ha presentado su renuncia como titular de la Fiscalía General del Estado de Michoacán. Su salida se produce en un momento en que asumirá el rol de coordinador estatal de Defensa de la Transformación del partido Morena. Durante su administración en la Fiscalía, la institución reportó una tasa de impunidad penal del 67.68%, inferior a la media nacional que se sitúa en un 89.42%. Esta cifra ha generado diversas reacciones sobre la efectividad de su gestión y el estado de la justicia en la región.",
+      "fuente": "El Universal",
+      "link": "https://www.eluniversal.com.mx/estados/carlos-torres-pina-presenta-su-renuncia-a-la-fiscalia-de-michoacan-asumio-como-coordinador-estatal-de-defensa-de-la-transformacion-de-morena/",
+      "fecha": "2026-09-18T21:58:09+00:00",
+      "imagenUrl": "https://www.eluniversal.com.mx/resizer/v2/F2BWYWSPGJCZZG35KYVTEUKQ6M.jpg?auth=b0f0d9967067de71b8aceddfa04c008857330c420f414fb30b33b6294201386e&smart=true&width=500"
+    },
+    {
+      "id": "3734c4782da0",
+      "categoria": "nacional",
+      "titulo": "Donald Trump Justifica su Veto a CNN, Politico y MS NOW y Aboga por una Prensa Transparente",
+      "resumen": "El expresidente Donald Trump se pronunció sobre su decisión de vetar a ciertos medios de comunicación, demandando una cobertura mediática que sea 'libre, justa y honesta'.",
+      "cuerpo": "En declaraciones recientes, el expresidente de Estados Unidos, Donald Trump, defendió su decisión de vetar a medios como CNN, Politico y MS NOW. Según Trump, estos outlets han demostrado una falta de objetividad en su cobertura informativa, lo que justifica su rechazo a mantener relaciones con ellos. El exmandatario enfatizó la importancia de contar con una prensa que ofrezca una información correcta y transparente, y que, en su opinión, respete los principios de equidad y honestidad. Esta controversia ha vuelto a encender el debate sobre la libertad de prensa y la relación entre políticos y los medios de comunicación.",
+      "fuente": "Latinus",
+      "link": "https://www.youtube.com/shorts/87Cdj09_Dqk",
+      "fecha": "2026-09-18T21:55:07+00:00",
+      "imagenUrl": "https://i1.ytimg.com/vi/87Cdj09_Dqk/hqdefault.jpg"
+    },
+    {
+      "id": "8798e971bfcb",
+      "categoria": "nacional",
+      "titulo": "Estados Unidos y Dinamarca firman acuerdo sobre seguridad en Groenlandia",
+      "resumen": "El presidente Donald Trump anuncia el inicio del proceso para establecer una presencia militar significativa en Groenlandia tras un acuerdo con Dinamarca.",
+      "cuerpo": "En una reciente declaración, el presidente de Estados Unidos, Donald Trump, destacó que Dinamarca ha concedido a Estados Unidos un 'control permanente' sobre la seguridad de la isla de Groenlandia. Este acuerdo, que apunta a fortalecer la presencia militar estadounidense en la región, marca un paso significativo en la política de defensa de Estados Unidos en el Ártico. Trump afirmó que su administración comenzará de inmediato el proceso para desarrollar una importante infraestructura militar en Groenlandia, lo que sugiere un enfoque proactivo en la seguridad nacional y en la supervisión del área estratégica del norte.",
+      "fuente": "El Universal",
+      "link": "https://www.eluniversal.com.mx/mundo/trump-asegura-que-dinamarca-le-otorgo-a-eu-control-permanente-sobre-groenlandia-anuncia-acuerdo-de-seguridad/",
+      "fecha": "2026-09-18T21:50:59+00:00",
+      "imagenUrl": "https://www.eluniversal.com.mx/resizer/v2/AW3LTNHCYZBCFHJOHPE4RF7XEU.jpg?auth=5739ef2d1d397e8f775f6ca8f2eeffea5236280d0b2bc0412a063473cad55a5c&smart=true&width=500"
+    },
+    {
+      "id": "01fb22d3d6cb",
+      "categoria": "nacional",
+      "titulo": "Trump Anuncia Acuerdo con Dinamarca sobre Seguridad en Groenlandia",
+      "resumen": "El expresidente Donald Trump declaró que alcanzó un acuerdo con el Reino de Dinamarca que concede a Estados Unidos un control prolongado sobre la seguridad en Groenlandia.",
+      "cuerpo": "En una reciente declaración, el expresidente Donald Trump afirmó que ha llegado a un acuerdo con el Reino de Dinamarca en el cual se establece que Estados Unidos obtendrá control permanente sobre la seguridad en Groenlandia. Este acuerdo, según Trump, reforzaría la cooperación entre ambos países en cuestiones de defensa y seguridad en la región ártica. Sin embargo, la administración danesa no ha confirmado estos términos y se ha enfocado en resaltar la importancia de la soberanía de Groenlandia, que es un territorio autónomo bajo el Reino de Dinamarca.",
+      "fuente": "Reforma",
+      "link": "https://www.reforma.com/afirma-trump-que-pacto-controlar-seguridad-en-groenlandia/ar3278468",
+      "fecha": "2026-09-18T21:49:49+00:00",
+      "imagenUrl": "https://iphonegr.reforma.com/libre/online07/imagetransformer2/ImageTransformer.aspx?img=https://img.gruporeforma.com/imagenes/960x640/7/274/6273478.jpg&amp;maxwidth=960&amp;maxheight=640&amp;imgWatermark=https://www.reforma.com/libre/imgdiseno/mailsharing/marca_agua.png&amp;transparencia=0.9&amp;centerWM=0"
+    },
     {
       "id": "9fdbdf21436b",
       "categoria": "nacional",
@@ -233,81 +310,15 @@
       "imagenUrl": "https://www.eluniversal.com.mx/resizer/v2/ZRC6VZ7YGVGK7AJY6PEK6UGKP4.jpeg?auth=e7328ec9498be44c0e3e09122120a4f4ed0ff200328dd8b74870fe336544bc6b&smart=true&width=500"
     },
     {
-      "id": "e6fe7887cdb2",
-      "categoria": "nacional",
-      "titulo": "Denuncias de Maltrato a Deportados de Estados Unidos en Guinea Ecuatorial",
-      "resumen": "Un informe de una organización no gubernamental señala que dos ciudadanos deportados desde Estados Unidos han sido arrestados y agredidos por las fuerzas de seguridad en Guinea Ecuatorial, sugiriendo que su expulsión podría ser una forma de represalia.",
-      "cuerpo": "La ONG ha presentado acusaciones graves sobre el trato recibido por dos hombres deportados desde Estados Unidos a Guinea Ecuatorial, donde, según el informe, fueron arrestados y golpeados por la policía local. Las autoridades guineanas han mantenido a estos individuos en un hotel ubicado en las afueras de Malabo, que ha sido designado por el presidente como centro de detención para solicitantes de asilo retornados desde Estados Unidos. La organización ha manifestado su preocupación por posibles violaciones a los derechos humanos y ha instado a la comunidad internacional a intervenir para proteger a estos deportados.",
-      "fuente": "El Universal",
-      "link": "https://www.eluniversal.com.mx/mundo/deportados-de-eu-a-guinea-ecuatorial-fueron-arrestados-y-golpeados-por-la-policia-acusa-ong-ven-represalia-en-expulsion-a-ese-pais/",
-      "fecha": "2026-09-18T20:19:29+00:00",
-      "imagenUrl": "https://www.eluniversal.com.mx/resizer/v2/WUMFZBHATJEJLJTFEE5HADWAHQ.jpg?auth=77fe29d736ca5a9d120238a47430129c86a96ff9781578fd77c3011cfc87f31a&smart=true&width=500"
-    },
-    {
-      "id": "9a13edd25ddd",
-      "categoria": "nacional",
-      "titulo": "Guía para el seguimiento del partido Puebla vs Atlante en la Liga MX",
-      "resumen": "Información sobre la transmisión en vivo del encuentro entre Puebla y Atlante en la Liga MX.",
-      "cuerpo": "El partido entre Puebla y Atlante, correspondiente a la Liga MX, se llevará a cabo hoy. Los aficionados podrán seguir el encuentro en vivo a través de diversas plataformas de transmisión. Se recomienda revisar los horarios específicos y los canales habilitados para disfrutar de este importante enfrentamiento en el fútbol mexicano.",
-      "fuente": "El Universal",
-      "link": "https://www.eluniversal.com.mx/deportes/puebla-vs-atlante-cuando-y-donde-ver-en-vivo-el-partido-de-la-liga-mx-hoy/",
-      "fecha": "2026-09-18T20:14:29+00:00",
-      "imagenUrl": "https://www.eluniversal.com.mx/resizer/v2/BAHRO7A4DFFCLCLDHCYDLZHBZ4.jpg?auth=0422b9c99d88a3f643ec47ab889a42ec9fb5aae86f21c6ad7e5ea0072a334158&smart=true&width=500"
-    },
-    {
-      "id": "753d825468d7",
-      "categoria": "nacional",
-      "titulo": "Traslado de Danna Yanina del Penal de Altamira al Hospital Psiquiátrico de Tampico",
-      "resumen": "Danna Yanina ha sido trasladada a un hospital psiquiátrico tras sufrir una crisis nerviosa significativa.",
-      "cuerpo": "Danna Yanina, involucrada en el caso de Dafne Zapata, ha sido trasladada del penal de Altamira al Hospital Psiquiátrico de Tampico. Este movimiento se produjo tras un episodio de crisis nerviosa severa que la afectó recientemente. Las autoridades han decidido que la atención especializada en salud mental es la más adecuada para su situación actual.",
-      "fuente": "El Universal",
-      "link": "https://www.eluniversal.com.mx/estados/caso-dafne-zapata-trasladan-a-danna-yanina-del-penal-de-altamira-al-hospital-psiquiatrico-de-tampico-sufrio-una-fuerte-crisis-nerviosa/",
-      "fecha": "2026-09-18T20:06:57+00:00",
-      "imagenUrl": "https://www.eluniversal.com.mx/resizer/v2/ON5OLI6YHRA7PCGEFQKUNORQJA.jpg?auth=d2be76678b5f4447be5dd523a8ad47eabde3905697e3ba87a85587c4f5c6dc44&smart=true&width=500"
-    },
-    {
-      "id": "121aced4a764",
-      "categoria": "nacional",
-      "titulo": "Revelaciones sobre la Declaración Patrimonial del Almirante Ojeda: Ingresos, Bienes y Créditos Hipotecarios",
-      "resumen": "La Secretaría Anticorrupción ha desclasificado información sobre el patrimonio del exsecretario de Marina, Almirante Ojeda, en respuesta a un reportaje publicado por EL UNIVERSAL.",
-      "cuerpo": "Recientemente, la Secretaría Anticorrupción ha hecho públicos los detalles de la Declaración Patrimonial del Almirante Ojeda, exsecretario de Marina durante la administración del presidente Andrés Manuel López Obrador. La documentación revela ingresos por 2 millones de pesos, así como la posesión de una camioneta y varios créditos hipotecarios. Esta acción de desclasificación se produce tras la divulgación de un reportaje por parte de EL UNIVERSAL, que cuestionó la transparencia y el manejo del patrimonio de funcionarios públicos. La medida busca promover la rendición de cuentas y la integridad dentro de las instituciones del país.",
-      "fuente": "El Universal",
-      "link": "https://www.eluniversal.com.mx/nacion/ingresos-por-2-mdp-camioneta-y-creditos-hipotecarios-esto-revela-la-declaracion-patrimonial-del-almirante-ojeda/",
-      "fecha": "2026-09-18T20:04:16+00:00",
-      "imagenUrl": "https://www.eluniversal.com.mx/resizer/v2/TRBOPYFUINEC7I42H6MC6YA6FY.jpg?auth=ada2ca9b933789b23fb05905b942eb63715d4488a1433056e112a3e1c2c79988&smart=true&width=500"
-    },
-    {
-      "id": "f10dc3629cb4",
-      "categoria": "nacional",
-      "titulo": "La Asociación de Ferrocarriles de México evalúa propuesta de incremento del derecho de uso de vías férreas en respuesta a solicitud del Ministerio de Hacienda",
-      "resumen": "La Asociación de Ferrocarriles de México está considerando una propuesta que sugiere un aumento en el derecho de uso de vías férreas, siendo el Ministerio de Hacienda quien ha solicitado que este incremento sea del 3%.",
-      "cuerpo": "La Asociación de Ferrocarriles de México se encuentra en la etapa de análisis de una propuesta que tiene como objetivo elevar el derecho de uso de las vías férreas. Esta iniciativa surge a raíz de una solicitud emitida por el Ministerio de Hacienda, que establece que el incremento propuesto debería fijarse en un 3%. Esta revisión es parte de un esfuerzo por mejorar la regulación del uso de las vías y se espera que tenga un impacto significativo en la operatividad del sector ferroviario en el país. Los diversos actores involucrados en la industria están pendientes de los developments y posibles implicaciones que esta medida podría acarrear.",
-      "fuente": "El Universal",
-      "link": "https://www.eluniversal.com.mx/cartera/asociacion-de-ferrocarriles-de-mexico-analiza-propuesta-para-aumentar-derecho-de-uso-de-vias-ferreas-hacienda-pide-que-sea-de-3/",
-      "fecha": "2026-09-18T20:01:58+00:00",
-      "imagenUrl": "https://www.eluniversal.com.mx/resizer/v2/D5HEYFTLSVGWRE34AMFB7LIKFE.jpg?auth=3fc9b6c26df2ed49de93cfb1a12e37deb5077c12b8ef105570732ab776c27808&smart=true&width=500"
-    },
-    {
-      "id": "a2faad009daa",
-      "categoria": "nacional",
-      "titulo": "Barbra Streisand critica a Donald Trump sobre el futuro del Centro Kennedy",
-      "resumen": "La reconocida artista Barbra Streisand expresa su preocupación por la influencia de Donald Trump en el futuro del Centro Kennedy, destacando su presunto ego desmedido.",
-      "cuerpo": "En una reciente declaración, la prestigiosa cantante y actriz Barbra Streisand manifestó su preocupación por la dirección en la que podría llevar el expresidente Donald Trump al Centro Kennedy, una emblemática institución cultural de Estados Unidos. Streisand, conocida por su activismo político, señaló que el ego desmedido de Trump podría tener repercusiones negativas en la misión y visión de este importante centro dedicado a las artes y la cultura. Sus comentarios reflejan un creciente desasosiego entre artistas y figuras culturales sobre el futuro de instituciones clave en el país bajo la influencia de políticas que consideran dañinas para el ámbito artístico.",
-      "fuente": "El Universal",
-      "link": "https://www.eluniversal.com.mx/espectaculos/barbra-streisand-arremete-contra-donald-trump-por-el-futuro-del-centro-kennedy-ego-desmedido/",
-      "fecha": "2026-09-18T19:58:33+00:00",
-      "imagenUrl": "https://www.eluniversal.com.mx/resizer/v2/EPTX6UTKMJBBFC46IZBLBX4D2Q.jpg?auth=cf19d35e20a21d60a98633733250f8cc1aaa1530f9d048cf5a76d4f09e4b0d7a&smart=true&width=500"
-    },
-    {
-      "id": "88574637b585",
-      "categoria": "nacional",
-      "titulo": "Segundo Simulacro Nacional 2026: Información Importante sobre el Ejercicio de Alerta Sísmica del 19 de Septiembre",
-      "resumen": "El segundo simulacro nacional 2026 se llevará a cabo el 19 de septiembre. A continuación se presenta información relevante para los participantes.",
-      "cuerpo": "El 19 de septiembre de 2026, se realizará el segundo simulacro nacional de alerta sísmica en México, con el objetivo de evaluar los planes de respuesta ante emergencias sísmicas. Este ejercicio se enmarca en los esfuerzos por mejorar la preparedness y la capacidad de respuesta de la población ante un posible evento sísmico. Durante el simulacro, se activará la alerta sísmica a nivel nacional, y se espera la participación de instituciones educativas, organismos gubernamentales y la ciudadanía en general. Se recomienda a los participantes familiarizarse con los procedimientos de evacuación y los puntos de reunión previamente establecidos para garantizar una respuesta efectiva durante el simulacro.",
-      "fuente": "El Universal",
-      "link": "https://www.eluniversal.com.mx/metropoli/segundo-simulacro-nacional-2026-lo-que-debes-saber-antes-de-que-suene-la-alerta-sismica-este-19-de-septiembre/",
-      "fecha": "2026-09-18T19:53:16+00:00",
-      "imagenUrl": "https://www.eluniversal.com.mx/resizer/v2/X7ITQ46VWVCUDJC5SMKFMWZYTU.jpg?auth=1f34ac34a5fd7c9e2103b32447e7ee5f70783c1de5fb41009492f5ba202785e4&smart=true&width=500"
+      "id": "2640827fd279",
+      "categoria": "internacional",
+      "titulo": "El presidente Trump restringe el acceso a la Casa Blanca para algunos medios de comunicación",
+      "resumen": "La administración Trump ha implementado restricciones de acceso a la Casa Blanca para periodistas de CNN, MS NOW y Politico, enmarcadas en una relación tensa entre el presidente y ciertos medios.",
+      "cuerpo": "En una serie de decisiones recientes, el presidente de Estados Unidos, Donald Trump, ha decidido prohibir el acceso a la Casa Blanca a periodistas de las cadenas CNN, MS NOW y Politico. Esta medida se produce en el contexto de una relación complicada y conflictiva que Trump ha tenido con varios medios de comunicación durante su mandato. La administración argumenta que estas acciones son necesarias debido a la cobertura negativa y a las tensiones surgidas en conferencias de prensa y eventos oficiales. Esta prohibición ha generado preocupación entre defensores de la libertad de prensa y analistas políticos, quienes señalan que podría ser un ataque directo a la posibilidad de una prensa libre y objetiva.",
+      "fuente": "BBC Mundo",
+      "link": "https://www.bbc.com/mundo/articles/c32l8wn2egvlo?at_medium=RSS&at_campaign=rss",
+      "fecha": "2026-09-18T21:41:48+00:00",
+      "imagenUrl": "https://ichef.bbci.co.uk/ace/ws/240/cpsprodpb/6cc1/live/5c0643d0-b3ab-11f1-a7fa-c95bcf5935e4.jpg"
     },
     {
       "id": "84a0b85c4d09",
@@ -330,6 +341,17 @@
       "link": "https://www.bbc.com/mundo/articles/c9vgy052d71zo?at_medium=RSS&at_campaign=rss",
       "fecha": "2026-09-18T20:08:31+00:00",
       "imagenUrl": "https://ichef.bbci.co.uk/ace/ws/240/cpsprodpb/9144/live/a47803b0-b36a-11f1-8f19-bd786ea30d0b.jpg"
+    },
+    {
+      "id": "42c37e1131a7",
+      "categoria": "internacional",
+      "titulo": "Prohibición de acceso a la Casa Blanca para ciertos medios de comunicación por parte de la administración Trump",
+      "resumen": "El expresidente Donald Trump ha anunciado una prohibición de acceso a la Casa Blanca para las cadenas de noticias CNN, MSNBC y el sitio web Politico. Esta medida se enmarca en un contexto de tensas relaciones entre el exmandatario y estos medios.",
+      "cuerpo": "Donald Trump ha declarado que CNN, MSNBC y Politico no podrán acceder a la Casa Blanca, lo que provoca un nuevo episodio en la relación entre el exmandatario y estos medios de comunicación. En sus declaraciones, Trump insinuó que podría extender esta prohibición a otros medios en el futuro, reflejando su postura crítica hacia las noticias que considera falsas o engañosas. Este anuncio ha generado diversas reacciones en el ámbito político y mediático, evidenciando las continuas tensiones entre la administración y ciertas plataformas informativas.",
+      "fuente": "Google News",
+      "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOanpjTkdpQkpJNmxkS2R6MUdOb2UxUk9QX1N0N250bVZzVVdqMFprNkVOLWV2RWZOd2FvY1lLUF9TWHJnRS1uSmpVRlRRclhfOTJGR1A3c05qb25KMVR5aEFlWnh0bU1JNXpQOGktNldyWmd3TFZhejY4TXMyZDdCcFZ2Q1hHOVBzZkplMXFiR2paaHFZQk1NRkRnTGhaU1RDNHBkY0pldm51dw?oc=5",
+      "fecha": "2026-09-18T19:30:00+00:00",
+      "imagenUrl": null
     },
     {
       "id": "5dd9abd8f418",
@@ -428,6 +450,17 @@
       "fuente": "Google News",
       "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOUjl2Zng1eWU3MkhIV1h4aEMtcUtjeW1aTF9ua3FJUnhwVHhHOWxQck9rbzhVYllyQUdXNVNoOC1BSnF6X2lBVzNBc1BVTVRPaWV5bE9kUzlZTzcxdngwY0VmcXU3NE5JM2NnQi1EUndka0pDRkZBcUhpbmVvb2puNWZySnMzcUxRRElWTklDU2ZoeWdHdkpRQUxHUE9Xb3hjanZLZzJDbUZIejlQZnFuejJFVdIBswFBVV95cUxQczY1Q3FxOXE3VGlZQ2FqU1dXUDJyeF81R3BNSFhVV0lmaHhpNWJKRUVaNFJwemUzOEV1bXdYS3BtMWROZ0dWOEl1S29kZEFvbm9GU3pnMjJkbW04VHRPU0VIaS0xb0xSZVVOVmxqSG12NkRrQ2JUNV9Tam8xNnItLUoyR2EwSnZmMW1CNlZwN08zRXRoTGFub0pQM3pCb3J4akY3Q2pycl9VWENkQ0xjaHJDcw?oc=5",
       "fecha": "2026-09-18T17:19:00+00:00",
+      "imagenUrl": null
+    },
+    {
+      "id": "459d8df980ae",
+      "categoria": "internacional",
+      "titulo": "Aleks Syntek Anuncia Su Retiro Temporal de México Por Motivos Personales",
+      "resumen": "El cantante Aleks Syntek ha comunicado su decisión de alejarse temporalmente de México, citando la necesidad de cuidar su salud mental y espiritual tras una reciente polémica que dejó a muchos de sus seguidores preocupados.",
+      "cuerpo": "Aleks Syntek, reconocido cantante mexicano, ha declarado que se retirará temporalmente de México, argumentando que esta decisión es fundamental para su salvación mental y espiritual. La decisión fue anunciada tras una reciente controversia que surgió durante su participación en el evento del Grito de Independencia, donde expresó su descontento de manera contundente, lo que generó diversas reacciones entre su público. Sin embargo, Syntek considera que su ira en ese momento fue justificada y que esta pausa es necesaria para reflexionar y renovarse antes de regresar a los escenarios. En sus declaraciones, ha enfatizado la importancia del bienestar personal y la necesidad de encontrar paz en medio de la adversidad.",
+      "fuente": "Google News",
+      "link": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxQQmVCeUNxQ0ZXUUZONzRTeXZzVWozaGF4ckVDcm5YZDlISGVfSi1MZ2lnMmJYR203RTBSb2JvNER6d1dvVGxpUHYtRFFIV3lmUVpBM1hRRzRuSDVWNVB3YWVIYWtkSXJwMjREQ1pzdXB4RFZ2X1ZVem1lMlhYYVl5MFFKdFNhdy1uRDlfdlNYbURjUW5NdXVyVzRNRlpCcjVRVTlNS3hXYy1UeF9YWFVWWXppNzJaRmVYM3dEYWFPSW5yWnBmTGk3YzBPT0VodDlxZXdwcmctb2EzSmVl?oc=5",
+      "fecha": "2026-09-18T17:05:00+00:00",
       "imagenUrl": null
     },
     {
@@ -585,37 +618,59 @@
       "imagenUrl": null
     },
     {
-      "id": "983f4579ac56",
-      "categoria": "internacional",
-      "titulo": "Claudia Sheinbaum confirma avances en acuerdo comercial con Estados Unidos, aunque no es definitivo",
-      "resumen": "La presidenta de México, Claudia Sheinbaum, ha señalado que ha mantenido comunicación constante con el expresidente Donald Trump en relación con el acuerdo comercial con Estados Unidos, aunque aún no se ha llegado a un acuerdo final.",
-      "cuerpo": "Durante una reciente declaración, la presidenta de México, Claudia Sheinbaum, confirmó que ha hablado en varias ocasiones con el expresidente estadounidense Donald Trump sobre un potencial acuerdo comercial entre ambos países. A pesar de los avances mencionados por Sheinbaum, enfatizó que este acuerdo no es definitivo y que aún se están llevando a cabo negociaciones. Sheinbaum ha reportado que han tenido diálogo en 22 ocasiones, lo que refleja un esfuerzo continuo para avanzar en este tema, fundamental para las relaciones económicas entre México y Estados Unidos.",
-      "fuente": "Google News",
-      "link": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOZ2RqMDBzaVFiM3FVNUwwTGQxSHFlWTZ6T0FYSXpFaV9rdGRWcUFrOWUwdWdrbThJdG9GUHUtVEgySUp4Y1NhMDVpRFF3RFVveXRTU1JOSkdMazlyUTFYSTFDVDdKTm1ySEFJTU1xTkxjQ2NWUFNSTUdhTTVZN0h5WUtXWThMa3g4dS1SWkhuLVN0OVlTQ2UwVGVfcFpkcjFXWkFXekJRVjhPQXl0ZE8yM1JEamx0RjVLcVdFam5ES3JrMXNkVTRCbzNQanhGY0IzOFh3dXV6QQ?oc=5",
-      "fecha": "2026-09-18T14:57:00+00:00",
-      "imagenUrl": null
+      "id": "7ba34612e22a",
+      "categoria": "trending",
+      "titulo": "Investigación sobre fraude económico en curso",
+      "resumen": "Autoridades inician una investigación para desmantelar una red de fraude económico que ha afectado a diversas instituciones.",
+      "cuerpo": "Las autoridades han anunciado el inicio de una investigación exhaustiva respecto a un esquema de fraude económico que ha impactado a múltiples entidades tanto públicas como privadas. Los investigadores están centrados en identificar a los responsables detrás de esta red, así como en recolectar pruebas que sustenten las acusaciones. Hasta el momento, se ha confirmado que varios individuos han sido llamados a declarar y se están llevando a cabo operativos para rastrear los fondos involucrados en el delito. La situación ha generado preocupación en la comunidad y ha llevado a una revisión de los protocolos de seguridad en las instituciones afectadas.",
+      "fuente": "Google Trends",
+      "link": "https://www.google.com/search?q=fraude",
+      "fecha": "2026-09-18T22:00:00+00:00",
+      "imagenUrl": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQoFJ2d9nr97GfPa6ZFLPmTmR4TDDgUHaB9BFJZWdPJpm3nXGbHK9pC24bKVvg"
     },
     {
-      "id": "7256c2f9af70",
-      "categoria": "internacional",
-      "titulo": "Aumento de Peticiones de Emigración en Rusia Ante Posible Reclutamiento Militar",
-      "resumen": "Las solicitudes de emigración desde Rusia han experimentado un notable incremento, casi ocho veces más desde julio, impulsadas por el temor a un nuevo reclutamiento militar. Un nuevo sistema de registro electrónico de citaciones militares ha impuesto restricciones de salida para aquellos llamados a filas.",
-      "cuerpo": "En el contexto actual de incertidumbre política y militar, se ha observado un aumento significativo en el número de rusos que solicitan emigrar del país. Desde julio, las peticiones de salida han casi se han multiplicado por ocho, lo que refleja un creciente temor entre la población ante la posibilidad de un nuevo reclutamiento militar. Con las elecciones a la Duma a la vista, esta tendencia ha llevado a muchos ciudadanos a buscar alternativas para salir del país. Además, el recientemente implementado registro electrónico de citaciones militares ha añadido una capa de preocupación, ya que impone un veto a la salida de aquellos que han sido llamados a filas, limitando aún más las opciones de quienes buscan escapar de la situación actual.",
-      "fuente": "Euronews",
-      "link": "https://es.euronews.com/2026/09/18/nueva-movilizacion-dispara-huida-rusos-pais-elecciones-duma",
-      "fecha": "2026-09-18T14:56:50+00:00",
-      "imagenUrl": "https://images.euronews.com/articles/stories/09/91/89/00/1200x675_cmsv2_de93989a-538e-58a7-8f41-da884092c9e6-9918900.jpg"
+      "id": "af25907645fa",
+      "categoria": "trending",
+      "titulo": "Selena Gomez: Trayectoria y Proyectos Recientes",
+      "resumen": "La multifacética artista Selena Gomez continúa destacándose en diversas áreas del entretenimiento, incluyendo la música, el cine y la televisión.",
+      "cuerpo": "Selena Gomez ha sido una figura prominente en la industria del entretenimiento desde su infancia, comenzando su carrera en la televisión con Disney Channel. A lo largo de los años, ha evolucionado como cantante, actriz y productora, logrando numerosos éxitos en las listas musicales y recibiendo aclamación crítica por su trabajo actoral. Recientemente, Gomez ha estado trabajando en nuevos proyectos musicales, así como en la producción de series para plataformas de streaming, demostrando su versatilidad y dedicación a su carrera. La artista también ha estado activa en la defensa de causas sociales, aprovechando su influencia para crear conciencia sobre problemas importantes. A medida que continúa su carrera, los seguidores esperan ansiosamente sus próximos lanzamientos y apariciones.",
+      "fuente": "Google Trends",
+      "link": "https://www.google.com/search?q=selena%20gomez",
+      "fecha": "2026-09-18T22:00:00+00:00",
+      "imagenUrl": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTydXCTNlULmmTERCF9ePLPoHuZkEQhZFAs44g40v4lmo3DSkP991PZAYNKbA0"
     },
     {
-      "id": "95c744c4b3e1",
-      "categoria": "internacional",
-      "titulo": "Diagnóstico de enfermedad rara revelado a través de una cita en plataforma de encuentros",
-      "resumen": "Maria Paula, tras casi tres décadas de padecer dolores crónicos sin un diagnóstico claro, encontró respuestas gracias a la interacción con un estudiante de Medicina en una aplicación de citas.",
-      "cuerpo": "Maria Paula, una mujer que había estado lidiando con dolores crónicos durante 30 años, finalmente recibió un diagnóstico que explicaba su condición. La transformación en su vida comenzó cuando se cruzó con un estudiante de Medicina en una cita organizada a través de una plataforma de encuentros. Este encuentro casual resultó ser determinante, ya que el estudiante, tras escuchar su historia, le sugirió que explorara una serie de pruebas médicas que la llevaron a identificar una enfermedad rara. Este episodio resalta la importancia del diálogo y la educación en salud, así como el papel potencial que las plataformas digitales pueden tener en la identificación de problemas de salud no diagnosticados.",
-      "fuente": "BBC Mundo",
-      "link": "https://www.bbc.com/mundo/articles/cw4gq8qy138vo?at_medium=RSS&at_campaign=rss",
-      "fecha": "2026-09-18T14:29:56+00:00",
-      "imagenUrl": "https://ichef.bbci.co.uk/ace/ws/240/cpsprodpb/34f4/live/be368b10-ae23-11f1-b1d1-571ed4d7ff2c.jpg"
+      "id": "9098f530a6e0",
+      "categoria": "trending",
+      "titulo": "Condiciones Climáticas en Nuevo Laredo",
+      "resumen": "Se prevén cambios significativos en el clima de Nuevo Laredo en los próximos días.",
+      "cuerpo": "A partir de este fin de semana, se anticipa una variación notable en las condiciones meteorológicas en la ciudad de Nuevo Laredo. Según el Servicio Meteorológico Nacional, se esperan temperaturas más frescas debido a la llegada de un sistema frontal. Este fenómeno traerá consigo Nublados intermitentes y posibilidad de lluvias, especialmente en la tarde y noche del sábado. Asimismo, se establece un descenso en las temperaturas mínimas, que oscilarán entre los 10 y 12 grados Celsius. Se recomienda a la población tomar las precauciones necesarias ante el cambio de clima y mantenerse informados a través de fuentes oficiales.",
+      "fuente": "Google Trends",
+      "link": "https://www.google.com/search?q=clima%20nuevo%20laredo",
+      "fecha": "2026-09-18T21:50:00+00:00",
+      "imagenUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiCTC5A4_gjlCvm6ZWiLxERev64AYQcZhpSZMbzXJa6_aTMObKlKmH4kAg_7k"
+    },
+    {
+      "id": "bc486ec692a0",
+      "categoria": "trending",
+      "titulo": "Pete Hegseth: Trayectoria y Controversias en la Televisión Americana",
+      "resumen": "Pete Hegseth, conocido presentador de televisión y analista político, ha generado un significativo impacto en los medios de comunicación estadounidenses con su enfoque en cuestiones conservadoras. Su carrera ha estado marcada por posiciones polémicas y un fuerte respaldo a temas de la agenda republicana.",
+      "cuerpo": "Pete Hegseth, nacido el 6 de junio de 1980, es un destacado periodista y comentarista político estadounidense. Se graduó de la Universidad de Princeton y sirve como presentador de 'Fox & Friends Weekend' en Fox News. A lo largo de su carrera, ha estado vinculado a diversas iniciativas y causas políticas, defendiendo posturas conservadoras que han suscitado tanto apoyo como criticas en sectores opuestos. Su trayectoria incluye experiencia militar, habiendo servido en la Reserva del Ejército de los Estados Unidos, y participando en misiones en Irak.\n\nAdemás de sus labores informativas, Hegseth es un autor publicado y ha aparecido en numerosas plataformas mediáticas, donde articula sus posiciones sobre la política estadounidense actual. Sin embargo, sus declaraciones y puntos de vista a menudo generan controversia, lo que lo convierte en una figura polarizante en el ámbito del periodismo político. A pesar de las críticas, sigue siendo una voz influyente entre los simpatizantes del conservadurismo en Estados Unidos.",
+      "fuente": "Google Trends",
+      "link": "https://www.google.com/search?q=pete%20hegseth",
+      "fecha": "2026-09-18T21:50:00+00:00",
+      "imagenUrl": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTsprXyCx9zyUD5l9g2EZsZTrj6rSqNoofQ5zpR2bhojsYN4UzFr3TiOlvM37g"
+    },
+    {
+      "id": "cb62b1e164fa",
+      "categoria": "trending",
+      "titulo": "New York City FC: Actualizaciones y Proyecciones del Equipo",
+      "resumen": "El equipo de fútbol New York City FC continúa consolidándose en la Major League Soccer, destacándose por su rendimiento en la temporada actual y su enfoque en el desarrollo de talento local.",
+      "cuerpo": "New York City FC, fundado en 2013, ha experimentado un crecimiento notable desde su incorporación a la Major League Soccer (MLS). En la presente temporada, el equipo ha mostrado un rendimiento sólido, destacando su capacidad para atraer a jugadores talentosos y desarrollar a jóvenes promesas del fútbol. Bajo la dirección de su cuerpo técnico, NYC FC ha implementado estrategias que buscan maximizar el potencial de cada jugador y mejorar su posición en la clasificación de la liga. La afición también desempeña un papel crucial en el apoyo al equipo, con un aumento en la asistencia a los partidos en el Yankee Stadium. Con miras al futuro, el club se compromete a seguir fortaleciendo su plantilla y manteniendo un enfoque en la comunidad, reafirmando así su presencia en la ciudad de Nueva York y en el ámbito del fútbol estadounidense.",
+      "fuente": "Google Trends",
+      "link": "https://www.google.com/search?q=new%20york%20city%20fc",
+      "fecha": "2026-09-18T21:50:00+00:00",
+      "imagenUrl": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSd4Jq2e4LxZM4vAWAXgj9A_M7-xI-ucBGJghqOC1GfiAxIScaCweZWYJzA58E"
     },
     {
       "id": "95e4242060cf",
@@ -871,61 +926,6 @@
       "imagenUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1OswLEGeoESoZAcYAPXd1WEXUc6BoPDIJPMMpngYzQ2f-Z4rygMdg9Zg5D7c"
     },
     {
-      "id": "bf0fed6813ce",
-      "categoria": "trending",
-      "titulo": "Club Deportivo Guadalajara Femenil: Un Análisis de su Impacto en el Fútbol Femenino en México",
-      "resumen": "El Club Deportivo Guadalajara Femenil ha sido un referente en el desarrollo del fútbol femenino en México, promoviendo la inclusión y el talento en el deporte.",
-      "cuerpo": "El Club Deportivo Guadalajara Femenil, conocido comúnmente como Chivas Femenil, ha surgido como uno de los equipos más destacados en la Liga MX Femenil. Desde su creación en 2017, el club ha tenido un impacto significativo en la promoción del fútbol femenino en el país. Este equipo no solo ha logrado atraer a un gran número de aficionados, sino que también ha sido instrumental en la identificación y desarrollo de talento femenino en el deporte, contribuyendo a la profesionalización y visibilidad del fútbol jugado por mujeres en México. Con una base de seguidores en constante crecimiento y una estructura que apoya el desarrollo de sus jugadoras, el club continúa siendo un modelo a seguir para otros equipos y competiciones en la región.",
-      "fuente": "Google Trends",
-      "link": "https://www.google.com/search?q=club%20deportivo%20guadalajara%20femenil",
-      "fecha": "2026-09-18T15:20:00+00:00",
-      "imagenUrl": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTK524CRXouQCe6nGjDO77_96RkIRY7zIopf8hLlYCX27jUtItzNIDuNCwiRFo"
-    },
-    {
-      "id": "bdebdc9f4cc2",
-      "categoria": "trending",
-      "titulo": "Análisis del Partido del Trabajo en el Contexto Político Actual",
-      "resumen": "Este informe presenta una evaluación del Partido del Trabajo, su evolución y su impacto en el escenario político contemporáneo.",
-      "cuerpo": "El Partido del Trabajo (PT) ha sido una fuerza política relevante en el sistema electoral, influenciando diversas decisiones y políticas públicas. Desde su fundación, el PT ha buscado representar los intereses de los trabajadores y sectores más vulnerables de la sociedad. En las últimas elecciones, el partido ha evidenciado un crecimiento significativo en su base de votantes, posicionándose como un actor clave en la coalición de izquierda. Su plataforma se centra en temas como la justicia social, el fortalecimiento de los derechos laborales y la lucha contra la desigualdad económica. A medida que el país enfrenta desafíos políticos y económicos, el Partido del Trabajo continúa jugando un rol importante en el debate público, buscando establecerse como una alternativa viable para los ciudadanos que exigen cambios sustanciales en las políticas gubernamentales.",
-      "fuente": "Google Trends",
-      "link": "https://www.google.com/search?q=partido%20del%20trabajo",
-      "fecha": "2026-09-18T15:20:00+00:00",
-      "imagenUrl": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQlazRom3m8l6Y_mayCrZyr9gLStkk8TnHHRWl5vTOtesvrhDdQyXzcvpnUaY4"
-    },
-    {
-      "id": "2c7a93c54c65",
-      "categoria": "trending",
-      "titulo": "Inauguración de la Autopista México-Querétaro",
-      "resumen": "Se llevó a cabo la inauguración de la nueva autopista que conecta México con Querétaro, destinada a mejorar el transporte y la movilidad en la región. La obra busca facilitar el tránsito de mercancías y pasajeros, impulsando así el desarrollo económico local.",
-      "cuerpo": "En un acto formal celebrado el día de hoy, se inauguró oficialmente la nueva autopista que une a la Ciudad de México con el estado de Querétaro. Este proyecto de infraestructura se presenta como una solución a los problemas de congestión vial que han afectado históricamente a esta importante ruta de comunicación. Las autoridades locales destacaron que la autopista no solo mejorará la movilidad de los habitantes y visitantes, sino que también potenciará el comercio y la inversión en la región. La obra, que ha requerido una inversión significativa, está diseñada para soportar un alto flujo vehicular y se espera que contribuya al desarrollo económico de Querétaro y sus alrededores. Además, se han implementado medidas de seguridad y señalización para garantizar la protección de los usuarios. La inauguración ha sido aclamada por empresarios y funcionarios públicos, quienes consideran que esta mejora en la infraestructura vial es un paso crucial hacia el futuro de la conectividad en el país.",
-      "fuente": "Google Trends",
-      "link": "https://www.google.com/search?q=autopista%20m%C3%A9xico%20-%20quer%C3%A9taro",
-      "fecha": "2026-09-18T15:20:00+00:00",
-      "imagenUrl": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSF-OiSKvwQJKXD0Qgng9rWmRL8lzKQreN33RsjOXMYMMtqaMlM0au6wweJtaM"
-    },
-    {
-      "id": "476fa94f7a53",
-      "categoria": "trending",
-      "titulo": "Códice Azcatitlan: Un Testimonio Histórico de la Civilización Mexica",
-      "resumen": "El Códice Azcatitlan es un documento prehispánico que proporciona una visión detallada de la historia y cultura de los mexicas, destacando su organización social y política.",
-      "cuerpo": "El Códice Azcatitlan es considerado uno de los más importantes testimonios gráficos de la cultura mexica, creado entre los siglos XV y XVI. Este manuscrito, que se encuentra en la Biblioteca Nacional de Antropología e Historia de México, se compone de una serie de pictogramas que narran la historia de los mexicas desde sus míticos orígenes hasta la llegada de los conquistadores españoles. A través de sus ilustraciones, el códice ofrece información valiosa sobre la estructura social, las ceremonias religiosas y los aspectos cotidianos de la vida de esta civilización. Investigadores continúan analizando su contenido para obtener una comprensión más profunda de las tradiciones y la historia de los pueblos originarios de Mesoamérica.",
-      "fuente": "Google Trends",
-      "link": "https://www.google.com/search?q=c%C3%B3dice%20azcatitlan",
-      "fecha": "2026-09-18T15:20:00+00:00",
-      "imagenUrl": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTCKJx3JZr7yjX82710FUbb8wcvX_qILsxvV8DSCaALhtiqlypdKmsXkgWkk70"
-    },
-    {
-      "id": "252457b4c1e3",
-      "categoria": "trending",
-      "titulo": "Descubrimiento de la Tumba de Nefertiti Genera Expectación",
-      "resumen": "Recientes hallazgos arqueológicos han suscitado un gran interés por la figura de Nefertiti, una de las reinas más icónicas del antiguo Egipto.",
-      "cuerpo": "Investigadores de la Universidad de Harvard han reportado nuevos avances en la búsqueda de la tumba de Nefertiti, la esposa del faraón Akhenatón. Este descubrimiento, que incluye la identificación de lo que se sospecha son cámaras ocultas en la necrópolis de Amino, ha revitalizado el interés en la historia y la cultura del antiguo Egipto. Nefertiti, famosa por su belleza y poder, ha sido objeto de múltiples estudios que intentan desentrañar los misterios de su vida y su reinado. Los arqueólogos han expresado su optimismo respecto a los potenciales hallazgos en el área, que podrían no solo revelar más sobre Nefertiti, sino también sobre las prácticas funerarias de la época. La comunidad científica aguarda con expectativa los resultados de las próximas excavaciones.",
-      "fuente": "Google Trends",
-      "link": "https://www.google.com/search?q=nefertiti",
-      "fecha": "2026-09-18T14:50:00+00:00",
-      "imagenUrl": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRreKKi-La1d_RXd1tOCl1XxQYrY4sYo33LXbsV4zScGALo86MmHjE5PzD_dG8"
-    },
-    {
       "id": "ade85574fa56",
       "categoria": "puerto-vallarta",
       "titulo": "Puerto Vallarta participará en el Segundo Simulacro Nacional 2026",
@@ -934,7 +934,10 @@
       "fuente": "Minuto a Minuto Noticias",
       "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/puerto-vallarta-participara-en-el-segundo-simulacro-nacional-2026/",
       "fecha": "2026-09-18T18:16:55+00:00",
-      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/6e03aac2-c683-4d34-a1ae-dce71fc27f13.jpeg"
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/6e03aac2-c683-4d34-a1ae-dce71fc27f13.jpeg",
+      "categoriasTodas": [
+        "puerto-vallarta"
+      ]
     },
     {
       "id": "7b118679a1a6",
@@ -945,7 +948,10 @@
       "fuente": "Minuto a Minuto Noticias",
       "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/inicia-construccion-de-domo-en-la-secundaria-foranea-29/",
       "fecha": "2026-09-17T21:20:07+00:00",
-      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/3bbc2a70-f079-4c0f-98d1-de61c743911f.jpeg"
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/3bbc2a70-f079-4c0f-98d1-de61c743911f.jpeg",
+      "categoriasTodas": [
+        "puerto-vallarta"
+      ]
     },
     {
       "id": "855627e37d0d",
@@ -956,7 +962,10 @@
       "fuente": "Minuto a Minuto Noticias",
       "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/vallartenses-y-turistas-disfrutaron-el-tradicional-desfile-civico-militar/",
       "fecha": "2026-09-17T16:24:57+00:00",
-      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/962e6015-44fd-40b8-8af7-1ccbbd6588c7.jpeg"
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/962e6015-44fd-40b8-8af7-1ccbbd6588c7.jpeg",
+      "categoriasTodas": [
+        "puerto-vallarta"
+      ]
     },
     {
       "id": "b2e8ab633ed5",
@@ -967,7 +976,10 @@
       "fuente": "Minuto a Minuto Noticias",
       "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/gobierno-de-puerto-vallarta-y-fuerzas-armadas-conmemoran-la-independencia-de-mexico/",
       "fecha": "2026-09-16T23:18:53+00:00",
-      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/03ad25c4-f219-47ed-a92c-a586acac380b.jpeg"
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/03ad25c4-f219-47ed-a92c-a586acac380b.jpeg",
+      "categoriasTodas": [
+        "puerto-vallarta"
+      ]
     },
     {
       "id": "09aa04b17133",
@@ -978,7 +990,10 @@
       "fuente": "Minuto a Minuto Noticias",
       "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/realiza-ayuntamiento-sesion-solemne-por-el-216-aniversario-de-la-independencia-de-mexico/",
       "fecha": "2026-09-16T15:02:00+00:00",
-      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/ecb75833-81a8-4b32-99bb-967e97ec944c.jpeg"
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/ecb75833-81a8-4b32-99bb-967e97ec944c.jpeg",
+      "categoriasTodas": [
+        "puerto-vallarta"
+      ]
     },
     {
       "id": "8765379211ee",
@@ -989,7 +1004,10 @@
       "fuente": "Minuto a Minuto Noticias",
       "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/presidente-munguia-da-el-grito-de-independencia-ante-miles-de-vallartenses-y-turistas/",
       "fecha": "2026-09-16T14:48:40+00:00",
-      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/8fefa696-8956-44fd-840e-34318ae2cf60.jpeg"
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/8fefa696-8956-44fd-840e-34318ae2cf60.jpeg",
+      "categoriasTodas": [
+        "puerto-vallarta"
+      ]
     },
     {
       "id": "56c01d22d50e",
@@ -1000,7 +1018,10 @@
       "fuente": "Minuto a Minuto Noticias",
       "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/accidente-en-puerto-vallarta-deja-una-persona-lesionada/",
       "fecha": "2026-09-16T13:54:37+00:00",
-      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/IMG_7674-1.jpeg"
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/IMG_7674-1.jpeg",
+      "categoriasTodas": [
+        "puerto-vallarta"
+      ]
     },
     {
       "id": "5ea3f7d5a02d",
@@ -1011,7 +1032,10 @@
       "fuente": "Minuto a Minuto Noticias",
       "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/entrega-luis-munguia-contratos-de-concesion-a-locatarios-del-mercado-las-americas/",
       "fecha": "2026-09-15T17:58:52+00:00",
-      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/3bea12e2-1923-4d68-ba37-a9c63fd46d9f.jpeg"
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/3bea12e2-1923-4d68-ba37-a9c63fd46d9f.jpeg",
+      "categoriasTodas": [
+        "puerto-vallarta"
+      ]
     },
     {
       "id": "77eb20fdbb4d",
@@ -1022,7 +1046,10 @@
       "fuente": "Minuto a Minuto Noticias",
       "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/alcalde-munguia-logra-consenso-para-eficientar-nomina-y-fortalecer-sus-servicios/",
       "fecha": "2026-09-15T06:46:45+00:00",
-      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/841dc8bf-1ae5-4910-9086-9ff4c420f028.jpeg"
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/841dc8bf-1ae5-4910-9086-9ff4c420f028.jpeg",
+      "categoriasTodas": [
+        "puerto-vallarta"
+      ]
     },
     {
       "id": "87b07d89329b",
@@ -1033,7 +1060,10 @@
       "fuente": "Minuto a Minuto Noticias",
       "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/entrega-luis-munguia-domo-en-primaria-de-ecoterra/",
       "fecha": "2026-09-15T05:06:03+00:00",
-      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/aa97c1f9-b895-45c7-ab6b-72e8de54b3be.jpeg"
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/aa97c1f9-b895-45c7-ab6b-72e8de54b3be.jpeg",
+      "categoriasTodas": [
+        "puerto-vallarta"
+      ]
     },
     {
       "id": "6d9a53695edf",
@@ -1044,7 +1074,10 @@
       "fuente": "Minuto a Minuto Noticias",
       "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/nueva-via-alterna-el-tondoroque-valle-de-banderas-sera-inaugurada-este-lunes/",
       "fecha": "2026-09-17T17:54:01+00:00",
-      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/8a9efcf3-b46a-4f53-ae64-f649296c0463-1.jpeg"
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/8a9efcf3-b46a-4f53-ae64-f649296c0463-1.jpeg",
+      "categoriasTodas": [
+        "bahia-banderas"
+      ]
     },
     {
       "id": "c7314235519c",
@@ -1055,7 +1088,10 @@
       "fuente": "Minuto a Minuto Noticias",
       "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/gobierno-de-bahia-de-banderas-mantiene-limpios-los-espacios-publicos/",
       "fecha": "2026-09-17T16:34:56+00:00",
-      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/2858f95b-2c36-4f40-8fb5-d51de516b5fc.jpeg"
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/2858f95b-2c36-4f40-8fb5-d51de516b5fc.jpeg",
+      "categoriasTodas": [
+        "bahia-banderas"
+      ]
     },
     {
       "id": "ddcd852e8185",
@@ -1066,7 +1102,10 @@
       "fuente": "Minuto a Minuto Noticias",
       "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/bahia-de-banderas-conmemora-el-216-aniversario-de-la-independencia-de-mexico/",
       "fecha": "2026-09-17T16:18:41+00:00",
-      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/a2e12a3f-7a86-4ab6-88da-201f44d9d400.jpeg"
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/a2e12a3f-7a86-4ab6-88da-201f44d9d400.jpeg",
+      "categoriasTodas": [
+        "bahia-banderas"
+      ]
     },
     {
       "id": "619cd1e7b5cd",
@@ -1077,7 +1116,10 @@
       "fuente": "Minuto a Minuto Noticias",
       "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/desfile-civico-reune-a-familias-de-bahia-de-banderas-por-el-216-aniversario-de-la-independencia/",
       "fecha": "2026-09-17T01:14:53+00:00",
-      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/3d63c260-77da-4a74-9d4b-58dc0f470729.jpeg"
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/3d63c260-77da-4a74-9d4b-58dc0f470729.jpeg",
+      "categoriasTodas": [
+        "bahia-banderas"
+      ]
     },
     {
       "id": "aa4f63ccaa11",
@@ -1088,7 +1130,10 @@
       "fuente": "Minuto a Minuto Noticias",
       "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/un-gobierno-que-escucha-y-atiende-israel-santillan-mantiene-cercania-con-la-ciudadania/",
       "fecha": "2026-09-16T13:46:36+00:00",
-      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/5be5ba03-ce9d-4536-b43a-6ef9c69a41fb.jpeg"
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/5be5ba03-ce9d-4536-b43a-6ef9c69a41fb.jpeg",
+      "categoriasTodas": [
+        "bahia-banderas"
+      ]
     },
     {
       "id": "77dcfcfd2cb8",
@@ -1099,7 +1144,10 @@
       "fuente": "Minuto a Minuto Noticias",
       "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/continuan-los-operativos-pero-tambien-las-conductas-de-riesgo-en-motociclistas/",
       "fecha": "2026-09-15T16:50:25+00:00",
-      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/IMG_7642.jpeg"
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/IMG_7642.jpeg",
+      "categoriasTodas": [
+        "bahia-banderas"
+      ]
     },
     {
       "id": "dda831efb068",
@@ -1110,7 +1158,10 @@
       "fuente": "Minuto a Minuto Noticias",
       "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/gobierno-de-bahia-de-banderas-fortalece-la-seguridad-ciudadana-con-nuevo-equipamiento/",
       "fecha": "2026-09-15T06:59:53+00:00",
-      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/IMG_7633.jpeg"
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/IMG_7633.jpeg",
+      "categoriasTodas": [
+        "bahia-banderas"
+      ]
     },
     {
       "id": "9e5f721b9ec1",
@@ -1121,7 +1172,38 @@
       "fuente": "Minuto a Minuto Noticias",
       "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/israel-santillan-supervisa-avance-de-obra-en-la-calle-5-de-febrero-de-punta-de-mita/",
       "fecha": "2026-09-15T06:54:04+00:00",
-      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/d484cd4c-d920-4068-954c-5242486e27ff.jpeg"
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/d484cd4c-d920-4068-954c-5242486e27ff.jpeg",
+      "categoriasTodas": [
+        "bahia-banderas"
+      ]
+    },
+    {
+      "id": "bbbb2add1e9b",
+      "categoria": "bahia-banderas",
+      "titulo": "Bahía de Banderas conmemora el 179.º Aniversario de la Gesta Heroica de los Niños Héroes",
+      "resumen": "Bahía de Banderas conmemora el 179.º Aniversario de la Gesta Heroica de los Niños Héroes El presidente municipal de Bahía de Banderas, Israel Santillán, encabezó este 13 de…",
+      "cuerpo": "Bahía de Banderas conmemora el 179.º Aniversario de la Gesta Heroica de los Niños Héroes\n\nEl presidente municipal de Bahía de Banderas, Israel Santillán, encabezó este 13 de septiembre el acto conmemorativo por el 179.º aniversario de la Gesta Heroica de los Niños Héroes de Chapultepec, realizado en la Plaza Pública de Valle de Banderas.\n\nEn esta ceremonia se rindieron honores a la Bandera y se recordó la valentía de los seis cadetes del Heroico Colegio Militar que, el 13 de septiembre de 1847, defendieron el Castillo de Chapultepec durante la invasión estadounidense, convirtiéndose en un símbolo de patriotismo, honor y compromiso con México.\n\nEn su intervención, el presidente municipal Israel Santillán destacó que se dice fácil hablar de 179 años, pero que detrás de esta fecha se encuentra el sacrificio de jóvenes de entre 13 y 20 años que entregaron su vida por México.\n\nEl alcalde señaló que el ejemplo de los Niños Héroes debe trascender generaciones y convertirse en un llamado para que niñas, niños y jóvenes ejerzan diariamente la valentía y la responsabilidad desde sus hogares, escuelas y comunidades.\n\n“El verdadero heroísmo no tiene edad”, expresó Israel Santillán, al destacar que la valentía también se demuestra en el cumplimiento de las obligaciones, en el trabajo y en la responsabilidad que implica contribuir a la construcción de una gran nación.\n\nAsimismo, subrayó que la sangre y el sacrificio de los cadetes del Colegio Militar permanecen en el corazón de México como parte de la memoria histórica de la nación, por lo que hizo un llamado a las nuevas generaciones a mantener vivos los valores de honor, responsabilidad y amor por la patria.\n\nLa ceremonia contó con la presencia de elementos de la 41.ª Zona Militar, integrantes de la Guardia Nacional, así como autoridades y servidores públicos del H. XII Ayuntamiento de Bahía de Banderas, entre ellos la secretaria del Ayuntamiento, Lic. Ciola Arévalos, el regidor Tony Flores y demás integrantes de la administración municipal.\n\nAl concluir el acto cívico, las autoridades refrendaron la importancia de mantener vigentes las ceremonias que fortalecen la identidad nacional y el respeto por quienes han contribuido, con su sacrificio y servicio, a la historia de México.\n\nAbout The Author\n\nRedacción\n\nSee author's posts\n\nPost navigation\n\nPrevious:\n\nBeneficia Gobierno de Puerto Vallarta a comunidades rurales con entrega de lentes gratuitos\n\nNext:\n\nAyuntamiento entrega apoyo a locatarios afectados por incendio en el mercado 5 de Diciembre",
+      "fuente": "Minuto a Minuto Noticias",
+      "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/bahia-de-banderas-conmemora-el-179-o-aniversario-de-la-gesta-heroica-de-los-ninos-heroes/",
+      "fecha": "2026-09-14T12:59:23+00:00",
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/8e3d25e6-943e-4924-8bdb-e23b0499cf7e.jpeg",
+      "categoriasTodas": [
+        "bahia-banderas"
+      ]
+    },
+    {
+      "id": "cdc56e9be05d",
+      "categoria": "bahia-banderas",
+      "titulo": "Bahía de Banderas conmemorará el 179 aniversario de la Gesta Heroica de los Niños Héroes",
+      "resumen": "Bahía de Banderas conmemorará el 179 aniversario de la Gesta Heroica de los Niños Héroes El H. XII Ayuntamiento de Bahía de Banderas, que encabeza el presidente municipal Israel…",
+      "cuerpo": "Bahía de Banderas conmemorará el 179 aniversario de la Gesta Heroica de los Niños Héroes\n\nEl H. XII Ayuntamiento de Bahía de Banderas, que encabeza el presidente municipal Israel Santillán, realizará este próximo domingo 13 de septiembre el acto cívico por el 179 aniversario de la Gesta Heroica de los Niños Héroes de Chapultepec.\n\nLa ceremonia se llevará a cabo en punto de las 9:30 a.m, en la Plaza Pública de Valle de Banderas, donde autoridades municipales y ciudadanía rendirán homenaje a los cadetes que defendieron el Castillo de Chapultepec y que son símbolo de valor y patriotismo.\n\nEl Gobierno Municipal reitera la invitación para participar en esta conmemoración y mantener vivas las tradiciones cívicas y los valores patrios.\n\nAbout The Author\n\nRedacción\n\nSee author's posts\n\nPost navigation\n\nPrevious:\n\nMiguel Ángel Navarro y Beatriz Estrada mejoran espacios educativos en la primaria “16 de Septiembre” de Acaponeta\n\nNext:\n\nGobierno Municipal invita a celebrar el 216 Aniversario de la Independencia de México",
+      "fuente": "Minuto a Minuto Noticias",
+      "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/bahia-de-banderas-conmemorara-el-179-aniversario-de-la-gesta-heroica-de-los-ninos-heroes/",
+      "fecha": "2026-09-13T11:34:11+00:00",
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/12409877-606d-44ad-bcae-5830118915eb-1.jpeg",
+      "categoriasTodas": [
+        "bahia-banderas"
+      ]
     },
     {
       "id": "7b5f87872665",
@@ -1132,7 +1214,80 @@
       "fuente": "Minuto a Minuto Noticias",
       "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/accidente-sobre-la-carretera-544-en-en-municipio-de-mascota/",
       "fecha": "2026-09-15T18:08:31+00:00",
-      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/IMG_7649.jpeg"
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/IMG_7649.jpeg",
+      "categoriasTodas": [
+        "jalisco"
+      ]
+    },
+    {
+      "id": "e79a3b108bd8",
+      "categoria": "jalisco",
+      "titulo": "Fue un acierto no entregar la educación a la Federación: Jalisco destaca por sus resultados educativos",
+      "resumen": "Fue un acierto no entregar la educación a la Federación: Jalisco destaca por sus resultados educativos Los resultados de la Evaluación del Logro Educativo 2025 respaldan la…",
+      "cuerpo": "Fue un acierto no entregar la educación a la Federación: Jalisco destaca por sus resultados educativos\n\nLos resultados de la Evaluación del Logro Educativo 2025 respaldan la decisión de mantener un modelo educativo propio en Jalisco\n\nScreenshot\n\nEl estado registra menores niveles de insuficiencia en lectura y matemáticas que el promedio nacional y los referentes de la OCDE\n\nLa decisión de Jalisco de no entregar su sistema educativo a la Federación y mantener una ruta propia hoy encuentra respaldo en los resultados académicos de sus estudiantes, que colocan al estado con indicadores superiores al promedio nacional en lectura y matemáticas.\n\nLa Evaluación del Logro Educativo 2025 muestra una diferencia importante entre el desempeño de las y los estudiantes de Jalisco y los resultados registrados a nivel nacional, particularmente en la reducción del rezago educativo.\n\nScreenshot\n\nLos datos adquieren relevancia al recordar que Jalisco decidió mantener la conducción de su política educativa y construir un modelo propio, en lugar de ceder completamente las decisiones educativas a la Federación.\n\nHoy, los resultados permiten dimensionar el impacto de esa decisión.\n\nEn lectura, mientras en México 30 por ciento de las y los estudiantes se encuentra en un nivel insuficiente, en Jalisco la cifra es de apenas 11.4 por ciento. Incluso frente al referente de la OCDE, donde el porcentaje de insuficiencia se ubica en 35 por ciento, el resultado de Jalisco es favorable.\n\nAdemás, 79.9 por ciento de las y los estudiantes jaliscienses se encuentra en el nivel “En Progreso”.\n\nLa brecha es todavía mayor en matemáticas. A nivel nacional, 50 por ciento de las y los estudiantes presenta un desempeño insuficiente, mientras que en Jalisco este porcentaje se reduce a 12.4 por ciento.\n\nScreenshot\n\nEn esta materia, 81.9 por ciento de las y los estudiantes de Jalisco se concentra en el nivel “En Progreso”, reflejando una diferencia sustancial frente al panorama nacional.\n\nLos resultados de 2025 fortalecen así la apuesta que Jalisco realizó por defender su autonomía educativa y construir soluciones desde lo local, de acuerdo con las necesidades de sus estudiantes, docentes y comunidades escolares.\n\nLa decisión implicó seguir una ruta distinta a la planteada desde el centro del país. Los indicadores actuales muestran que esa apuesta permitió a Jalisco avanzar en áreas fundamentales del aprendizaje y reducir significativamente los niveles de insuficiencia.\n\nScreenshot\n\nAsí, más allá de la discusión política que acompañó en su momento la decisión de mantener un modelo propio, los resultados educativos permiten hoy evaluar sus efectos: Jalisco presenta mejores indicadores que el promedio nacional en lectura y matemáticas.\n\nAbout The Author\n\nRedacción\n\nSee author's posts\n\nPost navigation\n\nPrevious:\n\nCompromiso cumplido por el Gobierno de Puerto Vallarta\n\nNext:\n\nBahía de Banderas, sede del Taller Regional “Evolución Patrimonial”",
+      "fuente": "Minuto a Minuto Noticias",
+      "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/fue-un-acierto-no-entregar-la-educacion-a-la-federacion-jalisco-destaca-por-sus-resultados-educativos/",
+      "fecha": "2026-09-09T20:12:22+00:00",
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/IMG_7392.jpeg",
+      "categoriasTodas": [
+        "jalisco"
+      ]
+    },
+    {
+      "id": "5091fbfad367",
+      "categoria": "jalisco",
+      "titulo": "Culmina DIF Jalisco formación de grupos comunitarios y entrega recursos para proyectos",
+      "resumen": "Culmina DIF Jalisco formación de grupos comunitarios y entrega recursos para proyectos Diez Grupos de Desarrollo concluyeron un proceso de formación y acompañamiento para…",
+      "cuerpo": "Culmina DIF Jalisco formación de grupos comunitarios y entrega recursos para proyectos\n\nDiez Grupos de Desarrollo concluyeron un proceso de formación y acompañamiento para fortalecer sus comunidades\n\nScreenshot\n\nCon una inversión superior a 2.9 millones de pesos se impulsarán 24 proyectos comunitarios en 10 municipios\n\nCon el objetivo de acompañar los procesos que surgen desde las propias comunidades, fortalecer sus capacidades y promover herramientas que generen bienestar, autonomía y oportunidades para las familias, el Sistema DIF Jalisco entregó apoyos económicos a 27 Grupos de Desarrollo Comunitario y culminó el proceso formativo de personas de la Región 12 Centro, quienes realizaron su graduación.\n\nAsimismo, y dentro de los objetivos del Programa de Salud y Bienestar Comunitario (PSBC), se entregaron recursos federales para fortalecer 24 proyectos comunitarios en 10 municipios, que suman 2 millones 910 mil pesos. Estos proyectos están orientados a mejorar los espacios habitables y fortalecer la economía solidaria de 416 personas; de manera indirecta impactarán positivamente a más de mil 600 habitantes.\n\nMaye Villa de Lemus, Presidenta de DIF Jalisco, destacó que este apoyo representa una herramienta para impulsar proyectos que nacen desde las propias comunidades, a partir de las necesidades que sus integrantes identifican al reconocer su capacidad para organizarse, tomar decisiones y trabajar de manera colectiva.\n\nScreenshot\n\n“Queremos un Jalisco en el que las personas puedan sentirse acompañadas, pero también capaces de construir su propio futuro. Un Estado en el que el gobierno haga su parte, por supuesto, pero en el que también reconozcamos toda esa fuerza que ya existe dentro de nuestras comunidades”, señaló Maye Villa de Lemus.\n\nPor su parte, Diana Berenice Vargas Salomón, Directora General del organismo asistencial, resaltó que este esfuerzo representa el cierre de un camino de cuatro años de aprendizaje, organización y trabajo comunitario.\n\n“Quiero destacar dos pilares de gran valor: el liderazgo de las mujeres y la fuerza organizativa que ha impulsado el bienestar en sus hogares. La gran mayoría de estos grupos están integrados por mujeres, quienes son motor fundamental de este trabajo comunitario”, puntualizó Vargas Salomón.\n\nComo parte de la jornada, también se graduaron de su proceso formativo, 10 grupos de los municipios de El Salto, Guadalajara, Ixtlahuacán de los Membrillos, Tlajomulco de Zúñiga y Tonalá.\n\nDurante este acompañamiento se desarrollaron 21 procesos de capacitación en temas como economía solidaria, autocuidado y espacios habitables, con actividades especializadas entre las que destacan el bordado de prendas de vestir, farmacia viviente y su procesamiento, así como aplicación de extensiones de cabello, alisado y pestañas.\n\nJohana Marisol Robles Virgen, representante del Grupo de Desarrollo Santa Paula 2, de Tonalá, dijo que el trabajo colectivo les ha permitido convertirse en mujeres emprendedoras, generar ingresos para sus familias y mantener una actividad productiva que pueden desarrollar de manera conjunta, reconociendo también el acompañamiento recibido para fortalecer sus conocimientos en administración y manejo de recursos.\n\nScreenshot\n\n“Ya tenemos nuestro propio negocio, gracias a DIF Jalisco, que nos acompañó en nuestro caminar y nos dio las herramientas para salir adelante”, comentó Robles Virgen.\n\nEn el evento también participaron la Subdirectora general de Desarrollo Comunitario y Apoyo Municipal, Engracia Alejandrina Vuelvas Acuña; el director de Fortalecimiento Municipal, José Jairo Alvarado Cisneros; y el jefe del Departamento de Zona Centro-Norte, José Enrique López Córdova, además de autoridades y representantes de los 10 Sistemas DIF Municipales de la Región 12 que culminaron su preparación.\n\nPara saber más\n\nLos 27 Grupos de Desarrollo beneficiados con recursos económicos que van desde 60 mil hasta 150 mil pesos para fortalecer 24 proyectos comunitarios pertenecen a los municipios de Cuquío, El Salto, Guadalajara, Ixtlahuacán de los Membrillos, Juanacatlán, San Pedro Tlaquepaque, Tlajomulco de Zúñiga, Tonalá, Zapopan y Zapotlanejo.\n\nEntre las y los beneficiarios se encuentran integrantes de comunidades Otomí y Purépecha, quienes representan el 10 por ciento de las personas beneficiarias.\n\nAbout The Author\n\nRedacción\n\nSee author's posts\n\nPost navigation\n\nPrevious:\n\nLa vallartense Isabel Medina representará a Jalisco en Miss Intercontinental México 2026\n\nNext:\n\nIsrael Santillán refrenda respaldo a adultos mayores durante visita a club de la tercera edad en Bucerías",
+      "fuente": "Minuto a Minuto Noticias",
+      "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/culmina-dif-jalisco-formacion-de-grupos-comunitarios-y-entrega-recursos-para-proyectos/",
+      "fecha": "2026-09-08T04:15:06+00:00",
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/IMG_7236.jpeg",
+      "categoriasTodas": [
+        "jalisco"
+      ]
+    },
+    {
+      "id": "bf11f292acda",
+      "categoria": "jalisco",
+      "titulo": "Puerto Vallarta tendrá Hospital Civil bajo modelo único de hospital-escuela en México",
+      "resumen": "Puerto Vallarta tendrá Hospital Civil bajo modelo único de hospital-escuela en México El Gobierno de Jalisco construye el Hospital Civil de la Costa con una inversión superior a…",
+      "cuerpo": "Puerto Vallarta tendrá Hospital Civil bajo modelo único de hospital-escuela en México\n\nEl Gobierno de Jalisco construye el Hospital Civil de la Costa con una inversión superior a mil 197 millones de pesos; beneficiará a alrededor de 300 mil personas de Puerto Vallarta y la región\n\nPuerto Vallarta se convertirá en pieza clave de la nueva Red de Hospitales-Escuela que impulsa el Gobierno de Jalisco, un modelo único en México que busca llevar atención médica especializada fuera del Área Metropolitana de Guadalajara y, al mismo tiempo, formar a nuevas generaciones de profesionales de la salud.\n\nComo parte de este proyecto, encabezado por el Gobernador Pablo Lemus Navarro en coordinación con la Universidad de Guadalajara (UdeG), actualmente se construye en Puerto Vallarta el Hospital Civil de la Costa, que contará con una inversión superior a los mil 197 millones de pesos y tendrá capacidad para beneficiar a cerca de 300 mil personas.\n\nEl nuevo hospital permitirá fortalecer la infraestructura de salud en Puerto Vallarta y acercar servicios médicos especializados a habitantes de la región, evitando que pacientes tengan que trasladarse hasta Guadalajara para recibir determinados tipos de atención.\n\nPero su alcance irá más allá de la atención hospitalaria. El Hospital Civil de la Costa funcionará bajo el modelo de hospital-escuela, lo que permitirá que estudiantes de medicina, enfermería y otras ciencias de la salud realicen prácticas, servicio y parte de su formación profesional en la región.\n\nCon ello, jóvenes de Puerto Vallarta y municipios cercanos podrán prepararse profesionalmente sin tener que dejar su lugar de origen, al mismo tiempo que participan en la atención y fortalecimiento de los servicios de salud de su propia comunidad.\n\nEl Hospital Civil de la Costa será el primero en extender este modelo hacia las regiones de Jalisco y posteriormente se sumará un nuevo Hospital Civil en Zapotlán el Grande, cuya construcción está prevista para iniciar el próximo año.\n\nEstos espacios formarán parte de una red junto con los dos Hospitales Civiles de Guadalajara y el Hospital Civil de Oriente, consolidando un esquema de atención y enseñanza con cobertura regional que actualmente no existe en ninguna otra entidad del país.\n\nLa estrategia retoma el espíritu con el que Fray Antonio Alcalde fundó hace 234 años el primer Hospital Civil de Guadalajara: brindar atención principalmente a las personas en condiciones de mayor vulnerabilidad y sin seguridad social.\n\nCon la construcción del Hospital Civil de la Costa, el Gobierno de Jalisco busca que Puerto Vallarta no sólo fortalezca su capacidad hospitalaria, sino que se consolide como un polo regional de atención médica especializada y formación de profesionales de la salud, acercando servicios de calidad a las familias de la costa de Jalisco.\n\nAbout The Author\n\nE. Tenorio\n\nSee author's posts\n\nPost navigation\n\nPrevious:\n\nIsrael Santillán desea éxito a estudiantes del CECyTEN en su regreso a clases\n\nNext:\n\nGobierno Municipal aprueba por mayoría Proyecto de Ley de Ingresos 2027 con cero incrementos",
+      "fuente": "Minuto a Minuto Noticias",
+      "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/puerto-vallarta-tendra-hospital-civil-bajo-modelo-unico-de-hospital-escuela-en-mexico/",
+      "fecha": "2026-09-01T18:30:34+00:00",
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/IMG_6878.jpeg",
+      "categoriasTodas": [
+        "jalisco"
+      ]
+    },
+    {
+      "id": "40e69b908879",
+      "categoria": "jalisco",
+      "titulo": "Conquista Jalisco a estrellas del deporte y el espectáculo",
+      "resumen": "Conquista Jalisco a estrellas del deporte y el espectáculo Jalisco se consolida como un destino que conquista a visitantes de todo el mundo y que invita a vivir experiencias que…",
+      "cuerpo": "Conquista Jalisco a estrellas del deporte y el espectáculo\n\nJalisco se consolida como un destino que conquista a visitantes de todo el mundo y que invita a vivir experiencias que van más allá de los grandes escenarios, tras recibir la visita de figuras internacionales como el clavadista olímpico Tom Daley, y los cantantes Sam Smith y Rosalía.\n\nScreenshot\n\nEstas personalidades recorrieron algunos municipios del estado para disfrutar del destino y vivir algunas de las expresiones más representativas de la cultura jalisciense.\n\nEl clavadista británico Tom Daley volvió a elegir Puerto Vallarta para pasar unos días de descanso junto a su esposo, Dustin Lance Black, y sus hijos. El campeón olímpico en Tokio 2020 y subcampeón en París 2024, compartió momentos de su viaje familiar con imágenes de playa y atardeceres que muestran al destino como un lugar para descansar, convivir y regresar.\n\nDurante su visita a Guadalajara como parte de su gira To Be Free, el cantante británico Sam Smith conoció la zona turística de Tlaquepaque, donde recorrió el Mercado Benito Juárez, El Parián y algunas galerías de arte, con una experiencia que refleja la gastronomía, la cultura y las tradiciones locales.\n\nLa cantante española Rosalía también decidió conocer Guadalajara durante su visita a la ciudad con motivo de su LUX Tour 2026.\n\nLa artista española recorrió la ciudad en bicicleta y visitó el Mercado San Juan de Dios, donde además de convivir con comerciantes, pudo conocer una de las zonas que forman parte de la vida cotidiana y la identidad popular de la ciudad.\n\nLa visita de estas figuras del deporte y del espectáculo representan tres formas distintas de vivir Jalisco: Puerto Vallarta como destino de descanso y familia; San Pedro Tlaquepaque desde sus mercados, gastronomía y cultura; y Guadalajara desde sus calles y espacios tradicionales; además de reafirmar su posicionamiento como un destino capaz de recibir al mundo y, al mismo tiempo, invitarlo a descubrir su esencia.\n\nAbout The Author\n\nRedacción\n\nSee author's posts\n\nPost navigation\n\nPrevious:\n\nGobierno Municipal participa en festival por el Día Nacional del Cocodrilo\n\nNext:\n\nProteger al Cocodrilo es proteger nuestros ecosistemas",
+      "fuente": "Minuto a Minuto Noticias",
+      "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/conquista-jalisco-a-estrellas-del-deporte-y-el-espectaculo/",
+      "fecha": "2026-08-23T20:00:52+00:00",
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/08/IMG_6339.jpeg",
+      "categoriasTodas": [
+        "jalisco"
+      ]
+    },
+    {
+      "id": "fee08d4484d7",
+      "categoria": "jalisco",
+      "titulo": "El ciclón tropical se localiza a 825 km al sur-suroeste de Jalisco.*",
+      "resumen": "Aviso por Huracán categoría 4 26 de julio de 2026 | 23:00 horas El ciclón tropical se localiza a 825 km al sur-suroeste de Jalisco. El análisis satelital más reciente muestra…",
+      "cuerpo": "Aviso por Huracán categoría 4\n\n26 de julio de 2026 | 23:00 horas\n\nEl ciclón tropical se localiza a 825 km al sur-suroeste de Jalisco.\n\nEl análisis satelital más reciente muestra desarrollo de tormentas hacia Costa Sur, Sierra de Amula, Altos Sur y Centro. Para el AMG se observa un núcleo de tormenta próximo, lo que favorecerá lluvias moderadas a fuertes en las próximas horas.\n\nEl pronóstico de oleaje para Jalisco indica un aumento del oleaje entre lunes y martes con valor de hasta 2.3 metros en el litoral.\n\nEl huracán registró un incremento de los vientos máximos sostenidos durante las últimas horas y se prevé que durante el día de mañana mantenga una intensidad similar y continúe con su desplazamiento hacia el oeste-noroeste.\n\nRecomendaciones:\n\n Mantente atento a la información meteorológica emitida por fuentes oficiales y sigue las indicaciones de Protección Civil.\n\n Atiende los avisos de la Capitanía de Puerto.\n\n Mantente alejado de laderas inestables y barrancas con potencial de deslizamientos.\n\nAbout The Author\n\nRedacción\n\nSee author's posts\n\nPost navigation\n\nPrevious:\n\nArq. Luis Munguía celebra junto a familias Las Paseadas de Las Palmas\n\nNext:\n\nBrinda Arq. Luis Munguía apoyo a Don Juan con aparato auditivo",
+      "fuente": "Minuto a Minuto Noticias",
+      "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/el-ciclon-tropical-se-localiza-a-825-km-al-sur-suroeste-de-jalisco/",
+      "fecha": "2026-07-27T05:36:20+00:00",
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/07/dd34c62c-96d1-4856-b555-4cdee5045f95.jpeg",
+      "categoriasTodas": [
+        "jalisco"
+      ]
     },
     {
       "id": "37827b7dbd6a",
@@ -1143,7 +1298,10 @@
       "fuente": "Minuto a Minuto Noticias",
       "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/gobierno-de-nayarit-entrega-ante-la-xxxiv-legislatura-del-congreso-del-estado-el-quinto-informe-de-gobierno/",
       "fecha": "2026-09-18T19:14:57+00:00",
-      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/79333bf7-1d95-4d67-a422-97a5689e3afb.jpeg"
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/79333bf7-1d95-4d67-a422-97a5689e3afb.jpeg",
+      "categoriasTodas": [
+        "nayarit"
+      ]
     },
     {
       "id": "72dfdb4a528c",
@@ -1154,7 +1312,122 @@
       "fuente": "Minuto a Minuto Noticias",
       "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/miguel-angel-navarro-quintero-encabezo-desde-la-plaza-benito-juarez-frente-a-casa-de-gobierno-el-izamiento-de-la-bandera-nacional/",
       "fecha": "2026-09-15T17:28:22+00:00",
-      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/639e5742-1fd7-4c13-9601-8535a01367b0.jpeg"
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/639e5742-1fd7-4c13-9601-8535a01367b0.jpeg",
+      "categoriasTodas": [
+        "nayarit"
+      ]
+    },
+    {
+      "id": "9afdd15d3152",
+      "categoria": "nayarit",
+      "titulo": "Miguel Ángel Navarro y Beatriz Estrada mejoran espacios educativos en la primaria “16 de Septiembre” de Acaponeta",
+      "resumen": "Miguel Ángel Navarro y Beatriz Estrada mejoran espacios educativos en la primaria “16 de Septiembre” de Acaponeta La primaria “16 de Septiembre”, en la comunidad de El Tigre,…",
+      "cuerpo": "Miguel Ángel Navarro y Beatriz Estrada mejoran espacios educativos en la primaria “16 de Septiembre” de Acaponeta\n\nLa primaria “16 de Septiembre”, en la comunidad de El Tigre, Acaponeta, cuenta desde hoy con un nuevo domo y una cancha de usos múltiples renovada. El gobernador del estado, Miguel Ángel Navarro Quintero, y su esposa, la presidenta del Sistema DIF Nayarit, doctora Beatriz Estrada Martínez, entregaron estos trabajos, realizados con una inversión superior a tres millones de pesos.\n\nA estas mejoras se suman ocho computadoras, tres proyectores y dos equipos de aire acondicionado destinados previamente al plantel. Además, el gobernador anunció que próximamente se construirá un desayunador escolar para atender otra de las necesidades de su comunidad educativa.\n\nNavarro Quintero señaló que atender una escuela no significa solamente mejorar su infraestructura, sino procurar que sus estudiantes tengan lo necesario para aprender, convivir y desarrollar sus actividades todos los días.\n\nAbout The Author\n\nRedacción\n\nSee author's posts\n\nPost navigation\n\nPrevious:\n\nLatidos del Corazón acerca servicios y apoyos del DIF Estatal a las familias de Bahía de Banderas\n\nNext:\n\nBahía de Banderas conmemorará el 179 aniversario de la Gesta Heroica de los Niños Héroes",
+      "fuente": "Minuto a Minuto Noticias",
+      "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/miguel-angel-navarro-y-beatriz-estrada-mejoran-espacios-educativos-en-la-primaria-16-de-septiembre-de-acaponeta/",
+      "fecha": "2026-09-12T22:39:51+00:00",
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/2eebac58-a79b-4c30-ae2a-b0eed11dde03.jpeg",
+      "categoriasTodas": [
+        "nayarit"
+      ]
+    },
+    {
+      "id": "375ec2008e39",
+      "categoria": "nayarit",
+      "titulo": "Mesa Estatal de Construcción de Paz y Seguridad fortalece diálogo con COPARMEX",
+      "resumen": "Mesa Estatal de Construcción de Paz y Seguridad fortalece diálogo con COPARMEX Luego de revisar la situación y los resultados en materia de seguridad en Nayarit, el gobernador del…",
+      "cuerpo": "Mesa Estatal de Construcción de Paz y Seguridad fortalece diálogo con COPARMEX\n\nLuego de revisar la situación y los resultados en materia de seguridad en Nayarit, el gobernador del estado, Miguel Ángel Navarro Quintero, y las y los integrantes de la Mesa Estatal de Construcción de Paz y Seguridad sostuvieron un encuentro con integrantes del Comité Ejecutivo de COPARMEX en la entidad.\n\nDurante el diálogo escucharon las inquietudes y los temas que preocupan al sector empresarial, y coincidieron en la importancia de mantener una comunicación directa que ayude a prevenir delitos y permita actuar oportunamente ante hechos que puedan afectar a empresas, trabajadores y comercios.\n\nEl gobernador señaló que este acercamiento continuará, ya que conocer de primera mano lo que ocurre en los distintos sectores permite anticiparse, orientar mejor las decisiones y responder donde sea necesario.\n\nAbout The Author\n\nRedacción\n\nSee author's posts\n\nPost navigation\n\nPrevious:\n\nLuis Munguía inaugura circuito de calles en la colonia Santo Domingo Ixtapa\n\nNext:\n\nAtrapan a presunto homicida y operador de “Los Vallarta”, en La Paz.",
+      "fuente": "Minuto a Minuto Noticias",
+      "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/mesa-estatal-de-construccion-de-paz-y-seguridad-fortalece-dialogo-con-coparmex/",
+      "fecha": "2026-09-11T18:17:25+00:00",
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/26dbaac2-ad28-4869-a714-afafc35b7ffe-scaled.jpeg",
+      "categoriasTodas": [
+        "nayarit"
+      ]
+    },
+    {
+      "id": "475484add2d2",
+      "categoria": "nayarit",
+      "titulo": "LOCALIZAN A ADULTO MAYOR SIN VIDA EN UN LOTE BALDÍO",
+      "resumen": "LOCALIZAN A ADULTO MAYOR SIN VIDA EN UN LOTE BALDÍO Los primeros reportes señalaba que tenia incrustado un palo de madera en unos de sus brazos. Por: César Gutiérrez La noche de…",
+      "cuerpo": "LOCALIZAN A ADULTO MAYOR SIN VIDA EN UN LOTE BALDÍO\n\n Los primeros reportes señalaba que tenia incrustado un palo de madera en unos de sus brazos.\n\nPor: César Gutiérrez\n\nLa noche de este jueves se reportó al módulo de Emergencias del 911 la presencia de una persona sin vida al interior de un terreno ubicado en la colonia Lomas de Cortés, en Tepic.\n\nElementos de la Policía Estatal arribaron como primeros respondientes al sitio, localizado sobre el camino a Los Metates, entre las calles Tolteca y Prisciliano Romero, donde confirmaron la presencia del cuerpo sin vida de un hombre de 74 años de edad.\n\nDe acuerdo con vecinos del lugar, el hombre llevaba por nombre José de Jesús Flores Luna, quien aparentemente vivía dentro del predio, en una pequeña vivienda construida con láminas y madera.\n\nParamédicos de Cruz Roja Mexicana acudieron al sitio y confirmaron que el hombre ya no contaba con signos vitales. En el lugar se observaron manchas hemáticas, por lo que una de las versiones apunta a que el hombre pudo haberse desvanecido y golpeado el rostro al caer.\n\nSe creé que el fallecimiento podría estar relacionado con causas naturales; sin embargo, esta información no ha sido confirmada oficialmente.\n\nEl sitio fue asegurado por los elementos policiacos y quedó bajo resguardo en espera de la llegada de personal de Servicios Periciales y del Servicio Médico Forense, quienes realizarán los procedimientos correspondientes.\n\nSerá después de la necropsia cuando se puedan establecer y confirmar las causas del fallecimiento.\n\nAbout The Author\n\nRedacción\n\nSee author's posts\n\nPost navigation\n\nPrevious:\n\nIsrael Santillán participa en jornada del IMSS HGZ 33\n\nNext:\n\nCorral del Risco recibió nueva jornada del Limpiatón",
+      "fuente": "Minuto a Minuto Noticias",
+      "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/localizan-a-adulto-mayor-sin-vida-en-un-lote-baldio/",
+      "fecha": "2026-09-11T06:18:25+00:00",
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/6a57aa92-a07a-4f63-897a-1b34adda3d12.jpeg",
+      "categoriasTodas": [
+        "nayarit"
+      ]
+    },
+    {
+      "id": "bca7c2ecc7d1",
+      "categoria": "nayarit",
+      "titulo": "Miguel Ángel Navarro da seguimiento permanente a las acciones de seguridad en Nayarit",
+      "resumen": "Miguel Ángel Navarro da seguimiento permanente a las acciones de seguridad en Nayarit El gobernador del estado, Miguel Ángel Navarro Quintero, señaló que los acuerdos en materia…",
+      "cuerpo": "Miguel Ángel Navarro da seguimiento permanente a las acciones de seguridad en Nayarit\n\nEl gobernador del estado, Miguel Ángel Navarro Quintero, señaló que los acuerdos en materia de seguridad deben traducirse en acciones y resultados, por lo que mantiene una revisión permanente de sus avances y de lo que todavía falta por hacer.\n\nAl encabezar la Mesa Estatal de Construcción de Paz y Seguridad, analizó el trabajo realizado por las distintas instituciones y definió las prioridades para los próximos días.\n\nNavarro Quintero destacó que dar seguimiento a estas tareas permite corregir lo necesario y tomar decisiones de acuerdo con la situación que vive cada zona del estado. En materia de seguridad, afirmó, no se puede bajar la guardia ni dejar asuntos pendientes.\n\nAbout The Author\n\nRedacción\n\nSee author's posts\n\nPost navigation\n\nPrevious:\n\nIsrael Santillán refrenda respaldo a adultos mayores durante visita a club de la tercera edad en Bucerías\n\nNext:\n\nDesayuno conmemorativo en la 12ª Zona Naval reconoce labor periodística en su día",
+      "fuente": "Minuto a Minuto Noticias",
+      "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/miguel-angel-navarro-da-seguimiento-permanente-a-las-acciones-de-seguridad-en-nayarit/",
+      "fecha": "2026-09-08T17:28:38+00:00",
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/a39b0180-5d3d-461a-9c0e-4297034fb926.jpeg",
+      "categoriasTodas": [
+        "nayarit"
+      ]
+    },
+    {
+      "id": "4df355d34618",
+      "categoria": "nayarit",
+      "titulo": "Miguel Ángel Navarro y Beatriz Estrada impulsan mejoras en la primaria Don Miguel Hidalgo de Tepic",
+      "resumen": "Miguel Ángel Navarro y Beatriz Estrada impulsan mejoras en la primaria Don Miguel Hidalgo de Tepic Después de años de afectaciones por inundaciones, la primaria Don Miguel…",
+      "cuerpo": "Miguel Ángel Navarro y Beatriz Estrada impulsan mejoras en la primaria Don Miguel Hidalgo de Tepic\n\nDespués de años de afectaciones por inundaciones, la primaria Don Miguel Hidalgo, en Tepic, será intervenida para resolver esta problemática y renovar distintas áreas del plantel. El gobernador del estado, Miguel Ángel Navarro Quintero, y su esposa, la doctora Beatriz Estrada Martínez, presidenta del Sistema DIF Nayarit, dieron inicio a los trabajos, que contemplan también la mejora de los accesos para brindar mayor seguridad a la comunidad escolar.\n\nA petición de la doctora Beatriz Estrada, se construirá además un desayunador escolar y se entregarán 12 equipos de aire acondicionado. Los trabajos incluirán también la intervención del Centro de Actualización para Docentes, a fin de que maestras y maestros cuenten con instalaciones adecuadas para continuar con su preparación.\n\nEl mandatario estatal señaló que estas acciones responden a necesidades concretas de la comunidad escolar, para que niñas y niños puedan aprender y convivir con mayor seguridad, y el personal docente disponga de mejores condiciones para desarrollar su labor.\n\nAbout The Author\n\nRedacción\n\nSee author's posts\n\nPost navigation\n\nPrevious:\n\nGobierno Municipal realiza labores de limpieza en el Mirador del Cerro de la Cruz\n\nNext:\n\nSeguridad Ciudadana reconoce profesionalismo y compromiso del Grupo de Atención Médica Táctica",
+      "fuente": "Minuto a Minuto Noticias",
+      "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/miguel-angel-navarro-y-beatriz-estrada-impulsan-mejoras-en-la-primaria-don-miguel-hidalgo-de-tepic/",
+      "fecha": "2026-09-07T19:43:42+00:00",
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/be6abc63-aadb-486d-9125-efc8c25352ce.jpeg",
+      "categoriasTodas": [
+        "nayarit"
+      ]
+    },
+    {
+      "id": "d080bfe0a306",
+      "categoria": "nayarit",
+      "titulo": "Gobierno del Estado fortalece diálogo y la paz social en Bahía de Banderas",
+      "resumen": "Gobierno del Estado fortalece diálogo y la paz social en Bahía de Banderas En representación del gobernador del estado, Miguel Ángel Navarro Quintero, la secretaria general de…",
+      "cuerpo": "Gobierno del Estado fortalece diálogo y la paz social en Bahía de Banderas\n\nEn representación del gobernador del estado, Miguel Ángel Navarro Quintero, la secretaria general de Gobierno, Rocío Esther González García, atendió a integrantes del Comisariado Ejidal de Valle de Banderas, siguiendo las instrucciones del mandatario estatal de privilegiar el diálogo y la atención directa para la construcción de acuerdos.\n\nDurante el encuentro se contó con la participación del presidente municipal de Bahía de Banderas, José Israel Santillán Castañeda, acompañado de integrantes de su gabinete, con quienes se estableció una mesa de diálogo para escuchar los planteamientos de los representantes ejidales y avanzar en la búsqueda de soluciones privilegiando en todo momento el entendimiento, respeto y la disposición para alcanzar acuerdos en beneficio de la población.\n\nLa secretaria de Gobierno destacó que la administración que encabeza Miguel Ángel Navarro Quintero mantiene una política de puertas abiertas y atención permanente, en la que el diálogo constituye una herramienta fundamental para atender las demandas sociales y prevenir diferencias.\n\nEl Gobierno del Estado refrenda su compromiso de continuar trabajando de manera coordinada con autoridades municipales, ejidales y los distintos sectores de la sociedad, con el objetivo de fortalecer la gobernabilidad, preservar la armonía y garantizar la paz social en Bahía de Banderas y en todo el estado.\n\nAbout The Author\n\nE. Tenorio\n\nSee author's posts\n\nPost navigation\n\nPrevious:\n\nDIF Bahía de Banderas impulsa campaña de brasieres con prótesis de mama\n\nNext:\n\nExitosa respuesta ciudadana a “Desde las Regiones” en el mes del testamento",
+      "fuente": "Minuto a Minuto Noticias",
+      "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/gobierno-del-estado-fortalece-dialogo-y-la-paz-social-en-bahia-de-banderas/",
+      "fecha": "2026-09-03T18:33:25+00:00",
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/dde4acf5-b86f-4ad4-830d-c686eba1551f-1.jpeg",
+      "categoriasTodas": [
+        "nayarit"
+      ]
+    },
+    {
+      "id": "3ac43ebeee78",
+      "categoria": "nayarit",
+      "titulo": "Miguel Ángel Navarro y Beatriz Estrada fortalecen el CAM No. 16 de Tepic",
+      "resumen": "Miguel Ángel Navarro y Beatriz Estrada fortalecen el CAM No. 16 de Tepic El Centro de Atención Múltiple No. 16, de Tepic, fue uno de los primeros planteles que visitó el…",
+      "cuerpo": "Miguel Ángel Navarro y Beatriz Estrada fortalecen el CAM No. 16 de Tepic\n\nEl Centro de Atención Múltiple No. 16, de Tepic, fue uno de los primeros planteles que visitó el gobernador del estado, Miguel Ángel Navarro Quintero, al inicio de su administración. Desde entonces, junto con su esposa, la doctora Beatriz Estrada Martínez, presidenta del Sistema DIF Nayarit, han impulsado la rehabilitación de distintas áreas para mejorar las condiciones en las que se atiende a sus estudiantes.\n\nEl gobernador y la doctora Beatriz Estrada regresaron al plantel para atender nuevas necesidades de la comunidad escolar. Se ampliará un aula destinada al área de cocina y repostería, se impermeabilizarán los techos y se colocará un domo; además, se entregarán equipos de aire acondicionado, proyectores, una estufa industrial y un refrigerador.\n\nNavarro Quintero destacó el trabajo que estudiantes y personal realizan todos los días en este Centro y señaló que la intención es respaldarlo con hechos, resolviendo lo que hace falta para brindarles las condiciones necesarias para desarrollar sus actividades.\n\nAbout The Author\n\nRedacción\n\nSee author's posts\n\nPost navigation\n\nPrevious:\n\nGobierno Municipal aprueba por mayoría Proyecto de Ley de Ingresos 2027 con cero incrementos\n\nNext:\n\nAprueba Ayuntamiento cambio de nombre a la Av. Federación por Av. Amado Nervo",
+      "fuente": "Minuto a Minuto Noticias",
+      "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/miguel-angel-navarro-y-beatriz-estrada-fortalecen-el-cam-no-16-de-tepic/",
+      "fecha": "2026-09-01T18:44:31+00:00",
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/09/349c0d1d-4be3-4800-9674-9242e4409eb9.jpeg",
+      "categoriasTodas": [
+        "nayarit"
+      ]
+    },
+    {
+      "id": "657fe874b7ba",
+      "categoria": "nayarit",
+      "titulo": "TERROR EN TUXPAN AL REGISTRARSE UN ENFRENTAMIENTO ARMADO",
+      "resumen": "TERROR EN TUXPAN AL REGISTRARSE UN ENFRENTAMIENTO ARMADO Elementos del Ejército Mexicano y Policía Estatal se dan un topón con civiles armados. Por: César Gutiérrez Hace unos…",
+      "cuerpo": "TERROR EN TUXPAN AL REGISTRARSE UN ENFRENTAMIENTO ARMADO\n\n Elementos del Ejército Mexicano y Policía Estatal se dan un topón con civiles armados.\n\nPor: César Gutiérrez\n\nHace unos minutos se registró un fuerte enfrentamiento entre las fuerzas estatales y Federales contra civiles armados en el centro de la cabecera municipal de Tuxpan, Nayarit.\n\nSe sabe que no hay ningún elemento lesionado. No hay personas sin vida y tampoco detenidos.\n\nLa situación esta controlada por lo que no hay riesgo para la población\n\nAbout The Author\n\nRedacción\n\nSee author's posts\n\nPost navigation\n\nPrevious:\n\nMorena Nacional arropa a Ra Aguilar; se perfila en Vallarta\n\nNext:\n\nRegresan a clases más de 43 mil estudiantes en Puerto Vallarta",
+      "fuente": "Minuto a Minuto Noticias",
+      "link": "https://minutoaminutonoticiasvallartabahia.com/destacado/terror-en-tuxpan-al-registrarse-un-enfrentamiento-armado/",
+      "fecha": "2026-08-31T04:53:41+00:00",
+      "imagenUrl": "https://minutoaminutonoticiasvallartabahia.com/wp-content/uploads/2026/08/0ba870c1-760c-4333-982a-b600adbe8f3e.jpeg",
+      "categoriasTodas": [
+        "nayarit"
+      ]
     }
   ]
 }
