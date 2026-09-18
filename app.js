@@ -425,6 +425,11 @@ async function init() {
       });
     });
 
+    document.getElementById('logoLink').addEventListener('click', (e) => {
+      e.preventDefault();
+      setActiveCat('todas');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
     document.getElementById('hamburgerBtn').addEventListener('click', () => {
       document.getElementById('mobileMenu').hidden = false;
     });
