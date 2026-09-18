@@ -350,6 +350,9 @@ function openModal(id, actualizarUrl = true) {
 
   if (actualizarUrl) history.pushState({ nota: n.id }, '', shareUrl);
   document.getElementById('modalOverlay').hidden = false;
+  // Sin esto, en notas largas la página de fondo también scrollea detrás
+  // del modal — se ven dos barras de scroll a la vez, confuso y feo.
+  document.body.classList.add('modal-open');
 }
 
 function setupShare(n, url) {
@@ -377,6 +380,7 @@ function setupShare(n, url) {
 
 function closeModal() {
   document.getElementById('modalOverlay').hidden = true;
+  document.body.classList.remove('modal-open');
   const url = new URL(location.href);
   if (url.searchParams.has('nota')) {
     url.searchParams.delete('nota');
@@ -512,10 +516,12 @@ async function init() {
     document.getElementById('quienesSomosLink').addEventListener('click', (e) => {
       e.preventDefault();
       infoModal.hidden = false;
+      document.body.classList.add('modal-open');
     });
-    document.getElementById('infoModalClose').addEventListener('click', () => { infoModal.hidden = true; });
+    const cerrarInfoModal = () => { infoModal.hidden = true; document.body.classList.remove('modal-open'); };
+    document.getElementById('infoModalClose').addEventListener('click', cerrarInfoModal);
     infoModal.addEventListener('click', (e) => {
-      if (e.target === infoModal) infoModal.hidden = true;
+      if (e.target === infoModal) cerrarInfoModal();
     });
   }
 }

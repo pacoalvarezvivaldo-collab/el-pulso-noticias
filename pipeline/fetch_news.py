@@ -144,6 +144,18 @@ def obtener_entradas_nuevas(historial: dict) -> list[dict]:
     return deduplicadas
 
 
+# Widgets de su plantilla WordPress que viven DENTRO de '.entry-content'
+# junto al texto real: pie de figura ("Screenshot"), caja de autor, y
+# navegación al post anterior/siguiente. get_text() los incluiría como si
+# fueran parte del cuerpo de la nota — se quitan del árbol antes de sacar
+# el texto, no después (un regex después no distingue "Screenshot" real
+# del texto vs. el de un pie de foto).
+BOILERPLATE_SELECTORS_VALLARTA = [
+    "figure.wp-caption", "h3.awpa-title", ".wp-post-author-wrap",
+    ".post-item-metadata", "nav.post-navigation",
+]
+
+
 def obtener_cuerpo_y_og_image(url: str) -> tuple[str | None, str | None]:
     """El RSS de Minuto a Minuto solo trae un extracto corto y sin imagen —
     a diferencia de obtener_imagen_og (que solo saca la imagen), esto
@@ -157,6 +169,10 @@ def obtener_cuerpo_y_og_image(url: str) -> tuple[str | None, str | None]:
         html = resp.text
         soup = BeautifulSoup(html, "html.parser")
         contenedor = soup.select_one(".entry-content")
+        if contenedor:
+            for selector in BOILERPLATE_SELECTORS_VALLARTA:
+                for el in contenedor.select(selector):
+                    el.decompose()
         cuerpo = (
             limpiar_texto_vallarta(contenedor.get_text("\n\n", strip=True))
             if contenedor else None

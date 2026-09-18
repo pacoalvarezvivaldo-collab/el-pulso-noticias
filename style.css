@@ -33,6 +33,10 @@ body {
   font-family: 'Barlow', system-ui, sans-serif;
   color: var(--text-body);
 }
+/* Con una nota larga, sin esto la página de fondo también scrollea detrás
+   del modal (que ya scrollea solo) — se ven dos barras de scroll a la
+   vez. Bloquea el fondo mientras el modal está abierto. */
+body.modal-open { overflow: hidden; }
 
 a { color: inherit; text-decoration: none; }
 
