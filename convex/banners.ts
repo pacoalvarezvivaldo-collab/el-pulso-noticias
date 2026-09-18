@@ -83,6 +83,7 @@ const bannerPublicoValidator = v.object({
   id: v.string(),
   imagenUrl: v.string(),
   linkUrl: v.optional(v.string()),
+  expiraEn: v.optional(v.string()),
 });
 
 export const listarBanners = query({
@@ -103,12 +104,13 @@ export const listarBanners = query({
       id: string;
       imagenUrl: string;
       linkUrl: string | undefined;
+      expiraEn: string | undefined;
     }> = [];
     for (const banner of banners) {
       if (banner.expiraEn !== undefined && banner.expiraEn < ahora) continue;
       const imagenUrl = await ctx.storage.getUrl(banner.imagenStorageId);
       if (imagenUrl === null) continue;
-      resultado.push({ id: banner._id, imagenUrl, linkUrl: banner.linkUrl });
+      resultado.push({ id: banner._id, imagenUrl, linkUrl: banner.linkUrl, expiraEn: banner.expiraEn });
     }
     return resultado;
   },

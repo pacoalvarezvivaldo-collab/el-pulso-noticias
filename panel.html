@@ -68,8 +68,6 @@
     <h1 class="panel-h1">Banners publicitarios</h1>
     <p class="panel-hint">Se muestran al costado del sitio (y arriba de las notas en celular).</p>
 
-    <div class="banner-list" id="bannerList"></div>
-
     <label class="panel-label">Imagen del banner</label>
     <input type="file" id="bannerImagenInput" class="panel-input" accept="image/*">
     <img id="bannerImagenPreview" class="panel-preview" hidden>
@@ -82,6 +80,10 @@
 
     <button id="agregarBannerBtn" class="panel-btn">Agregar banner</button>
     <p class="panel-status" id="bannerStatus" hidden></p>
+
+    <h2 class="panel-h2">Banners activos</h2>
+    <div class="banner-list" id="bannerList"></div>
+    <button id="eliminarSeleccionadosBtn" class="panel-btn panel-btn-danger" hidden>Eliminar seleccionados</button>
   </section>
 
 </main>

@@ -23,18 +23,22 @@
   </div>
 
   <div class="brand-row">
-    <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú">☰</button>
-    <a href="#" class="logo-link" id="logoLink">
+    <div class="brand-left">
+      <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú">☰</button>
+    </div>
+    <a href="#" class="logo-link brand-center" id="logoLink">
       <img src="LOGO.PNG" alt="El Pulso Noticias" class="logo-img">
     </a>
-    <div class="search-box">
-      <input type="text" placeholder="Buscar noticias, temas…" id="searchInput">
-      <button id="searchBtn">Buscar</button>
-    </div>
-    <button class="search-icon-btn" id="searchIconBtn" aria-label="Buscar">⌕</button>
-    <div class="live-clock">
-      <span class="live-label">EN VIVO · ACTUALIZADO</span>
-      <span class="live-time" id="liveClock">--:--</span>
+    <div class="brand-right">
+      <div class="search-box" id="searchBox">
+        <input type="text" placeholder="Buscar noticias, temas…" id="searchInput">
+        <button id="searchBtn">Buscar</button>
+      </div>
+      <button class="search-icon-btn" id="searchIconBtn" aria-label="Buscar">⌕</button>
+      <div class="live-clock">
+        <span class="live-label">EN VIVO · ACTUALIZADO</span>
+        <span class="live-time" id="liveClock">--:--</span>
+      </div>
     </div>
   </div>
 

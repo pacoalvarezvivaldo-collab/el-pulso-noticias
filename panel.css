@@ -54,6 +54,7 @@
   border: 1px solid var(--border);
   border-radius: 8px;
 }
+.banner-list-item input[type="checkbox"] { flex: none; width: 18px; height: 18px; cursor: pointer; }
 .banner-list-item img { width: 72px; height: 44px; object-fit: cover; border-radius: 4px; flex: none; }
 .banner-list-item .banner-list-link {
   flex: 1;
@@ -85,6 +86,12 @@
   font-size: 20px;
   color: var(--text-title);
   margin-bottom: 4px;
+}
+
+.panel-h2 {
+  font-size: 15px;
+  color: var(--text-title);
+  margin: 28px 0 10px;
 }
 
 .panel-form-head {
@@ -146,6 +153,7 @@
 }
 .panel-btn:disabled { opacity: .55; cursor: not-allowed; }
 .panel-btn:active:not(:disabled) { transform: scale(.98); }
+.panel-btn-danger { background: var(--red); margin-top: 12px; }
 
 .panel-link-btn {
   background: none;

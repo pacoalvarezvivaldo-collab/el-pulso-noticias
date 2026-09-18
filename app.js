@@ -27,6 +27,17 @@ function safeUrl(link) {
 
 let NOTAS = [];
 let activeCat = 'todas';
+let searchQuery = '';
+
+// Sin acentos ni mayúsculas para que "trafico" encuentre "tráfico".
+function normalizar(str) {
+  return String(str ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+}
+
+function buscar(query) {
+  searchQuery = query.trim();
+  render();
+}
 
 // Notas subidas a mano por el cliente vía panel.html, servidas por Convex.
 // Si Convex no responde (backend caído, URL sin configurar) el sitio sigue
@@ -107,6 +118,8 @@ function fmtFecha(iso) {
 
 function setActiveCat(cat) {
   activeCat = cat;
+  searchQuery = '';
+  document.getElementById('searchInput').value = '';
   document.querySelectorAll('.nav-pill, .bottom-item, .mobile-menu-item').forEach(el => {
     if (el.dataset.cat) el.classList.toggle('active', el.dataset.cat === cat);
   });
@@ -142,6 +155,21 @@ function esPrioritaria(n) {
 }
 
 function render() {
+  if (searchQuery) {
+    const q = normalizar(searchQuery);
+    const resultados = NOTAS
+      .filter(n => normalizar(n.titulo).includes(q) || normalizar(n.resumen).includes(q))
+      .sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+    document.getElementById('feedTitle').textContent = `Resultados para "${searchQuery}"`;
+    document.getElementById('hero').innerHTML = '';
+    if (!resultados.length) {
+      document.getElementById('cardGrid').innerHTML = '<p class="search-empty">Sin resultados.</p>';
+      return;
+    }
+    renderGrid(resultados);
+    return;
+  }
+
   const filtradas = activeCat === 'todas' ? NOTAS : NOTAS.filter(n => n.categoria === activeCat);
 
   const manuales = filtradas.filter(esPrioritaria).sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
@@ -319,11 +347,28 @@ async function init() {
     document.getElementById('closeMenuBtn').addEventListener('click', () => {
       document.getElementById('mobileMenu').hidden = true;
     });
+    const searchBox = document.getElementById('searchBox');
+    const searchInput = document.getElementById('searchInput');
+    const abrirBusqueda = () => {
+      searchBox.classList.add('open');
+      searchInput.focus();
+    };
     document.getElementById('searchIconBtn').addEventListener('click', () => {
-      document.getElementById('searchInput')?.focus();
+      searchBox.classList.toggle('open');
+      if (searchBox.classList.contains('open')) searchInput.focus();
     });
     document.getElementById('bottomSearchBtn').addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      abrirBusqueda();
+    });
+    document.getElementById('searchBtn').addEventListener('click', () => buscar(searchInput.value));
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') buscar(searchInput.value);
+    });
+    document.addEventListener('click', (e) => {
+      if (!searchBox.classList.contains('open')) return;
+      if (searchBox.contains(e.target) || e.target.id === 'searchIconBtn' || e.target.id === 'bottomSearchBtn') return;
+      searchBox.classList.remove('open');
     });
     document.getElementById('modalClose').addEventListener('click', closeModal);
     document.getElementById('modalOverlay').addEventListener('click', (e) => {

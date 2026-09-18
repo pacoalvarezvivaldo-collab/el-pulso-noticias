@@ -35,6 +35,8 @@ const bannerLinkInput = document.getElementById('bannerLinkInput');
 const bannerDiasInput = document.getElementById('bannerDiasInput');
 const agregarBannerBtn = document.getElementById('agregarBannerBtn');
 const bannerStatus = document.getElementById('bannerStatus');
+const eliminarSeleccionadosBtn = document.getElementById('eliminarSeleccionadosBtn');
+const bannersSeleccionados = new Set();
 
 function getPassword() {
   return sessionStorage.getItem('panelPassword') || '';
@@ -189,17 +191,27 @@ function setBannerStatus(msg, tipo) {
   bannerStatus.hidden = false;
 }
 
+function actualizarBotonEliminarSeleccionados() {
+  eliminarSeleccionadosBtn.hidden = bannersSeleccionados.size === 0;
+  eliminarSeleccionadosBtn.textContent = `Eliminar seleccionados (${bannersSeleccionados.size})`;
+}
+
 async function cargarBanners() {
   try {
     const res = await fetch(CONVEX_HTTP_URL + '/api/banners');
     if (!res.ok) return;
     const banners = await res.json();
+    const idsVigentes = new Set(banners.map(b => b.id));
+    for (const id of [...bannersSeleccionados]) {
+      if (!idsVigentes.has(id)) bannersSeleccionados.delete(id);
+    }
     bannerList.innerHTML = banners.map(b => {
       const vigencia = b.expiraEn
         ? `Expira ${new Date(b.expiraEn).toLocaleDateString('es-MX')}`
         : 'No expira';
       return `
         <div class="banner-list-item" data-id="${esc(b.id)}">
+          <input type="checkbox" class="banner-select-check" data-id="${esc(b.id)}" ${bannersSeleccionados.has(b.id) ? 'checked' : ''}>
           <img src="${esc(b.imagenUrl)}" alt="">
           <span class="banner-list-link">${b.linkUrl ? esc(b.linkUrl) : 'Sin link'} · ${esc(vigencia)}</span>
           <button class="banner-delete-btn" data-id="${esc(b.id)}">Eliminar</button>
@@ -207,28 +219,42 @@ async function cargarBanners() {
       `;
     }).join('');
     bannerList.querySelectorAll('.banner-delete-btn').forEach(btn => {
-      btn.addEventListener('click', () => eliminarBanner(btn.dataset.id));
+      btn.addEventListener('click', () => eliminarBanners([btn.dataset.id]));
     });
+    bannerList.querySelectorAll('.banner-select-check').forEach(chk => {
+      chk.addEventListener('change', () => {
+        if (chk.checked) bannersSeleccionados.add(chk.dataset.id);
+        else bannersSeleccionados.delete(chk.dataset.id);
+        actualizarBotonEliminarSeleccionados();
+      });
+    });
+    actualizarBotonEliminarSeleccionados();
   } catch {
     // Sin conexión con Convex — se deja la lista como estaba, no es fatal.
   }
 }
 
-async function eliminarBanner(id) {
+async function eliminarBanners(ids) {
   try {
-    const res = await fetch(CONVEX_HTTP_URL + '/api/banners/eliminar', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password: getPassword(), id }),
-    });
-    if (res.status === 401) throw { sesionInvalida: true };
-    if (!res.ok) throw new Error('No se pudo eliminar el banner.');
+    const password = getPassword();
+    const resultados = await Promise.all(ids.map(id =>
+      fetch(CONVEX_HTTP_URL + '/api/banners/eliminar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password, id }),
+      })
+    ));
+    if (resultados.some(r => r.status === 401)) throw { sesionInvalida: true };
+    if (resultados.some(r => !r.ok)) throw new Error('No se pudo eliminar alguno de los banners.');
+    for (const id of ids) bannersSeleccionados.delete(id);
     cargarBanners();
   } catch (err) {
     if (err && err.sesionInvalida) { showLogin('Contraseña incorrecta o vencida — entra de nuevo.'); return; }
     setBannerStatus(err.message || 'Error al eliminar.', 'err');
   }
 }
+
+eliminarSeleccionadosBtn.addEventListener('click', () => eliminarBanners([...bannersSeleccionados]));
 
 agregarBannerBtn.addEventListener('click', async () => {
   const file = bannerImagenInput.files[0];
