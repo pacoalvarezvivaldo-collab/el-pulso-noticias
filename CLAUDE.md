@@ -126,6 +126,40 @@ retroactivamente, solo las que se procesan de aquí en adelante.
   tiene intent de compartir web).
 - **Banners publicitarios**: al hacer click van al link que Evaristo haya
   puesto al subirlo (opcional) — si no le puso link, no es clickeable.
+- **Búsqueda (18-sep-2026)**: la caja de búsqueda era decorativa (sin
+  listener real). Ahora es un botón chico (lupa) que abre un popover
+  colgado del header (sticky, siempre visible, no hace falta forzar
+  scroll al abrir) → filtra `NOTAS` por título/resumen normalizado (sin
+  acentos/mayúsculas) → resultados reemplazan hero+grid. Si borran el
+  texto sin dar Enter, regresa sola al feed normal (antes se quedaba
+  trabada). En `app.js`: `buscar()`, `normalizar()`, rama `searchQuery` de
+  `render()`.
+- **Logo del header con "zoom" (18-sep-2026)**: `LOGO.PNG` trae mucho
+  fondo/circuitos alrededor del texto — se ve chico si se muestra completo.
+  `.logo-link.brand-center` es una caja fija (68px alto desktop / 48px
+  móvil) con `overflow:hidden`, y `.logo-img` usa
+  `object-fit:cover; object-position:50% 51%` para recortar solo la franja
+  con "El Pulso Noticias" (el subtítulo "Digital News" y el reflejo de
+  abajo quedan fuera). Mismo alto que antes, no crece el header.
+- **Sidebar "Más noticias" (18-sep-2026)**: el costado se veía muy vacío
+  bajo el banner. Las notas 21-28 de cada categoría (`resto.slice(19,27)`
+  en `render()`, `app.js`) — existen dentro de la ventana de 4 días pero no
+  entraban en el hero+grid de 20 — se listan ahí. Aplica en Inicio,
+  Nacional, Internacional y Trending; se oculta solo si esa categoría no
+  llega a 20 notas (ej. Trending con poco contenido). Solo escritorio (el
+  sidebar ya no se muestra en móvil). El sidebar completo se oculta solo
+  si NO hay banner Y NO hay "más noticias" (antes solo dependía del
+  banner) — ver `actualizarSidebarVisible()`.
+- **Banner ancla en móvil (18-sep-2026)**: antes vivía inline en el feed
+  con su alto natural (se veía "a lo largo", se iba con el scroll). Ahora
+  es franja fija de 64px pegada arriba del nav inferior, recortada con
+  `object-fit:cover`. Con más de un banner: flechas ‹› + swipe táctil
+  (sigue rotando cada 8s de fondo, navegar a mano solo reinicia el
+  conteo). Además usa `window.visualViewport` (`--vv-bottom-offset` en
+  `app.js`/`style.css`) para subir nav+banner cuando el navegador móvil
+  muestra su propia barra de botones (algunos la ponen abajo y tapaba lo
+  nuestro) — no se pudo probar en dispositivo real, solo verificado que no
+  rompe nada y que la variable se calcula bien.
 
 ## Pendiente / decisiones abiertas con el cliente
 
@@ -147,8 +181,14 @@ retroactivamente, solo las que se procesan de aquí en adelante.
   por el cliente que son sus links reales, no error). No dio link de X ni
   de WhatsApp: el espacio de X se reusó para Threads, WhatsApp (solo existía
   en topbar) queda "Pendiente" hasta que lo pase.
-- **Dominio propio — comprado, falta conectar (18-sep-2026).** Cuenta
-  Cloudflare del cliente (`pacoalvarezvivaldo@gmail.com`, account_id
+- **RESUELTO (18-sep-2026): dominio propio conectado.** Sitio ya sirve en
+  `https://www.elpulsonoticias.com.mx` (200, HTTPS válido) y
+  `https://elpulsonoticias.com.mx` (redirige 308 al de `www`) — panel
+  también funciona ahí (`/panel.html`) sin tocar nada, vive en el mismo
+  proyecto de Vercel. `el-pulso-noticias.vercel.app` se dejó activo en
+  paralelo (no se configuró redirect hacia el dominio nuevo, decidir si se
+  quiere más adelante). Cuenta Cloudflare del cliente
+  (`pacoalvarezvivaldo@gmail.com`, account_id
   `9bd9cf14ccad164bd0ebe5a11fff8412`) tiene acceso vía MCP `mcp__cloudflare__*`
   (docs/execute/search) — sirve para DNS y registrar sin pedirle nada al
   cliente. Dos dominios registrados ahí:
@@ -174,13 +214,16 @@ retroactivamente, solo las que se procesan de aquí en adelante.
     quede el de Evaristo en vez del de Paco. Falta el teléfono de Evaristo
     y confirmar alcance (¿solo teléfono, o todo el contacto?) antes de
     tocarlo vía `PUT /accounts/{account_id}/registrar/domains/{domain}`.
-  - **Pendiente conectar a Vercel**: no hay tool MCP de Vercel para
-    adjuntar un dominio a un proyecto (solo `buy_domain`/compra propia), y
-    el CLI de Vercel está instalado local pero sin sesión (`vercel whoami`
-    → token inválido). Hay que hacerlo a mano: dashboard de Vercel →
-    proyecto `el-pulso-noticias` → Settings → Domains → agregar
-    `elpulsonoticias.com.mx` → el cliente pasa el registro DNS que muestre
-    Vercel → se agrega por API de Cloudflare (rápido, sin error de dedo).
+  - **Conectado a Vercel vía navegador (18-sep-2026)**: no hay tool MCP de
+    Vercel para adjuntar un dominio a un proyecto (solo `buy_domain`/compra
+    propia), y el CLI de Vercel está instalado local pero sin sesión
+    (`vercel whoami` → token inválido). Se hizo con `claude-in-chrome`
+    (el perfil de Chrome ya tenía sesión iniciada en Vercel): Settings →
+    Domains → botón **"Add Existing"** (NO la caja de búsqueda de arriba,
+    esa es para comprar dominios nuevos y tira "No matching domains" con
+    uno que ya existe — confundió al cliente). DNS puesto por API de
+    Cloudflare en la zona de `.com.mx`: `A @ → 76.76.21.21` y
+    `CNAME www → cname.vercel-dns.com`, ambos sin proxy (nube gris).
 - **Google News sin imagen** — ver sección "Imágenes de las notas del
   pipeline" arriba; decidir si se deja así, se quita como fuente, o se
   justifica meter un navegador headless.
