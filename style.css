@@ -447,11 +447,43 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
 .modal-meta { margin-top: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--text-meta); }
 .modal-image { margin-top: 16px; width: 100%; max-height: 340px; object-fit: cover; border-radius: 6px; }
 .modal-body { margin-top: 18px; font-size: 16.5px; line-height: 1.7; color: #2c2a3d; }
-.modal-source {
-  display: inline-block; margin-top: 16px;
-  font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 13px;
-  color: var(--blue);
+
+.modal-share {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
 }
+.modal-share-label {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-meta);
+  margin-right: 4px;
+}
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 14px;
+  border-radius: 20px;
+  border: 0;
+  cursor: pointer;
+  color: #fff;
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  font-size: 12.5px;
+  letter-spacing: .02em;
+}
+.share-x { background: #10182b; }
+.share-fb { background: #1877f2; }
+.share-wa { background: #25d366; }
+.share-ig { background: linear-gradient(135deg, var(--purple), var(--orange-2)); }
 
 /* ============ DETECCIÓN RESPONSIVE: escritorio vs móvil ============ */
 /* Un solo header/HTML para ambos; el breakpoint decide qué piezas se ven.

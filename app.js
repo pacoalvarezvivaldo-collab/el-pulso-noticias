@@ -134,7 +134,7 @@ function renderTicker() {
   }));
 }
 
-function openModal(id) {
+function openModal(id, actualizarUrl = true) {
   const n = NOTAS.find(x => x.id === id);
   if (!n) return;
   document.getElementById('modalCat').textContent = CAT_LABEL[n.categoria];
@@ -145,10 +145,47 @@ function openModal(id) {
   const imgUrl = n.imagenUrl ? safeUrl(n.imagenUrl) : null;
   if (imgUrl) { img.src = imgUrl; img.hidden = false; } else { img.hidden = true; img.removeAttribute('src'); }
   document.getElementById('modalBody').textContent = n.cuerpo;
+
+  const shareUrl = new URL(location.href);
+  shareUrl.hash = '';
+  shareUrl.searchParams.set('nota', n.id);
+  setupShare(n, shareUrl.href);
+
+  if (actualizarUrl) history.pushState({ nota: n.id }, '', shareUrl);
   document.getElementById('modalOverlay').hidden = false;
 }
 
-function closeModal() { document.getElementById('modalOverlay').hidden = true; }
+function setupShare(n, url) {
+  const texto = `${n.titulo} — El Pulso Noticias`;
+  document.getElementById('shareX').href =
+    `https://twitter.com/intent/tweet?text=${encodeURIComponent(texto)}&url=${encodeURIComponent(url)}`;
+  document.getElementById('shareFb').href =
+    `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+  document.getElementById('shareWa').href =
+    `https://api.whatsapp.com/send?text=${encodeURIComponent(texto + ' ' + url)}`;
+  // Instagram no tiene un link de "compartir" web como los demás — solo se
+  // comparte desde su app. Copiamos texto+link al portapapeles para que el
+  // usuario lo pegue en una historia o DM.
+  const igBtn = document.getElementById('shareIg');
+  igBtn.onclick = async () => {
+    try {
+      await navigator.clipboard.writeText(`${texto} ${url}`);
+      igBtn.textContent = 'Copiado ✓';
+    } catch {
+      igBtn.textContent = 'No se pudo copiar';
+    }
+    setTimeout(() => { igBtn.textContent = 'Instagram'; }, 2000);
+  };
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').hidden = true;
+  const url = new URL(location.href);
+  if (url.searchParams.has('nota')) {
+    url.searchParams.delete('nota');
+    history.pushState({}, '', url);
+  }
+}
 
 function updateClock() {
   const el = document.getElementById('liveClock');
@@ -172,6 +209,9 @@ async function init() {
 
     renderTicker();
     render();
+
+    const idCompartido = new URLSearchParams(location.search).get('nota');
+    if (idCompartido) openModal(idCompartido, false);
   } catch (err) {
     console.error('No se pudieron cargar las noticias:', err);
     document.getElementById('feedTitle').textContent = 'No se pudieron cargar las noticias';
