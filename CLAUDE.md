@@ -139,14 +139,19 @@ retroactivamente, solo las que se procesan de aquí en adelante.
   backfill local, innecesario). Verificado en `news.json` del remoto:
   **Trending 20/20 con imagen**. Internacional subió a 16/20 (el resto es
   Google News, ver abajo — límite conocido, no bug).
-- **Redes sociales reales de Evaristo** — hoy la barra superior/footer
-  tienen los íconos como placeholder ("Pendiente"). En cuanto el cliente
-  las pase, conectarlas en `index.html` (topbar-social, mobile-menu-social,
-  footer-social) y mencionó que esas mismas se usarán como enlaces del
-  panel superior.
-- **Dominio propio** — sin decidir (ver spec de diseño), por ahora corre en
-  la URL gratis de Vercel (`el-pulso-noticias.vercel.app`) — cuando se
-  decida el dominio, agregarlo desde el dashboard de Vercel (Settings →
+- **RESUELTO (18-sep-2026): redes sociales reales de Evaristo.** Conectadas
+  en `index.html` (topbar-social, mobile-menu-social, footer-social):
+  Facebook `MinutoAminutoNoticiasVallartaBahia`, TikTok `@minuto.a.minuto.n`,
+  Threads `@minuto_a_minuto_noticias_` (nota: marca "Minuto a Minuto
+  Noticias Vallarta Bahía", no "El Pulso Noticias" — confirmado explícito
+  por el cliente que son sus links reales, no error). No dio link de X ni
+  de WhatsApp: el espacio de X se reusó para Threads, WhatsApp (solo existía
+  en topbar) queda "Pendiente" hasta que lo pase.
+- **Dominio propio** — sin decidir. Cliente preguntó (18-sep-2026),
+  sugerido `elpulsonoticias.com` (barato, universal) sobre `.mx`/`.news`
+  (más caros, menos comunes para su público). Sin comprar aún — falta que
+  el cliente confirme el nombre exacto antes de proceder (es gasto real).
+  Cuando se decida, agregarlo desde el dashboard de Vercel (Settings →
   Domains) del proyecto, no hay que tocar el repo.
 - **Google News sin imagen** — ver sección "Imágenes de las notas del
   pipeline" arriba; decidir si se deja así, se quita como fuente, o se
