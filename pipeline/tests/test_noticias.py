@@ -193,7 +193,7 @@ def test_trim_news_descarta_notas_viejas():
     assert resultado == [{"fecha": "2026-09-15T12:00:00+00:00", "titulo": "reciente"}]
 
 
-def test_trim_news_limita_a_20_mas_recientes_por_categoria():
+def test_trim_news_limita_a_28_mas_recientes_por_categoria():
     ahora = datetime(2026, 9, 16, tzinfo=timezone.utc)
     notas = [
         {
@@ -201,15 +201,15 @@ def test_trim_news_limita_a_20_mas_recientes_por_categoria():
             "fecha": (ahora - timedelta(hours=i)).isoformat(),
             "titulo": f"nota {i}",
         }
-        for i in range(25)
+        for i in range(35)
     ]
 
     resultado = trim_news(notas, dias=4, ahora=ahora)
 
-    assert len(resultado) == 20
+    assert len(resultado) == 28
     titulos = {n["titulo"] for n in resultado}
-    # Las 20 más recientes son las de i=0..19 (menor i = más reciente)
-    assert titulos == {f"nota {i}" for i in range(20)}
+    # Las 28 más recientes son las de i=0..27 (menor i = más reciente)
+    assert titulos == {f"nota {i}" for i in range(28)}
 
 
 def test_trim_news_limita_categorias_de_forma_independiente():
@@ -220,7 +220,7 @@ def test_trim_news_limita_categorias_de_forma_independiente():
             "fecha": (ahora - timedelta(hours=i)).isoformat(),
             "titulo": f"nac {i}",
         }
-        for i in range(25)
+        for i in range(35)
     ] + [
         {
             "categoria": "internacional",
@@ -234,7 +234,7 @@ def test_trim_news_limita_categorias_de_forma_independiente():
 
     nacionales = [n for n in resultado if n["categoria"] == "nacional"]
     internacionales = [n for n in resultado if n["categoria"] == "internacional"]
-    assert len(nacionales) == 20  # tope alcanzado y aplicado
+    assert len(nacionales) == 28  # tope alcanzado y aplicado
     assert len(internacionales) == 5  # por debajo del tope, no se recorta
 
 

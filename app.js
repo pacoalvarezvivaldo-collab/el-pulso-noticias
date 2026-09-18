@@ -433,13 +433,23 @@ async function init() {
     });
     const searchBox = document.getElementById('searchBox');
     const searchInput = document.getElementById('searchInput');
+    const searchBackdrop = document.getElementById('searchBackdrop');
+    // En móvil el buscador es un modal fijo centrado (independiente del
+    // scroll, no se anima a mover la página) — el backdrop es el fondo
+    // oscuro detrás. En escritorio el backdrop no se ve (CSS lo limita a
+    // la media query de móvil), solo importa el popover.
     const abrirBusqueda = () => {
       searchBox.classList.add('open');
+      searchBackdrop.hidden = false;
       searchInput.focus();
     };
+    const cerrarBusqueda = () => {
+      searchBox.classList.remove('open');
+      searchBackdrop.hidden = true;
+    };
     document.getElementById('searchIconBtn').addEventListener('click', () => {
-      searchBox.classList.toggle('open');
-      if (searchBox.classList.contains('open')) searchInput.focus();
+      if (searchBox.classList.contains('open')) cerrarBusqueda();
+      else abrirBusqueda();
     });
     // Antes forzaba scroll al top del sitio al abrir la búsqueda desde el
     // nav inferior — molesto si venías leyendo algo más abajo. El header
@@ -456,10 +466,11 @@ async function init() {
     searchInput.addEventListener('input', () => {
       if (!searchInput.value.trim() && searchQuery) buscar('');
     });
+    searchBackdrop.addEventListener('click', cerrarBusqueda);
     document.addEventListener('click', (e) => {
       if (!searchBox.classList.contains('open')) return;
       if (searchBox.contains(e.target) || e.target.id === 'searchIconBtn' || e.target.id === 'bottomSearchBtn') return;
-      searchBox.classList.remove('open');
+      cerrarBusqueda();
     });
     document.getElementById('modalClose').addEventListener('click', closeModal);
     document.getElementById('modalOverlay').addEventListener('click', (e) => {

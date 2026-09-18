@@ -127,6 +127,9 @@ h1, h2, h3 { font-family: 'Archivo', sans-serif; margin: 0; }
 }
 .search-box.open { display: flex; }
 
+.search-backdrop { display: none; }
+.search-backdrop[hidden] { display: none; }
+
 .search-empty { padding: 24px; color: #8a83a3; font-family: 'Barlow', sans-serif; }
 .search-box input {
   flex: 1;
@@ -588,6 +591,30 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
   .live-clock { display: none; }
   .brand-row { padding: 10px 14px; }
   .logo-link.brand-center { height: 48px; width: 104px; }
+
+  /* En móvil el buscador no cuelga del header (position:absolute ahí
+     hacía que el navegador scrolleara la página al enfocar el input, para
+     "mantenerlo visible") — se centra fijo en pantalla, independiente del
+     scroll, así no salta y además queda donde se pidió: al centro. */
+  .search-backdrop:not([hidden]) {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 8, 20, .6);
+    z-index: 55;
+  }
+  .search-box.open {
+    position: fixed;
+    top: 35%;
+    left: 20px;
+    right: 20px;
+    transform: translateY(-50%);
+    width: auto;
+    max-width: none;
+    margin: 0;
+    z-index: 60;
+    box-shadow: 0 20px 60px rgba(0,0,0,.55);
+  }
 
   .hero { grid-template-columns: 1fr; padding: 0; border-bottom: none; }
   .hero-main { padding: 0; }

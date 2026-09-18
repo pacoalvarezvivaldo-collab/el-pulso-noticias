@@ -121,7 +121,7 @@ def trim_news(
     notas: list[dict],
     dias: int = 4,
     ahora: datetime | None = None,
-    max_por_categoria: int = 20,
+    max_por_categoria: int = 28,
 ) -> list[dict]:
     ahora = ahora or datetime.now(timezone.utc)
     limite = ahora - timedelta(days=dias)
@@ -137,7 +137,11 @@ def trim_news(
     # Tope por categoría: news.json no debe crecer sin límite — el frontend
     # solo muestra ~10 notas por vista, así que conservar cientos es puro
     # peso muerto (tamaño del archivo y del repo). Se queda con las N más
-    # recientes de CADA categoría, no un tope global.
+    # recientes de CADA categoría, no un tope global. 28 y no 20: el hero+
+    # grid de cada categoría ya usa 20, el sidebar "Más noticias" del
+    # frontend (app.js::render) muestra hasta 8 más (notas 21-28) — con
+    # tope 20 nunca sobraba nada para esa lista fuera de Inicio (que mezcla
+    # las 3 categorías y sí tenía de sobra).
     por_categoria: dict[str, list[dict]] = {}
     for nota in resultado:
         por_categoria.setdefault(nota.get("categoria"), []).append(nota)
