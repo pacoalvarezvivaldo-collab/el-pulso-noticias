@@ -15,10 +15,14 @@ Convex agent skills for common tasks can be installed by running
 # El Pulso Noticias — Memoria del proyecto
 
 Sitio de noticias del cliente Evaristo Tenorio. Categorías: **Nacional**,
-**Internacional**, **Trending** (Google Trends México). Contenido reescrito
-por IA a partir de RSS — el sitio se presenta como fuente propia, **nunca
-se muestra ni se enlaza el medio original** (decisión explícita del
-cliente: la reescritura con IA existe justo para que sea "fuente propia").
+**Internacional**, **Trending** (Google Trends México) — contenido
+reescrito por IA a partir de RSS de terceros, el sitio se presenta como
+fuente propia, **nunca se muestra ni se enlaza el medio original**
+(decisión explícita del cliente: la reescritura con IA existe justo para
+que sea "fuente propia"). Más **Puerto Vallarta**, **Bahía de Banderas**,
+**Jalisco**, **Nayarit** (18-sep-2026) — estas SÍ son contenido propio de
+Evaristo (dueño también de Minuto a Minuto Noticias Vallarta Bahía), texto
+e imagen exactos sin reescritura IA, ver detalle abajo.
 
 ## Arquitectura
 
@@ -110,6 +114,61 @@ puede sacar `og:image` con una petición HTTP simple; solución real
 requeriría un navegador headless (no implementado, fuera de alcance por
 ahora). Notas viejas (de antes de estos fixes) no ganan imagen
 retroactivamente, solo las que se procesan de aquí en adelante.
+
+## Categorías regionales (Puerto Vallarta / Bahía de Banderas / Jalisco / Nayarit)
+
+Agregadas 18-sep-2026, contenido propio de Evaristo — **autorización
+expresa suya** para usar texto e imágenes tal cual (verbatim), sin pasar
+por `rewrite_entry_with_ai` como el resto del pipeline. Fuente:
+`minutoaminutonoticiasvallartabahia.com` (WordPress, "Minuto a Minuto
+Noticias" — mismo dueño/marca ya usada para redes sociales antes de
+conectar las reales de El Pulso). Su menú tiene estas 4 como secciones
+separadas — replicado igual aquí (el cliente pidió explícitamente 4
+pestañas, no una sola con badges, sabiendo que en celular no caben 9
+destinos en el nav inferior).
+
+- **RSS por categoría** (`/category/<slug>/feed/`, estándar WordPress)
+  solo trae extracto corto y sin imagen — a diferencia de los feeds
+  nacional/internacional que sí traen cuerpo o al menos algo de RSS.
+  `pipeline/fetch_news.py::obtener_entradas_vallarta` por eso hace un
+  segundo fetch por artículo nuevo: `obtener_cuerpo_y_og_image()` saca el
+  cuerpo real de `.entry-content` con **BeautifulSoup** (dependencia nueva
+  en `requirements.txt` — el resto del pipeline usa puro regex para
+  `og:image` porque es una sola etiqueta; para un bloque HTML anidado
+  regex ya no alcanza) y el `og:image` de la misma respuesta HTTP (no dos
+  requests separados).
+- **Sin reescritura IA**: `build_nota(entrada, entrada)` — la misma
+  entrada se pasa dos veces porque para cuando llega ahí ya trae
+  `titulo`/`resumen`/`cuerpo` puestos por el scraper (imita la forma que
+  build_nota espera de `reescrita` sin necesitar una función nueva).
+- **Limpieza de texto**: su CMS marca énfasis con `*negrita*`/`_cursiva_`
+  en texto plano que nunca se convierte a HTML — `limpiar_texto_vallarta()`
+  (noticias.py) los quita, se verían literales en la nota. `resumen_de_cuerpo()`
+  arma el resumen cortando el cuerpo completo a ~180 caracteres en el
+  último espacio (no hay resumen/dek separado confiable en su HTML).
+- **Un solo color** (`--teal`, `--cat-regional`) para las 4 — son una
+  misma familia temática, evita saturar la paleta de marca con 4 colores
+  más encima de azul/morado/naranja/rojo ya usados.
+- **Nav inferior de celular rediseñado**: con 8 categorías + Inicio no
+  caben como botones (antes eran Inicio/Nacional/Mundo/Trending/Buscar,
+  5, ya al límite). Ahora es **Inicio | Categorías | Buscar** — "Categorías"
+  abre el mismo drawer del hamburguesa, que sí lista las 8 sin problema de
+  espacio (vertical, scrollable). Mismo patrón que usa el sitio de
+  Evaristo (tampoco tiene barra de tabs inferior, solo hamburguesa). Nav
+  de escritorio (`.main-nav`) no necesitó cambios — ya tenía
+  `overflow-x:auto`, las 8 pills caben o scrollean solas.
+- Probado con notas de prueba inyectadas en una copia local de
+  `news.json` (nunca tocó el real ni gastó API de OpenAI): filtro por
+  categoría, badge teal, nav de escritorio y drawer móvil, todos
+  funcionando antes de pushear.
+- **Pendiente de ver en producción**: el scraper se probó standalone
+  contra el sitio real (funciona, trajo 40 notas de las 4 categorías en
+  una corrida), pero el pipeline completo (`fetch_news.py::main`) con esta
+  fuente integrada todavía no ha corrido en el cron real — la primera
+  corrida después del push (18-sep-2026 ~21:19 UTC, próxima 00:00 UTC) es
+  la primera vez que se prueba de punta a punta con `beautifulsoup4`
+  instalándose vía `requirements.txt` en GitHub Actions. Revisar que no
+  truene ahí.
 
 ## Decisiones de diseño ya tomadas
 
