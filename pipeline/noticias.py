@@ -45,6 +45,15 @@ def _imagen_de_entry(item) -> str | None:
             if url and (not tipo or tipo.startswith("image/")):
                 return url
 
+    # Google Trends (namespace ht:) trae su propia miniatura por tema —
+    # feedparser expone <ht:picture> como el atributo "ht_picture". Sin
+    # esto, Trending se queda siempre sin imagen: sus notas no tienen un
+    # link a un artículo real (ver comentario en parse_entries_from_parsed),
+    # así que el fallback de og:image en fetch_news.py no aplica ahí.
+    ht_picture = getattr(item, "ht_picture", None)
+    if ht_picture:
+        return ht_picture
+
     return None
 
 

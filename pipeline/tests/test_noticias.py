@@ -147,6 +147,16 @@ def test_parse_entries_from_parsed_toma_imagen_de_enclosure():
     assert entradas[0]["imagen"] == "https://x.com/foto.jpg"
 
 
+def test_parse_entries_from_parsed_toma_imagen_de_ht_picture_google_trends():
+    entry = _entry()
+    entry.ht_picture = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ABC123"
+    parsed = SimpleNamespace(entries=[entry])
+
+    entradas = parse_entries_from_parsed(parsed, fuente="Google Trends", categoria="trending")
+
+    assert entradas[0]["imagen"] == "https://encrypted-tbn0.gstatic.com/images?q=tbn:ABC123"
+
+
 def test_filter_new_entries_excluye_las_que_ya_estan_en_historial():
     entradas = [
         {"link": "https://x.com/1", "titulo": "A"},
