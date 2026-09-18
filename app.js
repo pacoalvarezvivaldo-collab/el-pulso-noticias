@@ -43,14 +43,18 @@ async function cargarNotasManual() {
   }
 }
 
+// Zona horaria fija de Puerto Vallarta, sin importar dónde esté el visitante
+// (así todos ven la misma hora, la del medio, no la de su dispositivo).
+const TZ_VALLARTA = 'America/Mexico_City';
+
 function fmtHora(iso) {
   const d = new Date(iso);
-  return d.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
+  return d.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit', timeZone: TZ_VALLARTA });
 }
 
 function fmtFecha(iso) {
   const d = new Date(iso);
-  return d.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  return d.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: TZ_VALLARTA });
 }
 
 function setActiveCat(cat) {
@@ -148,7 +152,7 @@ function closeModal() { document.getElementById('modalOverlay').hidden = true; }
 
 function updateClock() {
   const el = document.getElementById('liveClock');
-  if (el) el.textContent = new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
+  if (el) el.textContent = new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit', timeZone: TZ_VALLARTA });
 }
 
 async function init() {

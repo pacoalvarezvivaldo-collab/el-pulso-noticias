@@ -41,6 +41,8 @@ h1, h2, h3 { font-family: 'Archivo', sans-serif; margin: 0; }
   z-index: 40;
   background: var(--bg-dark-2);
   box-shadow: 0 6px 18px rgba(20, 18, 37, .25);
+  border-top: 4px solid;
+  border-image: linear-gradient(90deg, var(--purple), var(--blue) 35%, var(--orange) 68%, var(--red)) 1;
 }
 
 .topbar {
@@ -140,7 +142,7 @@ h1, h2, h3 { font-family: 'Archivo', sans-serif; margin: 0; }
   font-family: 'Archivo', sans-serif;
   font-weight: 800;
   font-size: 22px;
-  color: #fff;
+  color: var(--pulse-1);
 }
 
 .main-nav {
@@ -165,7 +167,10 @@ h1, h2, h3 { font-family: 'Archivo', sans-serif; margin: 0; }
   white-space: nowrap;
 }
 .nav-pill:hover { color: #fff; }
-.nav-pill.active { color: #fff; border-bottom-color: var(--orange); }
+.nav-pill.active { color: #fff; border-bottom-color: var(--red); }
+.nav-pill[data-cat="nacional"].active { border-bottom-color: var(--blue); }
+.nav-pill[data-cat="internacional"].active { border-bottom-color: var(--purple); }
+.nav-pill[data-cat="trending"].active { border-bottom-color: var(--orange); }
 
 .ticker {
   display: flex;
@@ -376,7 +381,10 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
   cursor: pointer;
   flex: 1;
 }
-.bottom-item.active { color: var(--orange); }
+.bottom-item.active { color: var(--red); }
+.bottom-item[data-cat="nacional"].active { color: var(--blue); }
+.bottom-item[data-cat="internacional"].active { color: var(--purple); }
+.bottom-item[data-cat="trending"].active { color: var(--orange); }
 .bn-icon { font-size: 18px; }
 
 /* ============ FOOTER ============ */
