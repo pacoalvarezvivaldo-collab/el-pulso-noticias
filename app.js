@@ -340,6 +340,25 @@ function updateClock() {
   if (el) el.textContent = new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit', timeZone: TZ_VALLARTA });
 }
 
+// Algunos navegadores móviles ponen su propia barra de botones abajo (otros
+// arriba) y la muestran/ocultan al hacer scroll — cuando aparece abajo tapa
+// nuestro nav+banner fijos. window.visualViewport reporta el área visible
+// real descontando esa barra; la diferencia contra innerHeight es cuánto
+// hay que subir nuestros elementos para que queden encima, no escondidos
+// detrás. Si el navegador no soporta visualViewport, el offset se queda en
+// 0 y el comportamiento es el de antes (bottom:0 fijo).
+function ajustarPorBarraDelNavegador() {
+  const vv = window.visualViewport;
+  if (!vv) return;
+  const offset = Math.max(0, window.innerHeight - vv.height - vv.offsetTop);
+  document.documentElement.style.setProperty('--vv-bottom-offset', `${offset}px`);
+}
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', ajustarPorBarraDelNavegador);
+  window.visualViewport.addEventListener('scroll', ajustarPorBarraDelNavegador);
+  ajustarPorBarraDelNavegador();
+}
+
 async function init() {
   document.getElementById('topbarDate').textContent = fmtFecha(new Date());
   updateClock();

@@ -400,11 +400,17 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
 .bottom-nav {
   display: none;
   position: fixed;
-  bottom: 0; left: 0; right: 0;
+  /* --vv-bottom-offset la actualiza app.js con la API visualViewport: es
+     0 normalmente, y sube cuando el navegador muestra su propia barra de
+     botones (algunos la ponen abajo, tapando esto) para que el nuestro
+     quede siempre encima, visible, en vez de escondido detrás. */
+  bottom: var(--vv-bottom-offset, 0px);
+  left: 0; right: 0;
   z-index: 40;
   background: var(--bg-dark-2);
   border-top: 1px solid rgba(255,255,255,.08);
   padding-bottom: env(safe-area-inset-bottom, 0px);
+  transition: bottom .15s ease-out;
 }
 .bottom-item {
   background: transparent;
@@ -561,10 +567,11 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
     height: 64px;
     position: fixed;
     left: 0; right: 0;
-    bottom: 56px;
+    bottom: calc(56px + var(--vv-bottom-offset, 0px));
     z-index: 39;
     background: var(--bg-dark-2);
     border-top: 1px solid rgba(255,255,255,.08);
+    transition: bottom .15s ease-out;
   }
   .mobile-banner[hidden] { display: none; }
   .banner-slide { flex: 1; min-width: 0; height: 100%; }
