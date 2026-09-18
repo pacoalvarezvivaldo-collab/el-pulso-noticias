@@ -74,6 +74,15 @@ function bannerHtml(b) {
 }
 
 let bannerRotTimer = null;
+let hayBanners = false;
+
+// El sidebar tiene dos inquilinos independientes (banner de anuncios y la
+// lista "Más noticias") que se activan en momentos distintos — se oculta
+// solo si ninguno de los dos tiene contenido, nunca por uno solo.
+function actualizarSidebarVisible() {
+  const sidebarMore = document.getElementById('sidebarMore');
+  document.getElementById('sidebar').hidden = !hayBanners && sidebarMore.hidden;
+}
 
 // Con varios banners activos se muestra uno a la vez (rotando), no todos
 // apilados uno tras otro — cada anunciante se ve igual de seguido. En
@@ -81,7 +90,6 @@ let bannerRotTimer = null;
 // rotación automática: cada navegación manual solo reinicia el conteo de
 // 8s, no la desactiva.
 function renderBanners(banners) {
-  const sidebar = document.getElementById('sidebar');
   const mobileBanner = document.getElementById('mobileBanner');
   const mobileSlide = document.getElementById('mobileBannerSlide');
   const prevBtn = document.getElementById('mobileBannerPrev');
@@ -89,15 +97,16 @@ function renderBanners(banners) {
 
   if (bannerRotTimer) { clearInterval(bannerRotTimer); bannerRotTimer = null; }
 
+  hayBanners = banners.length > 0;
+  actualizarSidebarVisible();
+
   if (!banners.length) {
-    sidebar.hidden = true;
     mobileBanner.hidden = true;
     document.body.classList.remove('has-mobile-banner');
     mobileSlide.innerHTML = '';
     return;
   }
 
-  sidebar.hidden = false;
   mobileBanner.hidden = false;
   document.body.classList.add('has-mobile-banner');
   prevBtn.hidden = banners.length < 2;
@@ -197,6 +206,7 @@ function render() {
       .sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
     document.getElementById('feedTitle').textContent = `Resultados para "${searchQuery}"`;
     document.getElementById('hero').innerHTML = '';
+    renderMasNoticias([]);
     if (!resultados.length) {
       document.getElementById('cardGrid').innerHTML = '<p class="search-empty">Sin resultados.</p>';
       return;
@@ -223,6 +233,26 @@ function render() {
   renderHero(destacada, resto.slice(0, 3));
   const gridItems = resto.slice(3, 19); // hero(1) + laterales(3) + grid(16) = 20 notas visibles
   renderGrid(gridItems.length ? gridItems : resto.slice(0, 6));
+  // Notas que ya existen (más viejas, dentro de la ventana de 4 días) pero
+  // se quedaban sin mostrarse en ningún lado — llenan el sidebar en vez de
+  // desperdiciarse. Mismo criterio en Inicio/Nacional/Internacional/Trending.
+  renderMasNoticias(resto.slice(19, 27));
+}
+
+function renderMasNoticias(items) {
+  const wrap = document.getElementById('sidebarMore');
+  const list = document.getElementById('sidebarMoreList');
+  wrap.hidden = items.length === 0;
+  actualizarSidebarVisible();
+  if (!items.length) { list.innerHTML = ''; return; }
+  list.innerHTML = items.map(n => `
+    <div class="sidebar-more-item" data-id="${esc(n.id)}">
+      <span class="sidebar-more-cat" style="color:${CAT_COLOR[n.categoria]}">${CAT_LABEL[n.categoria]}</span>
+      <div class="sidebar-more-title">${esc(n.titulo)}</div>
+      <div class="sidebar-more-meta">${fmtHora(n.fecha)}</div>
+    </div>
+  `).join('');
+  list.querySelectorAll('[data-id]').forEach(el => el.addEventListener('click', () => openModal(el.dataset.id)));
 }
 
 function renderHero(destacada, laterales) {

@@ -90,8 +90,25 @@ h1, h2, h3 { font-family: 'Archivo', sans-serif; margin: 0; }
   min-height: 44px;
 }
 
-.logo-link.brand-center { display: flex; justify-content: center; }
-.logo-img { height: 68px; width: auto; display: block; }
+/* LOGO.PNG trae mucho fondo/espacio vacío alrededor del texto — en vez de
+   mostrar la imagen completa (se ve chica y perdida), recortamos con
+   object-fit:cover a una caja panorámica centrada en el texto, así se ve
+   "en zoom" sin agrandar el alto real que ocupa en el header. */
+.logo-link.brand-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 68px;
+  width: 148px;
+  overflow: hidden;
+}
+.logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 51%;
+  display: block;
+}
 
 /* Popover: oculta por default, .open la muestra al hacer clic en el ícono */
 .search-box {
@@ -316,6 +333,34 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
 .mobile-banner { display: none; }
 .mobile-banner[hidden] { display: none; }
 .mobile-banner .banner-img { border-radius: 0; }
+
+/* Lista de apoyo en la barra lateral: notas que ya existen (más viejas,
+   fuera del hero/grid de 20) pero antes no se mostraban en ningún lado —
+   llenan el espacio vacío del costado en vez de desperdiciarse. */
+.sidebar-more[hidden] { display: none; }
+.sidebar-more-list { display: flex; flex-direction: column; }
+.sidebar-more-item {
+  cursor: pointer;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.sidebar-more-item:last-child { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
+.sidebar-more-cat {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.sidebar-more-title {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.32;
+  color: var(--text-title);
+}
+.sidebar-more-meta { margin-top: 4px; font-size: 11.5px; color: var(--text-meta); }
 
 .hero {
   display: grid;
@@ -542,7 +587,7 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
   .main-nav { display: none; }
   .live-clock { display: none; }
   .brand-row { padding: 10px 14px; }
-  .logo-img { height: 48px; }
+  .logo-link.brand-center { height: 48px; width: 104px; }
 
   .hero { grid-template-columns: 1fr; padding: 0; border-bottom: none; }
   .hero-main { padding: 0; }
