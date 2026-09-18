@@ -1,0 +1,15 @@
+{
+  "name": "el-pulso-noticias-panel",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "convex:dev": "convex dev"
+  },
+  "dependencies": {
+    "convex": "^1.46.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.1",
+    "typescript": "^7.0.2"
+  }
+}

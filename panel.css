@@ -1,0 +1,123 @@
+.panel-body {
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-dark-2);
+  padding: 14px 18px;
+}
+.panel-logo { height: 36px; }
+.panel-title {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: #fff;
+}
+
+.panel-main {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 20px 16px;
+}
+
+.panel-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.panel-h1 {
+  font-size: 20px;
+  color: var(--text-title);
+  margin-bottom: 4px;
+}
+
+.panel-form-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.panel-hint {
+  font-size: 13.5px;
+  color: var(--text-meta);
+  margin: 0 0 16px;
+}
+
+.panel-label {
+  display: block;
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .04em;
+  color: var(--text-title);
+  margin: 16px 0 6px;
+}
+
+.panel-input {
+  width: 100%;
+  font-family: 'Barlow', system-ui, sans-serif;
+  font-size: 15px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-page);
+  color: var(--text-title);
+}
+
+.panel-textarea { resize: vertical; font-family: 'Barlow', system-ui, sans-serif; }
+
+.panel-preview {
+  margin-top: 10px;
+  max-width: 100%;
+  max-height: 220px;
+  border-radius: 8px;
+  display: block;
+}
+
+.panel-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--blue);
+  color: #fff;
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+}
+.panel-btn:disabled { opacity: .55; cursor: not-allowed; }
+.panel-btn:active:not(:disabled) { transform: scale(.98); }
+
+.panel-link-btn {
+  background: none;
+  border: 0;
+  color: var(--text-meta);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12.5px;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.panel-error, .panel-status {
+  margin-top: 14px;
+  font-size: 13.5px;
+  padding: 10px 12px;
+  border-radius: 6px;
+}
+.panel-error { background: rgba(226,59,59,.12); color: var(--red); }
+.panel-status.ok { background: rgba(59,111,224,.12); color: var(--blue); }
+.panel-status.err { background: rgba(226,59,59,.12); color: var(--red); }
+
+@media (prefers-color-scheme: dark) {
+  .panel-input { background: #181628; border-color: var(--border); }
+}

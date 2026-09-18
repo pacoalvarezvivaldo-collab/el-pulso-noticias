@@ -28,6 +28,21 @@ function safeUrl(link) {
 let NOTAS = [];
 let activeCat = 'todas';
 
+// Notas subidas a mano por el cliente vía panel.html, servidas por Convex.
+// Si Convex no responde (backend caído, URL sin configurar) el sitio sigue
+// funcionando solo con las notas del pipeline automático.
+async function cargarNotasManual() {
+  if (typeof CONVEX_HTTP_URL === 'undefined' || CONVEX_HTTP_URL.includes('REEMPLAZAR')) return [];
+  try {
+    const res = await fetch(CONVEX_HTTP_URL + '/api/notas');
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data.notas ?? [];
+  } catch {
+    return [];
+  }
+}
+
 function fmtHora(iso) {
   const d = new Date(iso);
   return d.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
@@ -65,7 +80,7 @@ function renderHero(destacada, laterales) {
   if (!destacada) { hero.innerHTML = ''; return; }
   hero.innerHTML = `
     <div class="hero-main" data-id="${esc(destacada.id)}">
-      <div class="hero-photo">
+      <div class="hero-photo"${destacada.imagenUrl ? ` style="background-image:url('${esc(safeUrl(destacada.imagenUrl) ?? '')}');background-size:cover;background-position:center"` : ''}>
         <span class="hero-badge" style="background:${CAT_COLOR[destacada.categoria]}">${CAT_LABEL[destacada.categoria]}</span>
       </div>
       <h1 class="hero-title">${esc(destacada.titulo)}</h1>
@@ -89,7 +104,7 @@ function renderGrid(notas) {
   const grid = document.getElementById('cardGrid');
   grid.innerHTML = notas.map(n => `
     <div class="card" data-id="${esc(n.id)}">
-      <div class="card-photo">
+      <div class="card-photo"${n.imagenUrl ? ` style="background-image:url('${esc(safeUrl(n.imagenUrl) ?? '')}');background-size:cover;background-position:center"` : ''}>
         <span class="card-badge" style="background:${CAT_COLOR[n.categoria]}">${CAT_LABEL[n.categoria]}</span>
       </div>
       <div class="card-title">${esc(n.titulo)}</div>
@@ -122,6 +137,9 @@ function openModal(id) {
   document.getElementById('modalCat').style.background = CAT_COLOR[n.categoria];
   document.getElementById('modalTitle').textContent = n.titulo;
   document.getElementById('modalMeta').textContent = `${fmtHora(n.fecha)} · Fuente: ${n.fuente}`;
+  const img = document.getElementById('modalImage');
+  const imgUrl = n.imagenUrl ? safeUrl(n.imagenUrl) : null;
+  if (imgUrl) { img.src = imgUrl; img.hidden = false; } else { img.hidden = true; img.removeAttribute('src'); }
   document.getElementById('modalBody').textContent = n.cuerpo;
   const src = document.getElementById('modalSource');
   const url = safeUrl(n.link);
@@ -151,7 +169,9 @@ async function init() {
   try {
     const res = await fetch('news.json');
     const data = await res.json();
-    NOTAS = data.notas ?? [];
+    const notasPipeline = data.notas ?? [];
+    const notasManual = await cargarNotasManual();
+    NOTAS = [...notasPipeline, ...notasManual];
     document.getElementById('feedUpdated').textContent = data.generado
       ? 'ACTUALIZADO ' + fmtHora(data.generado)
       : 'Sin actualizar aún';

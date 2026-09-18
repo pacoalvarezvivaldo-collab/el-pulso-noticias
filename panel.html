@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Panel — El Pulso Noticias</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="panel.css">
+</head>
+<body class="panel-body">
+
+<header class="panel-header">
+  <img src="LOGO.PNG" alt="El Pulso Noticias" class="panel-logo">
+  <span class="panel-title">Panel de notas</span>
+</header>
+
+<main class="panel-main">
+
+  <section id="loginScreen" class="panel-card">
+    <h1 class="panel-h1">Entrar</h1>
+    <p class="panel-hint">Contraseña del panel.</p>
+    <input type="password" id="passwordInput" class="panel-input" placeholder="Contraseña" autocomplete="current-password">
+    <button id="loginBtn" class="panel-btn">Entrar</button>
+    <p class="panel-error" id="loginError" hidden></p>
+  </section>
+
+  <section id="formScreen" class="panel-card" hidden>
+    <div class="panel-form-head">
+      <h1 class="panel-h1">Nueva nota</h1>
+      <button id="logoutBtn" class="panel-link-btn">Salir</button>
+    </div>
+
+    <label class="panel-label">Categoría</label>
+    <select id="categoriaInput" class="panel-input">
+      <option value="nacional">Nacional</option>
+      <option value="internacional">Internacional</option>
+      <option value="trending">Trending</option>
+    </select>
+
+    <label class="panel-label">Título</label>
+    <input type="text" id="tituloInput" class="panel-input" placeholder="Título de la nota">
+
+    <label class="panel-label">Resumen</label>
+    <textarea id="resumenInput" class="panel-input panel-textarea" rows="2" placeholder="Resumen corto (aparece en las tarjetas)"></textarea>
+
+    <label class="panel-label">Cuerpo</label>
+    <textarea id="cuerpoInput" class="panel-input panel-textarea" rows="6" placeholder="Texto completo de la nota"></textarea>
+
+    <label class="panel-label">Fuente (opcional)</label>
+    <input type="text" id="fuenteInput" class="panel-input" placeholder="El Pulso Noticias">
+
+    <label class="panel-label">Imagen (opcional)</label>
+    <input type="file" id="imagenInput" class="panel-input" accept="image/*">
+    <img id="imagenPreview" class="panel-preview" hidden>
+
+    <button id="publicarBtn" class="panel-btn">Publicar nota</button>
+    <p class="panel-status" id="formStatus" hidden></p>
+  </section>
+
+</main>
+
+<script src="convex-config.js"></script>
+<script src="panel.js"></script>
+</body>
+</html>
