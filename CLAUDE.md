@@ -31,10 +31,16 @@ convex/                        backend del panel (notas manuales + banners)
 panel.html / panel.js / panel.css   panel del cliente (login con password compartida)
 ```
 
-**Repo:** `github.com/pacoalvarezvivaldo-collab/el-pulso-noticias` (público, GitHub Pages activo).
-**Sitio:** https://pacoalvarezvivaldo-collab.github.io/el-pulso-noticias/
-**Panel:** https://pacoalvarezvivaldo-collab.github.io/el-pulso-noticias/panel.html
+**Repo:** `github.com/pacoalvarezvivaldo-collab/el-pulso-noticias` (público).
+**Sitio:** https://el-pulso-noticias.vercel.app/ (Vercel, proyecto `paco-v/el-pulso-noticias` — deploy automático en cada push a `master`, sin build step, cache-control `max-age=0` así que se refresca casi al instante, sin el límite fijo de 10 min de GitHub Pages).
+**Panel:** https://el-pulso-noticias.vercel.app/panel.html
 **Convex prod:** `pacoalvarezvivaldo:evaristo-el-pulso-noticias:production` — `https://beaming-koala-776.convex.cloud` (cliente) / `https://beaming-koala-776.convex.site` (HTTP actions, es lo que usan `panel.js`/`app.js` vía `convex-config.js`).
+
+**GitHub Pages: apagado (18-sep-2026)** — el sitio se movió a Vercel por el
+límite fijo de caché de 10 min de GH Pages (sin forma de configurarlo).
+`.github/workflows/update_news.yml` sigue igual (sigue pusheando
+`news.json`/`historial.json` al repo), Vercel solo cambia dónde se sirve
+el resultado — no hay nada de Vercel que configurar en el pipeline.
 
 El pipeline (`OPENAI_API_KEY`) corre como GitHub Actions Secret del repo, no
 en local. Convex ya tiene `npx convex login` hecho en esta máquina — para
@@ -123,21 +129,15 @@ retroactivamente, solo las que se procesan de aquí en adelante.
 
 ## Pendiente / decisiones abiertas con el cliente
 
-- **Hosting del sitio** (18-sep-2026): GitHub Pages cachea los archivos
-  estáticos **10 min fijos, sin forma de configurarlo** — el cliente lo
-  notó como "se tarda en actualizar". Se le explicaron 3 opciones: (1)
-  mover el sitio a Vercel (gratis, sin servidor, deploy casi instantáneo,
-  recomendado), (2) correr el pipeline más seguido sin cambiar hosting
-  (no arregla el límite de caché), (3) comprar un VPS nuevo y barato en
-  Hetzner solo para esto (viable, servir estático es ligero, actualizar
-  seguido NO sube el costo — el costo real sería el trabajo de armar
-  nginx/SSL/deploy, no dinero). Cliente evaluando, **sin decidir aún**.
 - **Redes sociales reales de Evaristo** — hoy la barra superior/footer
   tienen los íconos como placeholder ("Pendiente"). En cuanto el cliente
   las pase, conectarlas en `index.html` (topbar-social, mobile-menu-social,
   footer-social) y mencionó que esas mismas se usarán como enlaces del
   panel superior.
 - **Dominio propio** — sin decidir (ver spec de diseño), por ahora corre en
-  la URL gratis de GitHub Pages.
-- **Google News sin imagen** — ver sección de arriba; decidir si se deja
-  así, se quita como fuente, o se justifica meter un navegador headless.
+  la URL gratis de Vercel (`el-pulso-noticias.vercel.app`) — cuando se
+  decida el dominio, agregarlo desde el dashboard de Vercel (Settings →
+  Domains) del proyecto, no hay que tocar el repo.
+- **Google News sin imagen** — ver sección "Imágenes de las notas del
+  pipeline" arriba; decidir si se deja así, se quita como fuente, o se
+  justifica meter un navegador headless.
