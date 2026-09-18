@@ -20,6 +20,7 @@ from pathlib import Path
 
 import feedparser
 import requests
+from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from openai import OpenAI
 
@@ -28,7 +29,9 @@ from pipeline.editor_ia import make_openai_caller, rewrite_entry_with_ai
 from pipeline.noticias import (
     build_nota,
     filter_new_entries,
+    limpiar_texto_vallarta,
     parse_entries_from_parsed,
+    resumen_de_cuerpo,
     trim_historial,
     trim_news,
 )
@@ -50,6 +53,18 @@ FEEDS = [
     {"url": "https://es.euronews.com/rss?level=theme&name=news", "fuente": "Euronews", "categoria": "internacional"},
     {"url": "https://news.google.com/rss?hl=es-419&gl=MX&ceid=MX:es-419", "fuente": "Google News", "categoria": "internacional"},
     {"url": "https://trends.google.com/trending/rss?geo=MX", "fuente": "Google Trends", "categoria": "trending"},
+]
+
+# Contenido propio de Evaristo Tenorio (dueño del medio) — autorización
+# expresa para usar texto e imágenes tal cual, sin reescritura IA (a
+# diferencia de FEEDS arriba). Por eso corren por un camino aparte en
+# main(): ver obtener_entradas_vallarta.
+FUENTE_VALLARTA = "Minuto a Minuto Noticias"
+FEEDS_VALLARTA = [
+    {"url": "https://minutoaminutonoticiasvallartabahia.com/category/puerto-vallarta/feed/", "categoria": "puerto-vallarta"},
+    {"url": "https://minutoaminutonoticiasvallartabahia.com/category/bahia-de-banderas/feed/", "categoria": "bahia-banderas"},
+    {"url": "https://minutoaminutonoticiasvallartabahia.com/category/jalisco/feed/", "categoria": "jalisco"},
+    {"url": "https://minutoaminutonoticiasvallartabahia.com/category/nayarit/feed/", "categoria": "nayarit"},
 ]
 
 
@@ -129,6 +144,73 @@ def obtener_entradas_nuevas(historial: dict) -> list[dict]:
     return deduplicadas
 
 
+def obtener_cuerpo_y_og_image(url: str) -> tuple[str | None, str | None]:
+    """El RSS de Minuto a Minuto solo trae un extracto corto y sin imagen —
+    a diferencia de obtener_imagen_og (que solo saca la imagen), esto
+    también saca el cuerpo completo real de '.entry-content' con
+    BeautifulSoup (una sola etiqueta con regex ya no alcanza para un bloque
+    con HTML anidado). Nunca debe tronar el pipeline: cualquier falla deja
+    la nota sin ese dato, tal como el resto del pipeline."""
+    try:
+        resp = requests.get(url, headers={"User-Agent": USER_AGENT}, timeout=10)
+        resp.raise_for_status()
+        html = resp.text
+        soup = BeautifulSoup(html, "html.parser")
+        contenedor = soup.select_one(".entry-content")
+        cuerpo = (
+            limpiar_texto_vallarta(contenedor.get_text("\n\n", strip=True))
+            if contenedor else None
+        )
+        match = OG_IMAGE_RE.search(html[:200_000]) or OG_IMAGE_RE_ALT.search(html[:200_000])
+        imagen = match.group(1) if match else None
+        return cuerpo or None, imagen
+    except Exception:
+        return None, None
+
+
+def obtener_entradas_vallarta(historial: dict) -> list[dict]:
+    """Puerto Vallarta / Bahía de Banderas / Jalisco / Nayarit: contenido
+    propio de Evaristo, se usa tal cual (sin pasar por rewrite_entry_with_ai
+    como el resto de FEEDS) — build_nota() recibe la misma entrada dos
+    veces (como 'entrada' y como 'reescrita') porque para cuando llega ahí
+    ya trae titulo/resumen/cuerpo puestos aquí mismo."""
+    nuevas = []
+    for feed in FEEDS_VALLARTA:
+        try:
+            resp = requests.get(feed["url"], headers={"User-Agent": USER_AGENT}, timeout=15)
+            resp.raise_for_status()
+            parsed = feedparser.parse(resp.content)
+            if getattr(parsed, "bozo", False) and not parsed.entries:
+                print(f"[aviso] feed sin entradas o con error: {FUENTE_VALLARTA} ({feed['url']})")
+                continue
+            entradas = parse_entries_from_parsed(
+                parsed, FUENTE_VALLARTA, feed["categoria"], feed_url=feed["url"]
+            )
+            nuevas.extend(filter_new_entries(entradas, historial))
+        except Exception as exc:
+            print(f"[aviso] no se pudo leer feed {FUENTE_VALLARTA} ({feed['categoria']}): {exc}")
+            continue
+
+    vistos: set[str] = set()
+    completas = []
+    for entrada in nuevas:
+        if entrada["link"] in vistos:
+            continue
+        vistos.add(entrada["link"])
+
+        cuerpo, imagen = obtener_cuerpo_y_og_image(entrada["link"])
+        if not cuerpo:
+            print(f"[aviso] se descarta nota de Vallarta (sin cuerpo): {entrada['titulo']}")
+            continue
+
+        entrada["cuerpo"] = cuerpo
+        entrada["resumen"] = resumen_de_cuerpo(cuerpo)
+        entrada["imagen"] = imagen
+        completas.append(entrada)
+
+    return completas
+
+
 def main() -> None:
     load_dotenv()
     api_key = os.environ.get("OPENAI_API_KEY")
@@ -158,6 +240,20 @@ def main() -> None:
         # valor, y si aquí quedara la fecha de publicación, una nota ya
         # vieja al llegar se purgaría del historial en la misma corrida y
         # volvería a parecer "nueva" (y a re-pagarse a la IA) para siempre.
+        historial[entrada["link"]] = datetime.now(timezone.utc).isoformat()
+
+    entradas_vallarta = obtener_entradas_vallarta(historial)
+    print(f"Entradas nuevas de Vallarta encontradas: {len(entradas_vallarta)}")
+
+    for entrada in entradas_vallarta:
+        try:
+            # Sin reescritura IA: la propia entrada (ya trae
+            # titulo/resumen/cuerpo puestos en obtener_entradas_vallarta)
+            # hace las veces de "reescrita".
+            notas_nuevas.append(build_nota(entrada, entrada))
+        except ValueError as exc:
+            print(f"[aviso] se descarta nota de Vallarta (inválida): {entrada['titulo']} — {exc}")
+            continue
         historial[entrada["link"]] = datetime.now(timezone.utc).isoformat()
 
     todas = trim_news(notas_vigentes + notas_nuevas)

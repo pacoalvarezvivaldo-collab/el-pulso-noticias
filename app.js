@@ -1,5 +1,13 @@
-const CAT_LABEL = { nacional: 'Nacional', internacional: 'Internacional', trending: 'Trending' };
-const CAT_COLOR = { nacional: 'var(--cat-nacional)', internacional: 'var(--cat-internacional)', trending: 'var(--cat-trending)' };
+const CAT_LABEL = {
+  nacional: 'Nacional', internacional: 'Internacional', trending: 'Trending',
+  'puerto-vallarta': 'Puerto Vallarta', 'bahia-banderas': 'Bahía de Banderas',
+  jalisco: 'Jalisco', nayarit: 'Nayarit',
+};
+const CAT_COLOR = {
+  nacional: 'var(--cat-nacional)', internacional: 'var(--cat-internacional)', trending: 'var(--cat-trending)',
+  'puerto-vallarta': 'var(--cat-regional)', 'bahia-banderas': 'var(--cat-regional)',
+  jalisco: 'var(--cat-regional)', nayarit: 'var(--cat-regional)',
+};
 
 // Las notas vienen de RSS externo + reescritura por IA (fuente no confiable) —
 // escapar siempre antes de insertar en innerHTML para evitar XSS. div.innerHTML
@@ -431,6 +439,13 @@ async function init() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
     document.getElementById('hamburgerBtn').addEventListener('click', () => {
+      document.getElementById('mobileMenu').hidden = false;
+    });
+    // El nav inferior ya no tiene un botón por categoría (con Puerto
+    // Vallarta/Bahía de Banderas/Jalisco/Nayarit sumados no caben 9
+    // botones) — "Categorías" abre el mismo drawer del hamburguesa, que
+    // sí lista todas verticalmente sin problema de espacio.
+    document.getElementById('bottomCategoriasBtn').addEventListener('click', () => {
       document.getElementById('mobileMenu').hidden = false;
     });
     document.getElementById('closeMenuBtn').addEventListener('click', () => {

@@ -8,7 +8,14 @@ from datetime import datetime, timedelta, timezone
 from urllib.parse import quote
 
 CAMPOS_NOTA = {"id", "categoria", "titulo", "resumen", "cuerpo", "fuente", "link", "fecha"}
-CATEGORIAS_VALIDAS = {"nacional", "internacional", "trending"}
+CATEGORIAS_VALIDAS = {
+    "nacional", "internacional", "trending",
+    # Regionales: contenido propio de Evaristo Tenorio (Minuto a Minuto
+    # Noticias Vallarta Bahía) — autorización expresa del dueño para usar
+    # texto e imágenes tal cual, sin reescritura IA. Ver
+    # fetch_news.py::obtener_entradas_vallarta.
+    "puerto-vallarta", "bahia-banderas", "jalisco", "nayarit",
+}
 
 
 def id_de_link(link: str) -> str:
@@ -151,6 +158,27 @@ def trim_news(
         notas_categoria.sort(key=lambda n: n["fecha"], reverse=True)
         limitado.extend(notas_categoria[:max_por_categoria])
     return limitado
+
+
+def limpiar_texto_vallarta(texto: str) -> str:
+    """Minuto a Minuto Noticias marca énfasis con asteriscos/guiones bajos
+    en texto plano (*negrita*, _cursiva_) que nunca se convierten a HTML —
+    se quitan porque nuestro sitio no interpreta markdown, se verían
+    literales en la nota."""
+    return texto.replace("*", "").replace("_", "").strip()
+
+
+def resumen_de_cuerpo(cuerpo: str, max_len: int = 180) -> str:
+    """Recorta el cuerpo completo a un resumen corto para la tarjeta —
+    corta en el último espacio antes del límite para no partir una palabra
+    a la mitad."""
+    texto = " ".join(cuerpo.split())
+    if len(texto) <= max_len:
+        return texto
+    corte = texto.rfind(" ", 0, max_len)
+    if corte == -1:
+        corte = max_len
+    return texto[:corte].rstrip() + "…"
 
 
 def validate_nota(nota: dict) -> None:

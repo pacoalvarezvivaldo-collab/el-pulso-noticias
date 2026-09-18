@@ -7,7 +7,9 @@ from pipeline.noticias import (
     build_nota,
     filter_new_entries,
     id_de_link,
+    limpiar_texto_vallarta,
     parse_entries_from_parsed,
+    resumen_de_cuerpo,
     trim_historial,
     trim_news,
     validate_nota,
@@ -315,3 +317,45 @@ def test_build_nota_carga_imagenUrl_desde_la_entrada():
     nota = build_nota(entrada, reescrita)
 
     assert nota["imagenUrl"] == "https://x.com/foto.jpg"
+
+
+def test_build_nota_acepta_categoria_regional():
+    entrada = {
+        "link": "https://minutoaminutonoticiasvallartabahia.com/n1",
+        "titulo": "Nota de Vallarta",
+        "resumen": "Resumen corto",
+        "cuerpo": "Cuerpo completo",
+        "fuente": "Minuto a Minuto Noticias",
+        "categoria": "puerto-vallarta",
+        "fecha": "2026-09-16T15:00:00+00:00",
+        "imagen": None,
+    }
+
+    # Sin reescritura IA: la propia entrada hace las veces de "reescrita"
+    # (ya trae titulo/resumen/cuerpo puestos por el scraper).
+    nota = build_nota(entrada, entrada)
+
+    assert nota["categoria"] == "puerto-vallarta"
+    assert nota["cuerpo"] == "Cuerpo completo"
+
+
+def test_limpiar_texto_vallarta_quita_asteriscos_y_guiones_bajos():
+    texto = "*Puerto Vallarta hace algo*\n\n_El resumen va aquí_\n\nCuerpo normal sin marcado."
+
+    assert limpiar_texto_vallarta(texto) == (
+        "Puerto Vallarta hace algo\n\nEl resumen va aquí\n\nCuerpo normal sin marcado."
+    )
+
+
+def test_resumen_de_cuerpo_corta_en_espacio_y_agrega_puntos_suspensivos():
+    cuerpo = "Una palabra " * 40  # bastante más largo que 180 caracteres
+
+    resumen = resumen_de_cuerpo(cuerpo, max_len=30)
+
+    assert len(resumen) <= 31  # 30 + el "…"
+    assert resumen.endswith("…")
+    assert not resumen[:-1].endswith(" ")  # no corta a media palabra
+
+
+def test_resumen_de_cuerpo_no_toca_textos_cortos():
+    assert resumen_de_cuerpo("Texto corto.", max_len=180) == "Texto corto."
