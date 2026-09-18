@@ -53,6 +53,7 @@ export const eliminarBanner = mutation({
     if (!banner) {
       return null;
     }
+    await ctx.storage.delete(banner.imagenStorageId);
     await ctx.db.delete(args.id);
     return null;
   },

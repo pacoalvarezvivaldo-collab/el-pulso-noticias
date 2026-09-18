@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { mutation, query } from "./_generated/server";
+import { internalMutation, mutation, query } from "./_generated/server";
 import { verificarPassword } from "./auth";
 
 const categoriaValidator = v.union(
@@ -19,6 +19,10 @@ const MAX_POR_CATEGORIA = 20;
 // esto solo evita un .collect()/.take() sin límite si algún día se sube en
 // volumen. Muy por debajo del límite de ~16k lecturas de Convex.
 const TECHO_LECTURA = 1000;
+// Techo por corrida del cron de limpieza: si algún día hay más de 500 notas
+// vencidas en una sola corrida, el resto se limpia en la corrida del día
+// siguiente — no es crítico que sea instantáneo.
+const TECHO_LIMPIEZA_POR_CORRIDA = 500;
 
 const notaCreadaValidator = v.object({
   _id: v.id("notasManual"),
@@ -146,5 +150,37 @@ export const listarNotasPublicas = query({
           : null,
       })),
     );
+  },
+});
+
+// Housekeeping interno (invocado por el cron en convex/crons.ts). No exponer
+// como función pública: borra filas y archivos de storage sin pasar por
+// verificarPassword, así que solo debe llegar aquí desde el propio backend.
+//
+// listarNotasPublicas ya oculta las notas más viejas que DIAS_VIGENCIA, pero
+// nunca las borraba de la tabla ni liberaba su imagen en storage — se
+// quedaban ahí creciendo para siempre. Esto las borra de verdad, igual que
+// pipeline/noticias.py::trim_news hace con news.json.
+export const limpiarNotasVencidas = internalMutation({
+  args: {},
+  returns: v.null(),
+  handler: async (ctx) => {
+    const limite = new Date(
+      Date.now() - DIAS_VIGENCIA * 24 * 60 * 60 * 1000,
+    ).toISOString();
+
+    const vencidas = await ctx.db
+      .query("notasManual")
+      .withIndex("by_fecha", (q) => q.lt("fecha", limite))
+      .take(TECHO_LIMPIEZA_POR_CORRIDA);
+
+    for (const nota of vencidas) {
+      if (nota.imagenStorageId) {
+        await ctx.storage.delete(nota.imagenStorageId);
+      }
+      await ctx.db.delete(nota._id);
+    }
+
+    return null;
   },
 });
