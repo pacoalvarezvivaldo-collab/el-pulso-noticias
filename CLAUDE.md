@@ -170,6 +170,30 @@ destinos en el nav inferior).
   instalándose vía `requirements.txt` en GitHub Actions. Revisar que no
   truene ahí.
 
+### Gotcha de deploy: cola de Vercel Hobby atorada (18-sep-2026)
+
+Tras muchos pushes seguidos hoy, 3 deploys quedaron en `QUEUED` sin
+avanzar — **Hobby solo permite 1 build a la vez** (mensaje en el
+dashboard: "Another build is in progress... Pro teams can use On-Demand
+Concurrent Builds"). Se cancelaron los 2 más viejos (mismo contenido
+final que el más nuevo, solo diferían en commits de memoria) desde
+Deployments → esa fila → **Cancel**. El restante sí terminó ("Ready") pero
+**no se auto-promovió**: quedó en `Production · Staged` con "Assigning
+Custom Domains: Skipped" — el dominio real seguía sirviendo un commit
+viejo. Se promovió a mano: `...` (tres puntos) junto a "Visit" en el
+detalle del deployment → **Promote** → confirmar los dominios
+(`www.elpulsonoticias.com.mx` + el `.vercel.app`) → unos ~60-90s después
+ya sirve el commit correcto (pasa de "Staged" a "Current"). Si un push no
+se refleja en el sitio real y no hay nada en cola/building, revisar esto
+antes que nada — probable causa tras cancelar deploys intermedios.
+
+**Aparte**: pegarle al dominio real con `curl` repetido en poco tiempo
+dispara el "Vercel Security Checkpoint" (403, challenge JS que curl no
+puede pasar) — es protección anti-bot, no significa que el sitio esté
+roto. Un navegador real (Chrome normal, `claude-in-chrome`) no lo dispara.
+Si `curl` da 403 en `elpulsonoticias.com.mx`, confirmar con navegador real
+antes de asumir que algo se rompió.
+
 ## Decisiones de diseño ya tomadas
 
 - **Paleta de marca** (del logo): morado `#6a3fa0`, naranja `#f7941d`→`#e8531f`,
