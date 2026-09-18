@@ -76,30 +76,65 @@ function bannerHtml(b) {
 let bannerRotTimer = null;
 
 // Con varios banners activos se muestra uno a la vez (rotando), no todos
-// apilados uno tras otro — cada anunciante se ve igual de seguido.
+// apilados uno tras otro — cada anunciante se ve igual de seguido. En
+// móvil además se puede navegar a mano (flechas o swipe) sin perder la
+// rotación automática: cada navegación manual solo reinicia el conteo de
+// 8s, no la desactiva.
 function renderBanners(banners) {
   const sidebar = document.getElementById('sidebar');
+  const mobileBanner = document.getElementById('mobileBanner');
+  const mobileSlide = document.getElementById('mobileBannerSlide');
+  const prevBtn = document.getElementById('mobileBannerPrev');
+  const nextBtn = document.getElementById('mobileBannerNext');
+
   if (bannerRotTimer) { clearInterval(bannerRotTimer); bannerRotTimer = null; }
+
   if (!banners.length) {
     sidebar.hidden = true;
-    document.getElementById('mobileBanner').innerHTML = '';
+    mobileBanner.hidden = true;
+    document.body.classList.remove('has-mobile-banner');
+    mobileSlide.innerHTML = '';
     return;
   }
+
   sidebar.hidden = false;
+  mobileBanner.hidden = false;
+  document.body.classList.add('has-mobile-banner');
+  prevBtn.hidden = banners.length < 2;
+  nextBtn.hidden = banners.length < 2;
 
   let i = 0;
   const mostrar = () => {
     const html = bannerHtml(banners[i]);
     document.getElementById('sidebarBanners').innerHTML = html;
-    document.getElementById('mobileBanner').innerHTML = html;
+    mobileSlide.innerHTML = html;
   };
+  const reiniciarTimer = () => {
+    if (bannerRotTimer) clearInterval(bannerRotTimer);
+    if (banners.length > 1) {
+      bannerRotTimer = setInterval(() => avanzar(1), 8000);
+    }
+  };
+  const avanzar = (delta) => {
+    i = (i + delta + banners.length) % banners.length;
+    mostrar();
+    reiniciarTimer();
+  };
+
   mostrar();
-  if (banners.length > 1) {
-    bannerRotTimer = setInterval(() => {
-      i = (i + 1) % banners.length;
-      mostrar();
-    }, 8000);
-  }
+  reiniciarTimer();
+
+  prevBtn.onclick = () => avanzar(-1);
+  nextBtn.onclick = () => avanzar(1);
+
+  let touchStartX = null;
+  mobileBanner.ontouchstart = (e) => { touchStartX = e.touches[0].clientX; };
+  mobileBanner.ontouchend = (e) => {
+    if (touchStartX === null || banners.length < 2) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 40) avanzar(dx < 0 ? 1 : -1);
+    touchStartX = null;
+  };
 }
 
 // Zona horaria fija de Puerto Vallarta, sin importar dónde esté el visitante
@@ -357,10 +392,11 @@ async function init() {
       searchBox.classList.toggle('open');
       if (searchBox.classList.contains('open')) searchInput.focus();
     });
-    document.getElementById('bottomSearchBtn').addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      abrirBusqueda();
-    });
+    // Antes forzaba scroll al top del sitio al abrir la búsqueda desde el
+    // nav inferior — molesto si venías leyendo algo más abajo. El header
+    // (y el cuadro de búsqueda que cuelga de él) ya es sticky y siempre
+    // está visible en pantalla, así que no hace falta mover el scroll.
+    document.getElementById('bottomSearchBtn').addEventListener('click', abrirBusqueda);
     document.getElementById('searchBtn').addEventListener('click', () => buscar(searchInput.value));
     searchInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') buscar(searchInput.value);

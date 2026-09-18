@@ -314,6 +314,7 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
 }
 
 .mobile-banner { display: none; }
+.mobile-banner[hidden] { display: none; }
 .mobile-banner .banner-img { border-radius: 0; }
 
 .hero {
@@ -551,10 +552,39 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
 
   .page-layout { grid-template-columns: 1fr; gap: 0; }
   .sidebar { display: none; }
-  .mobile-banner { display: block; margin: 18px 16px 0; }
+
+  /* Banner ancla: pegado justo arriba del nav inferior, siempre fijo en
+     pantalla (no se va con el scroll) para que sea notorio. */
+  .mobile-banner {
+    display: flex;
+    align-items: stretch;
+    height: 64px;
+    position: fixed;
+    left: 0; right: 0;
+    bottom: 56px;
+    z-index: 39;
+    background: var(--bg-dark-2);
+    border-top: 1px solid rgba(255,255,255,.08);
+  }
+  .mobile-banner[hidden] { display: none; }
+  .banner-slide { flex: 1; min-width: 0; height: 100%; }
+  .banner-slide .banner-link, .banner-slide .banner-img { height: 100%; }
+  .mobile-banner .banner-img { width: 100%; object-fit: cover; border: 0; }
+  .banner-arrow {
+    flex: none;
+    width: 30px;
+    border: 0;
+    background: rgba(0,0,0,.35);
+    color: #fff;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .banner-arrow[hidden] { display: none; }
 
   .bottom-nav { display: flex; }
   body { padding-bottom: 56px; }
+  body.has-mobile-banner { padding-bottom: 120px; }
 }
 
 @media (min-width: 761px) {
