@@ -37,7 +37,7 @@ async function cargarNotasManual() {
     const res = await fetch(CONVEX_HTTP_URL + '/api/notas');
     if (!res.ok) return [];
     const data = await res.json();
-    return data.notas ?? [];
+    return Array.isArray(data) ? data : [];
   } catch {
     return [];
   }
@@ -119,9 +119,15 @@ function mezclarPorCategoria(notas) {
 
 function render() {
   const filtradas = activeCat === 'todas' ? NOTAS : NOTAS.filter(n => n.categoria === activeCat);
-  const ordenadas = activeCat === 'todas'
-    ? mezclarPorCategoria(filtradas)
-    : [...filtradas].sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+
+  // Lo que Evaristo sube desde el panel va siempre primero, sin importar
+  // la fecha — el resto (pipeline RSS+IA) se ordena/mezcla como antes.
+  const manuales = filtradas.filter(n => n.esManual).sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+  const automaticas = filtradas.filter(n => !n.esManual);
+  const restoOrdenado = activeCat === 'todas'
+    ? mezclarPorCategoria(automaticas)
+    : [...automaticas].sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+  const ordenadas = [...manuales, ...restoOrdenado];
 
   const destacada = ordenadas.find(n => n.destacada) || ordenadas[0];
   const resto = ordenadas.filter(n => n !== destacada);
@@ -175,7 +181,9 @@ function renderGrid(notas) {
 }
 
 function renderTicker() {
-  const ordenadas = [...NOTAS].sort((a, b) => new Date(b.fecha) - new Date(a.fecha)).slice(0, 15);
+  const manuales = NOTAS.filter(n => n.esManual).sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+  const automaticas = NOTAS.filter(n => !n.esManual).sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+  const ordenadas = [...manuales, ...automaticas].slice(0, 15);
   const items = ordenadas.map(n => `
     <a href="#" class="ticker-item" data-id="${esc(n.id)}">
       <span class="t-time">${fmtHora(n.fecha)}</span>${esc(n.titulo)}<span style="opacity:.5">/</span>
@@ -257,7 +265,7 @@ async function init() {
     const data = await res.json();
     const notasPipeline = data.notas ?? [];
     const [notasManual, banners] = await Promise.all([cargarNotasManual(), cargarBanners()]);
-    NOTAS = [...notasPipeline, ...notasManual];
+    NOTAS = [...notasPipeline, ...notasManual.map(n => ({ ...n, esManual: true }))];
     renderBanners(banners);
     document.getElementById('feedUpdated').textContent = data.generado
       ? 'ACTUALIZADO ' + fmtHora(data.generado)
