@@ -198,12 +198,19 @@ http.route({
     if (body.linkUrl !== undefined && typeof body.linkUrl !== "string") {
       return jsonResponse({ error: "linkUrl debe ser texto" }, 400);
     }
+    if (
+      body.diasVigencia !== undefined &&
+      typeof body.diasVigencia !== "number"
+    ) {
+      return jsonResponse({ error: "diasVigencia debe ser numérico" }, 400);
+    }
 
     try {
       const banner = await ctx.runMutation(api.banners.crearBanner, {
         password: body.password,
         imagenStorageId: body.imagenStorageId as Id<"_storage">,
         linkUrl: body.linkUrl as string | undefined,
+        diasVigencia: body.diasVigencia as number | undefined,
       });
       return jsonResponse(banner, 201);
     } catch (err) {

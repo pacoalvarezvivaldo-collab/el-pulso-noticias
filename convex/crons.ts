@@ -13,4 +13,15 @@ crons.interval(
   {},
 );
 
+// Borra banners publicitarios vencidos (expiraEn pasado, campo opcional) y
+// su imagen en storage. listarBanners solo los oculta del sitio; sin este
+// cron los banners con vigencia vencida se quedarían en la tabla y en
+// storage para siempre. Los banners sin expiraEn (permanentes) no los toca.
+crons.interval(
+  "limpiar banners vencidos",
+  { hours: 24 },
+  internal.banners.limpiarBannersVencidos,
+  {},
+);
+
 export default crons;
