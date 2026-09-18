@@ -161,14 +161,37 @@ destinos en el nav inferior).
   `news.json` (nunca tocó el real ni gastó API de OpenAI): filtro por
   categoría, badge teal, nav de escritorio y drawer móvil, todos
   funcionando antes de pushear.
-- **Pendiente de ver en producción**: el scraper se probó standalone
-  contra el sitio real (funciona, trajo 40 notas de las 4 categorías en
-  una corrida), pero el pipeline completo (`fetch_news.py::main`) con esta
-  fuente integrada todavía no ha corrido en el cron real — la primera
-  corrida después del push (18-sep-2026 ~21:19 UTC, próxima 00:00 UTC) es
-  la primera vez que se prueba de punta a punta con `beautifulsoup4`
-  instalándose vía `requirements.txt` en GitHub Actions. Revisar que no
-  truene ahí.
+- **RESUELTO (18-sep-2026): corrida manual en producción exitosa** — no
+  hizo falta esperar al cron, se corrió `fetch_news.py` a mano dos veces
+  (con `--prod` implícito, es el mismo script) y `beautifulsoup4` se
+  instaló sin problema vía `requirements.txt`. Confirmado en el sitio real
+  con las 4 pestañas mostrando notas reales, imagen y texto exactos.
+- **Notas en 2 categorías a la vez (18-sep-2026, pedido explícito del
+  cliente)**: al principio Jalisco/Nayarit se veían casi vacíos (1 y 2
+  notas) aunque sus feeds sí traen 10 items cada uno — la primera versión
+  de `obtener_entradas_vallarta` hacía dedup por link ACROSS las 4 feeds
+  (se quedaba con la primera categoría vista, descartaba el resto como
+  "duplicado"). El cliente prefiere que si un artículo aparece en más de
+  un feed, se muestre en las dos pestañas correspondientes (igual que en
+  su sitio) — reescrito: primero se agrupan las categorías por link (una
+  sola pasada a las 4 feeds, sin descartar nada), el cuerpo/imagen se
+  descargan una sola vez por artículo (no una vez por categoría), y se
+  genera una copia de la nota por cada categoría con `categoriasTodas`
+  (lista completa) para que el frontend junte el badge
+  ("Puerto Vallarta · Jalisco" en vez de mostrar solo una y esconder que
+  también aplica a la otra) — ver `catLabel()` en `app.js`. Tras el fix
+  la distribución quedó más pareja (10/10/6/10) aunque en la corrida real
+  no apareció ningún caso de doble-categoría genuino todavía (verificado
+  con nota de prueba inyectada localmente, no con datos reales — el
+  badge doble sigue sin verse en vivo hasta que su sitio cross-etiquete
+  algo de nuevo).
+- **Retención especial regional**: 2 meses (no 4 días) y tope de 25 por
+  categoría (no 28) — es contenido propio, no de terceros reescrito por
+  IA, el cliente lo quiere conservar más tiempo. `trim_news()` acepta
+  `dias_regional`/`max_por_categoria_regional`, aplica según
+  `CATEGORIAS_REGIONALES` (noticias.py).
+- **Ticker "AL MOMENTO" a la mitad de velocidad** (18-sep-2026, pedido
+  del cliente): `ticker-scroll` 32s → 64s por vuelta (style.css).
 
 ### Gotcha de deploy: cola de Vercel Hobby atorada (18-sep-2026)
 
