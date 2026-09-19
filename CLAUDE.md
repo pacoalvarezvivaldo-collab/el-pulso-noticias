@@ -240,30 +240,40 @@ destinos en el nav inferior).
   en vivo en producción.
 - **Bug real (18-sep-2026): botón "✕" de la nota aparecía y desaparecía
   al bajar y subir en el celular** — reportado con capturas reales
-  (Brave/Android) en 3 iteraciones seguidas hasta quedar resuelto:
+  (Brave/Android) en varias iteraciones hasta quedar resuelto de raíz:
   1. Original: `position:absolute` dentro de `.modal` — en nota larga
      scrolleaba con el texto y se salía de pantalla.
-  2. Intento 1: `position:fixed` (atado al viewport del navegador) — en
-     nota larga aparecía/desaparecía de forma intermitente al bajar y
-     subir. Causa: Chrome/Brave en Android esconde y muestra la barra de
-     direcciones al hacer scroll, cambiando el viewport que `fixed` usa
-     para posicionarse — bug conocido de `fixed` + barra dinámica de
+  2. Intento 1: `position:fixed` (atado al viewport del navegador) —
+     aparecía/desaparecía de forma intermitente al bajar y subir. Causa:
+     Chrome/Brave en Android esconde y muestra la barra de direcciones
+     al hacer scroll, cambiando el viewport que `fixed` usa para
+     posicionarse — bug conocido de `fixed` + barra dinámica de
      navegador móvil, no exclusivo de este sitio.
-  3. Intento 2: `position:sticky` (anclado a `.modal-overlay`, el
-     contenedor de scroll de la nota, no al navegador) + `float:right` +
-     `margin-bottom` negativo (su propio alto) para no empujar el resto
-     del contenido — mejoró pero seguía fallando de forma intermitente
-     en ciertos puntos de scroll. Causa: `sticky` combinado con `float`
-     tiene bugs de repintado conocidos entre motores de navegador (no es
-     un patrón 100% confiable pese a ser común en tutoriales).
-  4. **Fix final**: `position:sticky` sin `float` — `display:block` +
-     `margin-left:auto` lo alinea a la derecha dentro de `.modal` sin
-     necesitar float. Ocupa su propia fila arriba de la categoría en vez
-     de sobreponerse (pequeño cambio visual, aceptado a cambio de que ya
-     no dependa de un patrón con bugs conocidos). Probado en local
-     inyectando las mismas reglas sin el `@media` (bypassa el límite de
-     la herramienta con viewports móviles) en varios puntos de scroll
-     (arriba, medio, casi al fondo, subiendo y bajando) sin fallos.
+  3. Intento 2: `position:sticky` + `float:right` + `margin-bottom`
+     negativo — mejoró pero seguía fallando en ciertos puntos de scroll
+     (bugs de repintado conocidos al combinar sticky con float).
+  4. Intento 3: `position:sticky` sin float (`display:block` +
+     `margin-left:auto`) — mejor, pero seguía desapareciendo al llegar
+     al final del contenido (cerca de "Compartir"). Causa: es el
+     comportamiento NORMAL de `sticky` — deja de pegarse cuando se acaba
+     el espacio de su propio contenedor, pero de este lado se siente
+     como que "el botón desaparece".
+  5. **Fix final (raíz del problema, no otro parche de positioning)**:
+     el botón ya no vive DENTRO del área que scrollea. Nuevo contenedor
+     `.modal-scroll` (envuelve cat/título/meta/imagen/cuerpo/compartir,
+     agregado en `index.html`) es el único que scrollea
+     (`overflow-y:auto`); `.modal` es `flex-column` con altura acotada a
+     `100dvh` (se ajusta sola si el navegador esconde su barra) y el
+     botón es una cabecera fija fuera del scroll (`flex-shrink:0`, ni
+     fixed ni sticky, `position:static` normal). El botón no tiene que
+     "seguir" nada porque nunca se mueve — elimina la clase entera de
+     bugs de fixed/sticky en vez de buscar la variante que no falle.
+     Verificado en local (inyectando las mismas reglas sin el `@media`,
+     bypassa el límite de la herramienta con viewports móviles): scroll
+     completo de arriba a abajo sin que el botón se mueva ni desaparezca
+     en ningún punto, y que el modal de "Quiénes somos" (misma clase
+     `.modal`, contenido corto, sin `.modal-scroll`) no se rompe con el
+     flex-column nuevo.
 
 ### Gotcha de deploy: cola de Vercel Hobby atorada (18-sep-2026)
 
