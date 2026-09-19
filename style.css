@@ -668,7 +668,13 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
      mismos tamaños de escritorio — imagen y texto se sentían "de golpe
      muy grandes" en pantalla de celular. Se achican y se acota el padding
      para que se vea proporcionado al ancho real del teléfono. */
-  .modal-overlay { padding: 16px 12px; }
+  /* align-items:center (regla de escritorio) + overflow-y:auto en nota
+     larga hace que el navegador arranque el scroll a la mitad del modal
+     (lo centra aunque no quepa) — cabecera/título/botón cerrar quedan
+     arriba, fuera de vista, sin forma de hacer scroll hacia arriba para
+     alcanzarlos (no hay scroll negativo). Alineado arriba: el modal
+     siempre arranca visible desde su inicio. */
+  .modal-overlay { padding: 16px 12px; align-items: flex-start; }
   .modal { padding: 20px; }
   .modal-title { font-size: 21px; }
   .modal-image { max-height: 200px; }
