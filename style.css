@@ -643,6 +643,17 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
   .modal-title { font-size: 21px; }
   .modal-image { max-height: 200px; }
   .modal-body { font-size: 15px; line-height: 1.6; }
+  /* En nota larga el botón "✕" (position:absolute dentro de .modal)
+     scrolleaba junto con el texto y se iba fuera de pantalla — sin forma
+     fácil de regresar sin scrollear todo el camino de vuelta arriba.
+     Fijo a la pantalla: siempre alcanzable sin importar qué tanto se
+     haya scrolleado la nota. */
+  .modal-close {
+    position: fixed;
+    top: 12px; right: 12px;
+    z-index: 90;
+    box-shadow: 0 4px 14px rgba(0,0,0,.35);
+  }
 
   main { padding: 0; }
   .feed-head { padding: 0 16px; }
