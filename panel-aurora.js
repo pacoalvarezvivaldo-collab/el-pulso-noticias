@@ -1,12 +1,18 @@
 // Fondo animado del panel (efecto "aurora" en WebGL) — puerto a JS plano
 // del componente React original (ogl + shader), porque el panel no tiene
-// build step ni React. ogl se carga como ES module directo desde CDN, no
-// hay que instalar nada. Colores: los 4 de la marca (morado/azul/rojo/
-// el naranja específico que pidió el cliente, #e6660d en vez del genérico
+// build step ni React. Colores: los 4 de la marca (morado/azul/rojo/el
+// naranja específico que pidió el cliente, #e6660d en vez del genérico
 // del sitio). Sin modo claro (el panel siempre es oscuro) ni props
 // reactivas (config fija, no cambia en caliente) — se quitó del original
 // por no aplicar aquí.
-import { Renderer, Program, Mesh, Color, Triangle } from 'https://cdn.jsdelivr.net/npm/ogl@1.0.11/src/index.js';
+//
+// ogl vive vendorizado en vendor/ogl/ (solo los 5 módulos que se usan
+// aquí, no toda la librería) en vez de importarlo de un CDN en caliente:
+// bajar código de terceros en cada visita al panel es riesgo de
+// supply-chain (si jsdelivr o el paquete cambian después, se ejecutaría
+// lo que sea sin que nadie lo revise). Actualizar la versión = repetir a
+// mano la descarga (ver git log de este archivo para el script usado).
+import { Renderer, Program, Mesh, Color, Triangle } from './vendor/ogl/index.js';
 
 const VERT = `#version 300 es
 in vec2 position;
