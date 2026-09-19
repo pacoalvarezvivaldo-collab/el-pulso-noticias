@@ -239,23 +239,31 @@ destinos en el nav inferior).
   regla nueva vive dentro del media query) y que el CSS está confirmado
   en vivo en producción.
 - **Bug real (18-sep-2026): botón "✕" de la nota aparecía y desaparecía
-  al bajar y subir en el celular** — reportado con 4 capturas reales
-  (Brave/Android) mostrando el botón visible en un momento y ausente
-  poco después con el mismo scroll. Causa: `position:fixed` (el fix
-  anterior para que no se fuera de pantalla) se posiciona relativo al
-  viewport del navegador, pero Chrome/Brave en Android esconde y
-  muestra la barra de direcciones al hacer scroll, cambiando ese
-  viewport en cada transición — bug conocido de `fixed` + barra
-  dinámica de navegador móvil, no es exclusivo de este sitio. Cambiado a
-  `position:sticky` (anclado a `.modal-overlay`, el contenedor de scroll
-  de la nota, no al navegador) con `float:right` + `margin-bottom:
-  -34px` (su propio alto) para que no empuje el resto del contenido
-  hacia abajo — patrón estándar para "botón fijo en la esquina de un
-  contenido que scrollea". Sí se pudo verificar el layout (cat/título no
-  se rompen junto al botón) y el scroll (el botón se queda quieto)
-  inyectando las mismas reglas sin el `@media` en una copia local — el
-  límite de la herramienta es solo con la barra dinámica del navegador
-  móvil en sí (eso no se puede simular localmente), no con el layout.
+  al bajar y subir en el celular** — reportado con capturas reales
+  (Brave/Android) en 3 iteraciones seguidas hasta quedar resuelto:
+  1. Original: `position:absolute` dentro de `.modal` — en nota larga
+     scrolleaba con el texto y se salía de pantalla.
+  2. Intento 1: `position:fixed` (atado al viewport del navegador) — en
+     nota larga aparecía/desaparecía de forma intermitente al bajar y
+     subir. Causa: Chrome/Brave en Android esconde y muestra la barra de
+     direcciones al hacer scroll, cambiando el viewport que `fixed` usa
+     para posicionarse — bug conocido de `fixed` + barra dinámica de
+     navegador móvil, no exclusivo de este sitio.
+  3. Intento 2: `position:sticky` (anclado a `.modal-overlay`, el
+     contenedor de scroll de la nota, no al navegador) + `float:right` +
+     `margin-bottom` negativo (su propio alto) para no empujar el resto
+     del contenido — mejoró pero seguía fallando de forma intermitente
+     en ciertos puntos de scroll. Causa: `sticky` combinado con `float`
+     tiene bugs de repintado conocidos entre motores de navegador (no es
+     un patrón 100% confiable pese a ser común en tutoriales).
+  4. **Fix final**: `position:sticky` sin `float` — `display:block` +
+     `margin-left:auto` lo alinea a la derecha dentro de `.modal` sin
+     necesitar float. Ocupa su propia fila arriba de la categoría en vez
+     de sobreponerse (pequeño cambio visual, aceptado a cambio de que ya
+     no dependa de un patrón con bugs conocidos). Probado en local
+     inyectando las mismas reglas sin el `@media` (bypassa el límite de
+     la herramienta con viewports móviles) en varios puntos de scroll
+     (arriba, medio, casi al fondo, subiendo y bajando) sin fallos.
 
 ### Gotcha de deploy: cola de Vercel Hobby atorada (18-sep-2026)
 
