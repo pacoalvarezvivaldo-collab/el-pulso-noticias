@@ -231,13 +231,31 @@ destinos en el nav inferior).
   inalcanzable porque no existe scroll negativo desde ese punto de
   partida. Fix: en móvil, `.modal-overlay{align-items:flex-start}` — el
   modal arranca alineado arriba, el scroll normal desde 0 sí llega a
-  todo. No se pudo confirmar visualmente en local (mismo límite de
-  emulación móvil de la herramienta, ver nota de `visualViewport` más
-  abajo — `resize_window` cambia el tamaño de la ventana de Chrome pero
-  `window.innerWidth` se queda en la resolución real del monitor, no
-  dispara el media query de 760px), solo verificado que no rompe el
-  centrado de escritorio (la regla nueva vive dentro del media query) y
-  que el CSS está confirmado en vivo en producción.
+  todo. No se pudo confirmar visualmente en local con captura real
+  (mismo límite de emulación móvil de la herramienta — `resize_window`
+  cambia el tamaño de la ventana de Chrome pero `window.innerWidth` se
+  queda en la resolución real del monitor, no dispara el media query de
+  760px), solo verificado que no rompe el centrado de escritorio (la
+  regla nueva vive dentro del media query) y que el CSS está confirmado
+  en vivo en producción.
+- **Bug real (18-sep-2026): botón "✕" de la nota aparecía y desaparecía
+  al bajar y subir en el celular** — reportado con 4 capturas reales
+  (Brave/Android) mostrando el botón visible en un momento y ausente
+  poco después con el mismo scroll. Causa: `position:fixed` (el fix
+  anterior para que no se fuera de pantalla) se posiciona relativo al
+  viewport del navegador, pero Chrome/Brave en Android esconde y
+  muestra la barra de direcciones al hacer scroll, cambiando ese
+  viewport en cada transición — bug conocido de `fixed` + barra
+  dinámica de navegador móvil, no es exclusivo de este sitio. Cambiado a
+  `position:sticky` (anclado a `.modal-overlay`, el contenedor de scroll
+  de la nota, no al navegador) con `float:right` + `margin-bottom:
+  -34px` (su propio alto) para que no empuje el resto del contenido
+  hacia abajo — patrón estándar para "botón fijo en la esquina de un
+  contenido que scrollea". Sí se pudo verificar el layout (cat/título no
+  se rompen junto al botón) y el scroll (el botón se queda quieto)
+  inyectando las mismas reglas sin el `@media` en una copia local — el
+  límite de la herramienta es solo con la barra dinámica del navegador
+  móvil en sí (eso no se puede simular localmente), no con el layout.
 
 ### Gotcha de deploy: cola de Vercel Hobby atorada (18-sep-2026)
 
