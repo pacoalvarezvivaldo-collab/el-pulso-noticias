@@ -512,6 +512,11 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
   padding: 9px 0;
   cursor: pointer;
   flex: 1;
+  /* Sin esto, "Categorías" (la etiqueta más larga) no se encoge a su
+     parte justa del ancho (default de flexbox: min-width:auto, un item
+     nunca se achica más que su contenido) — empujaba "Buscar" fuera de
+     la pantalla a la derecha en celulares angostos. */
+  min-width: 0;
 }
 .bottom-item.active { color: var(--red); }
 .bn-icon { font-size: 18px; }
