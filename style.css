@@ -682,11 +682,20 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
   /* En nota larga el botón "✕" (position:absolute dentro de .modal)
      scrolleaba junto con el texto y se iba fuera de pantalla — sin forma
      fácil de regresar sin scrollear todo el camino de vuelta arriba.
-     Fijo a la pantalla: siempre alcanzable sin importar qué tanto se
-     haya scrolleado la nota. */
+     Se probó position:fixed (atado al viewport del navegador) pero en
+     móvil aparecía/desaparecía de forma intermitente al bajar y subir:
+     Chrome/Brave en Android esconde y muestra la barra de direcciones
+     con el scroll, cambiando el viewport que usa fixed para calcular su
+     posición — bug conocido de position:fixed + barra dinámica de
+     navegador móvil. sticky no tiene ese problema: se ancla al propio
+     contenedor de scroll de la nota (.modal-overlay), no al navegador.
+     float:right + margin-bottom negativo (su propio alto) para que no
+     empuje el resto del contenido hacia abajo. */
   .modal-close {
-    position: fixed;
-    top: 12px; right: 12px;
+    position: sticky;
+    top: 12px; right: 12px; left: auto;
+    float: right;
+    margin-bottom: -34px;
     z-index: 90;
     box-shadow: 0 4px 14px rgba(0,0,0,.35);
   }
