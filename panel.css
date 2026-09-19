@@ -1,6 +1,24 @@
 .panel-body {
   min-height: 100vh;
   padding-bottom: 40px;
+  background: var(--bg-dark-2);
+}
+
+/* Fondo animado (panel-aurora.js) — capa fija detrás de todo el
+   contenido. El color plano es el respaldo mientras carga el WebGL (o si
+   el navegador no soporta WebGL2 y el script nunca llega a pintar nada). */
+.aurora-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: var(--bg-dark-2);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.panel-header, .panel-main {
+  position: relative;
+  z-index: 1;
 }
 
 .panel-header {
