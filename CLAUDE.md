@@ -192,6 +192,33 @@ destinos en el nav inferior).
   `CATEGORIAS_REGIONALES` (noticias.py).
 - **Ticker "AL MOMENTO" a la mitad de velocidad** (18-sep-2026, pedido
   del cliente): `ticker-scroll` 32s → 64s por vuelta (style.css).
+- **Modal de nota en móvil (18-sep-2026)**: el botón "✕" vivía dentro de
+  `.modal` (`position:absolute`) — en nota larga scrolleaba junto con el
+  texto y se salía de pantalla. Ahora `position:fixed`, siempre
+  alcanzable. También `body.modal-open{overflow:hidden}` al abrir
+  cualquier modal (nota o "Quiénes somos") — antes el fondo scrolleaba
+  detrás del modal (que ya scrollea solo), se veían dos barras de scroll
+  a la vez.
+- **Drawer de categorías en móvil (18-sep-2026)**: antes abría/cerraba
+  con el atributo `hidden` (display:none de golpe, "se sentía
+  desfasado") — ahora clase `.open` con `transform:translateX` +
+  transición (desliza desde la izquierda), `visibility` retrasada con la
+  misma transición para no desaparecer a la mitad del deslizado. Cada
+  categoría con ícono (mismos del nav inferior + 📍 regionales). Lista
+  con su propio `overflow-y:auto` (`.mobile-menu-items`), separada del
+  header/redes — con 8 categorías, antes el botón de cerrar se podía
+  quedar fuera de vista si la lista no cabía completa en pantallas
+  chicas. `setActiveCat()` ahora hace scroll-to-top al cambiar de
+  categoría (antes se quedaba en el scroll previo, se sentía como salto
+  raro al aterrizar en contenido de otro alto).
+- **Bug real (18-sep-2026): nav inferior desalineado en móvil** —
+  reportado con captura real de celular (Inicio/Categorías/Buscar
+  corridos a la derecha, "Buscar" cortado en el borde). Causa:
+  `.bottom-item{flex:1}` sin `min-width:0` — default de flexbox es
+  `min-width:auto`, un item nunca se encoge más que su propio contenido;
+  "Categorías" (la etiqueta más larga de las 3, antes había 5 más
+  cortas) no se achicaba a su parte justa, empujando "Buscar" fuera de
+  la pantalla. Fix: `min-width:0` en `.bottom-item`.
 
 ### Gotcha de deploy: cola de Vercel Hobby atorada (18-sep-2026)
 
