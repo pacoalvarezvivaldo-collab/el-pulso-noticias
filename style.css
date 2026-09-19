@@ -687,15 +687,21 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
      Chrome/Brave en Android esconde y muestra la barra de direcciones
      con el scroll, cambiando el viewport que usa fixed para calcular su
      posición — bug conocido de position:fixed + barra dinámica de
-     navegador móvil. sticky no tiene ese problema: se ancla al propio
-     contenedor de scroll de la nota (.modal-overlay), no al navegador.
-     float:right + margin-bottom negativo (su propio alto) para que no
-     empuje el resto del contenido hacia abajo. */
+     navegador móvil. Luego se probó sticky+float:right (para no
+     empujar el resto del contenido) pero float y sticky combinados
+     tienen bugs de repintado conocidos entre motores — el botón seguía
+     desapareciendo de forma intermitente, se arreglaba solo al
+     scrollear más (forzaba un recálculo). Quitado el float: ahora
+     display:block + margin-left:auto lo alinea a la derecha dentro de
+     .modal sin necesitar float, sticky puro sin combinar con nada raro.
+     Ocupa su propia fila arriba de la categoría en vez de sobreponerse,
+     pero ya no depende de un truco con bugs de compatibilidad. */
   .modal-close {
     position: sticky;
-    top: 12px; right: 12px; left: auto;
-    float: right;
-    margin-bottom: -34px;
+    display: block;
+    top: 12px; right: auto; left: auto;
+    margin-left: auto;
+    margin-bottom: 8px;
     z-index: 90;
     box-shadow: 0 4px 14px rgba(0,0,0,.35);
   }
