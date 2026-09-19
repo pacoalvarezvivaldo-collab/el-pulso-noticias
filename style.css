@@ -668,43 +668,47 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
      mismos tamaños de escritorio — imagen y texto se sentían "de golpe
      muy grandes" en pantalla de celular. Se achican y se acota el padding
      para que se vea proporcionado al ancho real del teléfono. */
-  /* align-items:center (regla de escritorio) + overflow-y:auto en nota
-     larga hace que el navegador arranque el scroll a la mitad del modal
-     (lo centra aunque no quepa) — cabecera/título/botón cerrar quedan
-     arriba, fuera de vista, sin forma de hacer scroll hacia arriba para
-     alcanzarlos (no hay scroll negativo). Alineado arriba: el modal
-     siempre arranca visible desde su inicio. */
-  .modal-overlay { padding: 16px 12px; align-items: flex-start; }
-  .modal { padding: 20px; }
+  /* Botón "✕" de la nota en móvil: 3 intentos fallidos antes de esto —
+     1) position:absolute (scrolleaba con el texto, se salía de
+     pantalla); 2) position:fixed (Chrome/Brave en Android esconde y
+     muestra la barra de direcciones al scrollear, cambia el viewport
+     que usa fixed, el botón aparecía/desaparecía sin patrón fijo); 3)
+     position:sticky con y sin float (bugs de repintado del propio
+     sticky en motores móviles, o simplemente dejaba de pegarse al
+     acercarse al final del contenido — comportamiento normal de sticky
+     cuando se acaba su contenedor, pero se sentía como bug). Ráiz del
+     problema: tratar de mantener el botón visible DENTRO de un área que
+     scrollea, con cualquier variante de fixed/sticky, es frágil en
+     móvil. Solución real: el botón ya NO vive dentro del área que
+     scrollea. `.modal` es flex-column con altura acotada a la pantalla
+     (`100dvh`, se ajusta sola si el navegador esconde su barra); el
+     botón es su cabecera fija (flex-shrink:0, fuera del scroll) y todo
+     el contenido de la nota vive en `.modal-scroll`
+     (flex:1; overflow-y:auto) — el único que se mueve. El botón no
+     necesita "seguir" nada: simplemente nunca se mueve. */
+  .modal-overlay { padding: 16px 12px; }
+  .modal {
+    padding: 20px;
+    max-height: calc(100vh - 32px);
+    max-height: calc(100dvh - 32px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+  .modal-close {
+    position: static;
+    align-self: flex-end;
+    flex-shrink: 0;
+    margin-bottom: 8px;
+  }
+  .modal-scroll {
+    overflow-y: auto;
+    min-height: 0;
+    -webkit-overflow-scrolling: touch;
+  }
   .modal-title { font-size: 21px; }
   .modal-image { max-height: 200px; }
   .modal-body { font-size: 15px; line-height: 1.6; }
-  /* En nota larga el botón "✕" (position:absolute dentro de .modal)
-     scrolleaba junto con el texto y se iba fuera de pantalla — sin forma
-     fácil de regresar sin scrollear todo el camino de vuelta arriba.
-     Se probó position:fixed (atado al viewport del navegador) pero en
-     móvil aparecía/desaparecía de forma intermitente al bajar y subir:
-     Chrome/Brave en Android esconde y muestra la barra de direcciones
-     con el scroll, cambiando el viewport que usa fixed para calcular su
-     posición — bug conocido de position:fixed + barra dinámica de
-     navegador móvil. Luego se probó sticky+float:right (para no
-     empujar el resto del contenido) pero float y sticky combinados
-     tienen bugs de repintado conocidos entre motores — el botón seguía
-     desapareciendo de forma intermitente, se arreglaba solo al
-     scrollear más (forzaba un recálculo). Quitado el float: ahora
-     display:block + margin-left:auto lo alinea a la derecha dentro de
-     .modal sin necesitar float, sticky puro sin combinar con nada raro.
-     Ocupa su propia fila arriba de la categoría en vez de sobreponerse,
-     pero ya no depende de un truco con bugs de compatibilidad. */
-  .modal-close {
-    position: sticky;
-    display: block;
-    top: 12px; right: auto; left: auto;
-    margin-left: auto;
-    margin-bottom: 8px;
-    z-index: 90;
-    box-shadow: 0 4px 14px rgba(0,0,0,.35);
-  }
 
   main { padding: 0; }
   .feed-head { padding: 0 16px; }
