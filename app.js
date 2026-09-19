@@ -187,6 +187,11 @@ function setActiveCat(cat) {
     if (el.dataset.cat) el.classList.toggle('active', el.dataset.cat === cat);
   });
   render();
+  // Sin esto, cambiar de categoría (sobre todo desde el drawer de
+  // Categorías en móvil) dejaba el scroll donde haya quedado antes —
+  // como el contenido nuevo casi siempre tiene otro alto, se sentía como
+  // un salto raro hacia arriba/abajo en vez de un cambio limpio de tab.
+  window.scrollTo({ top: 0, behavior: 'auto' });
 }
 
 // En Inicio ninguna categoría debe monopolizar la portada (p. ej. si
@@ -440,11 +445,19 @@ async function init() {
     // Los listeners se enlazan pase lo que pase con el fetch: si news.json
     // falla o llega mal formado, la página no debe quedar muerta (menú,
     // búsqueda, modal, etc. tienen que seguir funcionando).
+    // El drawer se anima (slide) con una clase en vez del atributo
+    // 'hidden' — con 'hidden' el elemento pasa a display:none de golpe,
+    // no hay nada que transicionar. .open controla transform/visibility
+    // por CSS; abrirMenu/cerrarMenu son los únicos que la tocan.
+    const mobileMenu = document.getElementById('mobileMenu');
+    const abrirMenu = () => mobileMenu.classList.add('open');
+    const cerrarMenu = () => mobileMenu.classList.remove('open');
+
     document.querySelectorAll('[data-cat]').forEach(el => {
       el.addEventListener('click', (e) => {
         e.preventDefault();
         setActiveCat(el.dataset.cat);
-        document.getElementById('mobileMenu').hidden = true;
+        cerrarMenu();
       });
     });
 
@@ -453,19 +466,13 @@ async function init() {
       setActiveCat('todas');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-    document.getElementById('hamburgerBtn').addEventListener('click', () => {
-      document.getElementById('mobileMenu').hidden = false;
-    });
+    document.getElementById('hamburgerBtn').addEventListener('click', abrirMenu);
     // El nav inferior ya no tiene un botón por categoría (con Puerto
     // Vallarta/Bahía de Banderas/Jalisco/Nayarit sumados no caben 9
     // botones) — "Categorías" abre el mismo drawer del hamburguesa, que
     // sí lista todas verticalmente sin problema de espacio.
-    document.getElementById('bottomCategoriasBtn').addEventListener('click', () => {
-      document.getElementById('mobileMenu').hidden = false;
-    });
-    document.getElementById('closeMenuBtn').addEventListener('click', () => {
-      document.getElementById('mobileMenu').hidden = true;
-    });
+    document.getElementById('bottomCategoriasBtn').addEventListener('click', abrirMenu);
+    document.getElementById('closeMenuBtn').addEventListener('click', cerrarMenu);
     const searchBox = document.getElementById('searchBox');
     const searchInput = document.getElementById('searchInput');
     const searchBackdrop = document.getElementById('searchBackdrop');

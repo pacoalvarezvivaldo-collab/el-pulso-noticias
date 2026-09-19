@@ -278,14 +278,28 @@ h1, h2, h3 { font-family: 'Archivo', sans-serif; margin: 0; }
   color: #fff;
   display: flex;
   flex-direction: column;
+  /* Antes se abría/cerraba con el atributo hidden (display:none de
+     golpe, nada que animar, se sentía "desfasado"). Ahora desliza desde
+     la izquierda — visibility retrasada con la transición para que al
+     cerrar no desaparezca de golpe a la mitad del deslizado, y para que
+     no sea clicleable estando fuera de pantalla. */
+  transform: translateX(-100%);
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform .28s ease, visibility .28s ease;
 }
-.mobile-menu[hidden] { display: none; }
+.mobile-menu.open {
+  transform: translateX(0);
+  visibility: visible;
+  pointer-events: auto;
+}
 .mobile-menu-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 14px 16px;
   border-bottom: 1px solid rgba(255,255,255,.1);
+  flex: none;
 }
 .mobile-menu-logo { height: 40px; }
 .mobile-menu-head button {
@@ -297,8 +311,18 @@ h1, h2, h3 { font-family: 'Archivo', sans-serif; margin: 0; }
   cursor: pointer;
   min-height: 44px;
 }
+/* Lista con su propio scroll, separada del header y de "Síguenos" — con
+   8 categorías en pantallas chicas el header (con el botón de cerrar)
+   ya no se va fuera de vista si la lista no cabe completa. */
+.mobile-menu-items {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
 .mobile-menu-item {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 14px;
   padding: 18px 18px;
   border-bottom: 1px solid rgba(255,255,255,.08);
   font-family: 'Archivo', sans-serif;
@@ -306,7 +330,8 @@ h1, h2, h3 { font-family: 'Archivo', sans-serif; margin: 0; }
   font-size: 18px;
   color: #fff;
 }
-.mobile-menu-social { padding: 20px 18px; margin-top: auto; }
+.mmi-icon { flex: none; width: 24px; font-size: 20px; text-align: center; }
+.mobile-menu-social { padding: 20px 18px; flex: none; }
 .mobile-menu-social-label {
   display: block;
   font-family: 'IBM Plex Mono', monospace;
