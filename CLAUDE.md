@@ -219,6 +219,25 @@ destinos en el nav inferior).
   "Categorías" (la etiqueta más larga de las 3, antes había 5 más
   cortas) no se achicaba a su parte justa, empujando "Buscar" fuera de
   la pantalla. Fix: `min-width:0` en `.bottom-item`.
+- **Bug real (18-sep-2026): nota larga abría con la cabecera fuera de
+  vista en móvil** — reportado con captura real de celular (solo se veía
+  imagen+texto, sin título/categoría/botón cerrar, sensación de "recuadro
+  demasiado grande" que ya se había intentado arreglar con
+  `.modal-close` fijo pero seguía pasando). Causa real:
+  `.modal-overlay{align-items:center; overflow-y:auto}` (regla
+  compartida escritorio+móvil) — con el modal más alto que la pantalla,
+  el navegador lo centra igual y arranca el scroll a la mitad; la mitad
+  de arriba (cabecera, botón cerrar) queda fuera de pantalla y es
+  inalcanzable porque no existe scroll negativo desde ese punto de
+  partida. Fix: en móvil, `.modal-overlay{align-items:flex-start}` — el
+  modal arranca alineado arriba, el scroll normal desde 0 sí llega a
+  todo. No se pudo confirmar visualmente en local (mismo límite de
+  emulación móvil de la herramienta, ver nota de `visualViewport` más
+  abajo — `resize_window` cambia el tamaño de la ventana de Chrome pero
+  `window.innerWidth` se queda en la resolución real del monitor, no
+  dispara el media query de 760px), solo verificado que no rompe el
+  centrado de escritorio (la regla nueva vive dentro del media query) y
+  que el CSS está confirmado en vivo en producción.
 
 ### Gotcha de deploy: cola de Vercel Hobby atorada (18-sep-2026)
 
